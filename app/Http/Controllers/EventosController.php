@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class EventosController extends Controller
@@ -11,7 +12,11 @@ class EventosController extends Controller
      */
     public function index()
     {
-        return view('eventos');
+        $larines = DB::connection('pgsql2')
+        ->table('tbl_ido_larines')
+        ->orderBy('id_larin','asc')
+        ->get();
+        return view('eventos',compact('larines'));
     }
 
     /**
@@ -60,5 +65,16 @@ class EventosController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getLarin(Request $request)
+    {
+        $larines = DB::connection('pgsql2')
+        ->table('tbl_ido_larines')
+        ->where('clave_larin', $request->id_larin)
+        ->orderBy('id_larin','asc')
+        ->get();
+
+        response()->json($larines,200);
     }
 }
