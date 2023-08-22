@@ -59,6 +59,19 @@
         text-decoration: none;
         cursor: pointer;
         }
+        .color-line.line-1, .color-line.line-01  { background: #f04e98; }
+        .color-line.line-2, .color-line.line-02  { background: #005eb8; }
+        .color-line.line-3, .color-line.line-03  { background: #af9800; }
+        .color-line.line-4, .color-line.line-04  { background: #6bbbae; }
+        .color-line.line-5, .color-line.line-05  { background: #ffd100; }
+        .color-line.line-6, .color-line.line-06  { background: #da291c; }
+        .color-line.line-7, .color-line.line-07  { background: #e87722; }
+        .color-line.line-8, .color-line.line-08  { background: #009a44; }
+        .color-line.line-9, .color-line.line-09  { background: #512f2e; }
+        .color-line.line-12 { background: #c09b57; }
+        .color-line.line-A, .color-line.line-LA  { background: #981d97; }
+        .color-line.line-B, .color-line.line-LB  { background: -webkit-linear-gradient(bottom,  #00843d 0%,#00843d 50%,#b1b3b3 50%,#b1b3b3 100%);}
+        .color-line.line-B.diagonal  { background: linear-gradient(to bottom left, #b1b3b3 50% ,#00843d 50%);}
     </style>
 @stop
 
@@ -94,7 +107,8 @@
                         <div class="contenido-modal">
                             <span class="cerrar">&times;</span>
                                                        
-                            <form action="" id='form-evento'>
+                            <form action="/eventos/" id='form-evento' method="POST">
+                                @csrf
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
@@ -103,9 +117,10 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <x-adminlte-select name="linea" id="linea" required>
-                                                            <option>Option 1</option>
-                                                            <option>Option 2</option>
-                                                            <option>Option 3</option>
+                                                            <option value>-- Seleccione una linea --</option>
+                                                            @foreach ($lineas as $item)
+                                                                <option value="{{ $item -> id_linea }}">{{ $item -> linea }}</option>
+                                                            @endforeach
                                                         </x-adminlte-select>                                                        
                                                     </div>
                                                     <div class="col">
@@ -121,6 +136,7 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <x-adminlte-select2 style="width: 50%" name="larin" id="larin" label="Larin" required>
+                                                            <option value>-- Seleccione un larin --</option>
                                                             @foreach ($larines as $item)
                                                                 <option value="{{ $item -> clave_larin }}">{{ $item -> clave_larin }} --- {{ $item -> descripcion_corta_larin }}</option>
                                                             @endforeach
@@ -142,7 +158,7 @@
                                                            <div class="input-group-prepend">
                                                               <span class="input-group-text" id="vueltas">Vueltas perdidas</span>
                                                            </div>
-                                                           <input type="text" class="form-control" aria-label="Default" aria-describedby="vue-perdidas" name="vperdidas" required>
+                                                           <input type="text" class="form-control" aria-label="Default" aria-describedby="vue-perdidas" name="vueltas" required>
                                                         </div>
                                                      </div>
                                                 </div>
@@ -151,6 +167,12 @@
                                                 <div class="row"> 
                                                     <div class="col" style="text-align: center">
                                                         <x-adminlte-button id="submit" class="btn-flat" type="submit" label="Guardar Evento" theme="success" icon="fas fa-lg fa-save"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row"> 
+                                                    <div class="col" style="text-align: center">
+                                                        <input type="date" id="fecha_f" class="form-control" name="fecha" value="<?php echo $hoy;?>" min="<?php echo $hoy;?>" max="<?php echo $hoy;?>" hidden>
                                                     </div>
                                                 </div>
                                             </div>
@@ -170,6 +192,30 @@
                         </div>
                     </div>
 
+                    <?php
+                        $lineas = ['1','2','3','4','5','6','7','8','9','12','A','B'];
+                        foreach( $lineas as $linea){ ?>
+
+                        <!-- Inician las tablas de los eventos cada una de las lineas -->
+                        <div class="col-12 blk_eventos_L<?php echo $linea; ?>">
+                            <h5 class="mb-0">Línea <?php echo $linea; ?></h5>
+                            <p >Incidentes de Operación en Línea</p>
+                        </div>
+
+                        <div class=" col-12 table-responsive tbl_eventos_L<?php echo $linea; ?>">
+                            <table class="table table-sm table-bordered" id="linea<?php echo $linea; ?>">
+                            <thead class="text-center">
+                                <tr class="color-line line-<?php echo $linea; ?>">
+                                    <th scope="col">Hora</th>
+                                    <th scope="col" class="w-75">Descripción</th>
+                                    <th scope="col">Retardo</th>
+                                </tr>
+                            </thead>
+                            </table>
+                        </div>
+
+                    <?php } ?>
+                    
                 </div>
             </div>
         </div>
@@ -184,23 +230,14 @@
         // Ventana modal
         var modal = document.getElementById("ventanaModal");
 
-        // Botón que abre el modal
-        var boton = document.getElementById("abrirModal");
-
-        // Hace referencia al elemento <span> que tiene la X que cierra la ventana
-        var span = document.getElementsByClassName("cerrar")[0];
-
-        // Cuando el usuario hace click en el botón, se abre la ventana
-        boton.addEventListener("click",function() {
+        document.getElementById("abrirModal").addEventListener("click",function() {
             modal.style.display = "block";
         });
 
-        // Si el usuario hace click en la x, la ventana se cierra
-        span.addEventListener("click",function() {
+        document.getElementsByClassName("cerrar")[0].addEventListener("click",function() {
             modal.style.display = "none";
         });
 
-        // Si el usuario hace click fuera de la ventana, se cierra.
         window.addEventListener("click",function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
@@ -208,8 +245,6 @@
         });
 
         cargarReloj();
-
-
 
         document.getElementById('fecha').addEventListener('change',(e)=>{
             let fecha = new Date(e.target.value)
@@ -221,8 +256,36 @@
             }else{
                 $('#abrirModal').show()
             }
+            $('#linea1').DataTable().destroy();
+            generaTabla1()
+            $('#linea2').DataTable().destroy();
+            generaTabla2()
+            $('#linea3').DataTable().destroy();
+            generaTabla3()
+            $('#linea4').DataTable().destroy();
+            generaTabla4()
+            $('#linea5').DataTable().destroy();
+            generaTabla5()
+            $('#linea6').DataTable().destroy();
+            generaTabla6()
+            $('#linea7').DataTable().destroy();
+            generaTabla7()
+            $('#linea8').DataTable().destroy();
+            generaTabla8()
+            $('#linea9').DataTable().destroy();
+            generaTabla9()
+            $('#lineaA').DataTable().destroy();
+            generaTablaA()
+            $('#lineaB').DataTable().destroy();
+            generaTablaB()
+            $('#linea12').DataTable().destroy();
+            generaTabla12()
         })
         
+        $('#larin').select2({
+            dropdownAutoWidth : true,
+            width: '400px'
+        })
 
         $('#larin').on('select2:select', function (e) {
             var prueba = e.params.data;
@@ -239,10 +302,377 @@
             }).then(response=>{
                 return response.json()
             }).then( respuesta=>{
-                console.log(respuesta);
+                document.getElementById('descripcion').value=respuesta[0].larin
+                console.log(respuesta[0].larin);
             }).catch(error => console.error(error));
         });
+
+        generaTabla1()
+        generaTabla2()
+        generaTabla3()
+        generaTabla4()
+        generaTabla5()
+        generaTabla6()
+        generaTabla7()
+        generaTabla8()
+        generaTabla9()
+        generaTablaA()
+        generaTablaB()
+        generaTabla12()
+
+
     })
+
+    function generaTabla1(){
+        new DataTable('#linea1', {
+            responsive: true,
+            autoWidth: false,
+            language: {
+                infoEmpty: 'No se han registrado Incidentes Relevantes durante el día',
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
+            },
+            ajax : {
+                method : "POST",
+                url : "/eventos/getLinea",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data : { 
+                    fecha : document.getElementById('fecha').value,
+                    linea : '01',
+                },
+            },
+            columns: [
+                { data: 'hora' },
+                { data: 'descripcion' },
+                { data: 'retardo' },
+            ],
+            paging: false,
+            searching: false,
+            ordering:  false,
+            info: false,
+            processing: true,
+            serverSide: true    
+        });
+
+    }
+
+    function generaTabla2(){
+        new DataTable('#linea2', {
+            responsive: true,
+            autoWidth: false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
+            },
+            ajax : {
+                method : "POST",
+                url : "/eventos/getLinea",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data : { 
+                    fecha : document.getElementById('fecha').value,
+                    linea : '02',
+                },
+            },
+            columns: [
+                { data: 'hora' },
+                { data: 'descripcion' },
+                { data: 'retardo' },
+            ],
+            paging: false,
+            searching: false,
+            ordering:  false,
+            info: false         
+        });
+
+    }
+
+    function generaTabla3(){
+        new DataTable('#linea3', {
+            responsive: true,
+            autoWidth: false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
+            },
+            ajax : {
+                method : "POST",
+                url : "/eventos/getLinea",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data : { 
+                    fecha : document.getElementById('fecha').value,
+                    linea : '03',
+                },
+            },
+            columns: [
+                { data: 'hora' },
+                { data: 'descripcion' },
+                { data: 'retardo' },
+            ],
+            paging: false,
+            searching: false,
+            ordering:  false,
+            info: false         
+        });
+
+    }
+
+    function generaTabla4(){
+        new DataTable('#linea4', {
+            responsive: true,
+            autoWidth: false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
+            },
+            ajax : {
+                method : "POST",
+                url : "/eventos/getLinea",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data : { 
+                    fecha : document.getElementById('fecha').value,
+                    linea : '04',
+                },
+            },
+            columns: [
+                { data: 'hora' },
+                { data: 'descripcion' },
+                { data: 'retardo' },
+            ],
+            paging: false,
+            searching: false,
+            ordering:  false,
+            info: false         
+        });
+
+    }
+
+    function generaTabla5(){
+        new DataTable('#linea5', {
+            responsive: true,
+            autoWidth: false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
+            },
+            ajax : {
+                method : "POST",
+                url : "/eventos/getLinea",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data : { 
+                    fecha : document.getElementById('fecha').value,
+                    linea : '05',
+                },
+            },
+            columns: [
+                { data: 'hora' },
+                { data: 'descripcion' },
+                { data: 'retardo' },
+            ],
+            paging: false,
+            searching: false,
+            ordering:  false,
+            info: false         
+        });
+
+    }
+
+    function generaTabla6(){
+        new DataTable('#linea6', {
+            responsive: true,
+            autoWidth: false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
+            },
+            ajax : {
+                method : "POST",
+                url : "/eventos/getLinea",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data : { 
+                    fecha : document.getElementById('fecha').value,
+                    linea : '06',
+                },
+            },
+            columns: [
+                { data: 'hora' },
+                { data: 'descripcion' },
+                { data: 'retardo' },
+            ],
+            paging: false,
+            searching: false,
+            ordering:  false,
+            info: false         
+        });
+
+    }
+
+    function generaTabla7(){
+        new DataTable('#linea7', {
+            responsive: true,
+            autoWidth: false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
+            },
+            ajax : {
+                method : "POST",
+                url : "/eventos/getLinea",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data : { 
+                    fecha : document.getElementById('fecha').value,
+                    linea : '07',
+                },
+            },
+            columns: [
+                { data: 'hora' },
+                { data: 'descripcion' },
+                { data: 'retardo' },
+            ],
+            paging: false,
+            searching: false,
+            ordering:  false,
+            info: false         
+        });
+
+    }
+
+    function generaTabla8(){
+        new DataTable('#linea8', {
+            responsive: true,
+            autoWidth: false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
+            },
+            ajax : {
+                method : "POST",
+                url : "/eventos/getLinea",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data : { 
+                    fecha : document.getElementById('fecha').value,
+                    linea : '08',
+                },
+            },
+            columns: [
+                { data: 'hora' },
+                { data: 'descripcion' },
+                { data: 'retardo' },
+            ],
+            paging: false,
+            searching: false,
+            ordering:  false,
+            info: false         
+        });
+
+    }
+
+    function generaTabla9(){
+        new DataTable('#linea9', {
+            responsive: true,
+            autoWidth: false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
+            },
+            ajax : {
+                method : "POST",
+                url : "/eventos/getLinea",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data : { 
+                    fecha : document.getElementById('fecha').value,
+                    linea : '09',
+                },
+            },
+            columns: [
+                { data: 'hora' },
+                { data: 'descripcion' },
+                { data: 'retardo' },
+            ],
+            paging: false,
+            searching: false,
+            ordering:  false,
+            info: false         
+        });
+
+    }
+
+    function generaTablaA(){
+        new DataTable('#lineaA', {
+            responsive: true,
+            autoWidth: false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
+            },
+            ajax : {
+                method : "POST",
+                url : "/eventos/getLinea",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data : { 
+                    fecha : document.getElementById('fecha').value,
+                    linea : 'LA',
+                },
+            },
+            columns: [
+                { data: 'hora' },
+                { data: 'descripcion' },
+                { data: 'retardo' },
+            ],
+            paging: false,
+            searching: false,
+            ordering:  false,
+            info: false         
+        });
+
+    }
+
+    function generaTablaB(){
+        new DataTable('#lineaB', {
+            responsive: true,
+            autoWidth: false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
+            },
+            ajax : {
+                method : "POST",
+                url : "/eventos/getLinea",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data : { 
+                    fecha : document.getElementById('fecha').value,
+                    linea : 'LB',
+                },
+            },
+            columns: [
+                { data: 'hora' },
+                { data: 'descripcion' },
+                { data: 'retardo' },
+            ],
+            paging: false,
+            searching: false,
+            ordering:  false,
+            info: false         
+        });
+
+    }
+
+    function generaTabla12(){
+        new DataTable('#linea12', {
+            responsive: true,
+            autoWidth: false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
+            },
+            ajax : {
+                method : "POST",
+                url : "/eventos/getLinea",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data : { 
+                    fecha : document.getElementById('fecha').value,
+                    linea : '12',
+                },
+            },
+            columns: [
+                { data: 'hora' },
+                { data: 'descripcion' },
+                { data: 'retardo' },
+            ],
+            paging: false,
+            searching: false,
+            ordering:  false,
+            info: false         
+        });
+
+    }
 
     function cargarReloj(){
         let hoy = new Date()
