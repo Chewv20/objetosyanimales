@@ -1,0 +1,66 @@
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* Fondo modal: negro con opacidad al 50% */
+.modal {
+display: none; /* Por defecto, estará oculto */
+position: fixed; /* Posición fija */
+z-index: 1; /* Se situará por encima de otros elementos de la página*/
+padding-top: 150px; /* El contenido estará situado a 200px de la parte superior */
+left: 35px;
+top: 0;
+width: 100%; /* Ancho completo */
+height: 100%; /* Algura completa */
+overflow: auto; /* Se activará el scroll si es necesario */
+background-color: rgba(0,0,0,0.5); /* Color negro con opacidad del 50% */
+}
+/* Ventana o caja modal */
+.contenido-modal {
+position: relative; /* Relativo con respecto al contenedor -modal- */
+background-color: white;
+margin: auto; /* Centrada */
+padding: 10px;
+width: 80%;
+-webkit-animation-name: animarsuperior;
+-webkit-animation-duration: 0.5s;
+animation-name: animarsuperior;
+animation-duration: 0.5s
+}
+/* Animación */
+@-webkit-keyframes animatetop {
+from {top:-300px; opacity:0} 
+to {top:0; opacity:1}
+}
+@keyframes animarsuperior {
+from {top:-300px; opacity:0}
+to {top:0; opacity:1}
+}
+/* Botón cerrar */
+.cerrar {
+color: black;
+float: right;
+font-size: 30px;
+font-weight: bold;
+}
+.cerrar:hover,
+.cerrar:focus {
+color: #000;
+text-decoration: none;
+cursor: pointer;
+}
+.color-line.line-1, .color-line.line-01  { background: #f04e98; }
+.color-line.line-2, .color-line.line-02  { background: #005eb8; }
+.color-line.line-3, .color-line.line-03  { background: #af9800; }
+.color-line.line-4, .color-line.line-04  { background: #6bbbae; }
+.color-line.line-5, .color-line.line-05  { background: #ffd100; }
+.color-line.line-6, .color-line.line-06  { background: #da291c; }
+.color-line.line-7, .color-line.line-07  { background: #e87722; }
+.color-line.line-8, .color-line.line-08  { background: #009a44; }
+.color-line.line-9, .color-line.line-09  { background: #512f2e; }
+.color-line.line-12 { background: #c09b57; }
+.color-line.line-A, .color-line.line-LA  { background: #981d97; }
+.color-line.line-B, .color-line.line-LB  { background: -webkit-linear-gradient(bottom,  #00843d 0%,#00843d 50%,#b1b3b3 50%,#b1b3b3 100%);}
+.color-line.line-B.diagonal  { background: linear-gradient(to bottom left, #b1b3b3 50% ,#00843d 50%);}
+
+#export-table_wrapper {
+    display: none;
+  }

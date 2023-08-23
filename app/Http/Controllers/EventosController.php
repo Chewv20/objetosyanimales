@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use PhpParser\Node\Expr\AssignOp\Concat;
 
 class EventosController extends Controller
@@ -60,6 +61,7 @@ class EventosController extends Controller
         DB::update('update folio set folio = ? where anio = ?', [$consulta_id[0]->folio+1,$anio]);
         DB::insert('insert into evento (id, fecha, linea, hora, larin, retardo, vueltas, descripcion) values (?, ?, ?, ?, ?, ?, ?, ?)', [$id, $request->fecha, $request->linea, $request->hora, $request->larin, $request->retardo, $request->vueltas, $descr_larga]);
 
+        return redirect('/eventos');
     }
 
     /**
@@ -107,15 +109,18 @@ class EventosController extends Controller
 
     public function getLinea(Request $request)
     {
-        $eventos1 = DB::connection('pgsql')
-        ->table('evento')
-        ->where([
-        ['linea',$request->linea],
-        ['fecha',$request->fecha],   
-        ])
-        ->orderBy('hora')
-        ->get();
+        if(isset($request)){
+            $eventos = DB::connection('pgsql')
+            ->table('evento')
+            ->where([
+            ['linea',$request->linea],
+            ['fecha',$request->fecha],
+            ['retardo','>=',$request->tiempo],    
+            ])
+            ->orderBy('hora')
+            ->get();
 
-        return datatables($eventos1)->toJson();
+            return datatables($eventos)->toJson();
+        }
     }
 }
