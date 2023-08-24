@@ -75,18 +75,6 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             }).catch(error => console.error(error));
         });
 
-        let $select = $('#filtros');
-
-        let selecteds = [];
-            
-            $select.children(':selected').each((idx, el) => {
-                // Obtenemos los atributos que necesitamos
-                selecteds.push({
-                id: el.id,
-                value: el.value
-                });
-            });
-
         let lineas = ['1','2','3','4','5','6','7','8','9','12','A','B'];
         lineas.forEach(element => {
             
@@ -106,8 +94,16 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
 
         document.getElementById('aplicarFiltro').addEventListener('click',(e)=>{
             let lineas = ['1','2','3','4','5','6','7','8','9','12','A','B'];
-            let tiempo = document.getElementById('tiempo').value
-            console.log(tiempo);
+            let tiempo = parseInt(document.getElementById('tiempo').value)
+            let filtro = $('#filtros').val()
+            let filtros = []
+            filtro.forEach(element => {
+                filtros.push({'descripcion':element})
+            })
+            filtros.push({'tiempo':tiempo})
+            if(document.querySelector('.form-check-input').checked){
+                filtros.push({'vueltas': 0})
+            }
             lineas.forEach(element => {
                 $('#linea'+element).DataTable().destroy()
                 if(element=='A' || element =='B'){
@@ -118,6 +114,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                     generaTabla('#linea'+element,'0'+element,tiempo)
                 }
             });
+            console.log(filtros);
             modal1.style.display = "none";
         })
 

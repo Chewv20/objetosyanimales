@@ -153,14 +153,14 @@
                                         @endphp
                                         <x-adminlte-select2 id="filtros" name="sel2Category[]" label="Filtros"
                                             igroup-size="sm" :config="$config" multiple placeholder="Selecciona">
-                                            <option>Apertura de puertas</option>
-                                            <option value="C4">Arrollado</option>
-                                            <option>Traspaso de Batería</option>
-                                            <option>Neumatico Ponchado</option>
-                                            <option>Tren evacuado</option>
-                                            <option>Carro Evacuado</option>
-                                            <option>Motriz inactiva</option>
-                                            <option>Espejo de Agua</option>
+                                            <option value="puertas">Apertura de puertas</option>
+                                            <option value="arrolla">Arrollado</option>
+                                            <option value='traspaso'>Traspaso de Batería</option>
+                                            <option value='neumati'>Neumatico Ponchado</option>
+                                            <option value="tren evacuado">Tren evacuado</option>
+                                            <option value="carro evacuado">Carro Evacuado</option>
+                                            <option value="motriz inactiva">Motriz inactiva</option>
+                                            <option value="espejo de agua">Espejo de Agua</option>
                                         </x-adminlte-select2>
 
                                         <div class="col-12 mb-3 p-1">
