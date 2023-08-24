@@ -1,3 +1,4 @@
+
 const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
 
     $(document).ready(function(){
@@ -45,17 +46,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             }else{
                 $('#abrirModal').show()
             }
-            let lineas = ['1','2','3','4','5','6','7','8','9','12','A','B'];
-            lineas.forEach(element => {
-                $('#linea'+element).DataTable().destroy()
-                if(element=='A' || element =='B'){
-                    generaTabla('#linea'+element,'L'+element,document.getElementById('tiempo').value)
-                }else if(element == '12'){
-                    generaTabla('#linea'+element,element,document.getElementById('tiempo').value)
-                }else{
-                    generaTabla('#linea'+element,'0'+element,document.getElementById('tiempo').value)
-                }
-            });
+            crearTabla()
 
         })
         
@@ -109,18 +100,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         });
         
         document.getElementById('borrarFiltro').addEventListener('click',(e)=>{
-            let lineas = ['1','2','3','4','5','6','7','8','9','12','A','B'];
-        
-            lineas.forEach(element => {
-                $('#linea'+element).DataTable().destroy()
-                if(element=='A' || element =='B'){
-                    generaTabla('#linea'+element,'L'+element,0)
-                }else if(element == '12'){
-                    generaTabla('#linea'+element,element,0)
-                }else{
-                    generaTabla('#linea'+element,'0'+element,0)
-                }
-            });
+            crearTabla()
             modal1.style.display = "none";
         })
 
@@ -141,8 +121,77 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             modal1.style.display = "none";
         })
 
+        document.getElementById('submit').addEventListener('click',(e)=>{
+            e.preventDefault()
+            let resultado = validar();
+            
+            if(!resultado){                
+                compruebaRep()
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Revisa los campos',
+                    text: 'Revisa que todos los campos sean correctos'
+                })
+            }
+        })
+
 
     })
+
+    function validar(){
+        let error = false;
+
+        let inputsrequeridos = document.querySelectorAll('#form-evento [required]')  
+        for(let i=0;i<inputsrequeridos.length;i++){
+            if(inputsrequeridos[i].value =='' ){
+                inputsrequeridos[i].style.borderColor = '#FF0400'
+                error = true
+            }else if(inputsrequeridos[i].value == 0 ){
+                inputsrequeridos[i].style.borderColor = '#FF0400'
+                error = true
+            }else{
+                inputsrequeridos[i].style.removeProperty('border');
+            }
+        }
+
+        return error;
+    }
+
+    function compruebaRep(){
+        let Pfecha = document.getElementById('fecha_f').value
+        let Phora = document.getElementById('hora_l').value
+        let Plinea = document.getElementById('linea').value
+        let Plarin = document.getElementById('larin').value
+
+        
+        fetch('/eventos/getReporte/',{
+            method : 'POST',
+            body: JSON.stringify({
+                fecha : Pfecha,
+                hora  : Phora,
+                linea : Plinea,
+                larin : Plarin,       
+            }),
+            headers:{
+                'Content-Type': 'application/json',
+                "X-CSRF-Token": csrfToken
+            }
+        }).then(response=>{
+            return response.json()
+        }).then( data=>{      
+            if(data[0]){            
+                Swal.fire(
+                    {icon: 'error',
+                    title: 'Se intenta guardar un reporte existente',
+                    text: data[0].id}
+                )
+                console.log(data[0].id);
+            }else{
+                guardar();
+            }
+        }).catch(error => console.error(error));
+    }
 
     function generaTabla(linea,idLinea,tiempo){
         new DataTable(linea, {
@@ -184,4 +233,74 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         let fecha = dias_semana[hoy.getDay()] + ', ' + hoy.getDate() + ' de ' + meses[hoy.getMonth()] + ' de ' + hoy.getUTCFullYear()
         document.getElementById('fechaHoy').innerHTML = fecha + ', '+hoy.toLocaleTimeString('en-US')
         setTimeout(cargarReloj, 500);
+    }
+
+
+    function guardar(){
+        let Pfecha   = document.getElementById('fecha_f').value
+        let Plinea   = document.getElementById('linea').value
+        let Phora    = document.getElementById('hora_l').value
+        let Plarin   = document.getElementById('larin').value
+        let Pdescripcion = document.getElementById('descripcion').value
+        let Pretardo = document.getElementById('retardo_l').value
+        let Pvueltas = document.getElementById('vueltas_l').value        
+
+        fetch('/eventos/',{
+                method : 'POST',
+                body: JSON.stringify({
+                    fecha   : Pfecha,  
+                    linea   : Plinea,  
+                    hora    : Phora,   
+                    larin   : Plarin,
+                    descripcion : Pdescripcion,  
+                    retardo : Pretardo,
+                    vueltas : Pvueltas
+                }),
+                headers:{
+                    'Content-Type': 'application/json',
+                    "X-CSRF-Token": csrfToken
+                }
+            }).then(response=>{
+                return response.json()
+            }).then( data=>{
+                if(data.success){
+                    Swal.fire(
+                        {icon: 'success',
+                        title: 'Reporte guardado con éxito',
+                        text: data.id}
+                    )
+                    limpiar() 
+                }
+                console.log(data);
+            }).catch(error => console.error(error));
+
+        return true
+
+    }
+
+
+    function limpiar(){
+        document.getElementById('linea').value = "" 
+        document.getElementById('hora_l').value = ""
+        document.getElementById('vueltas_l').value = ""
+        document.getElementById('retardo_l').value = ""
+        document.getElementById('descripcion').value = ""
+        document.getElementById('larin').value = '0'
+        $('#larin').trigger('change');
+        crearTabla()
+    }
+
+    function crearTabla(){
+        let lineas = ['1','2','3','4','5','6','7','8','9','12','A','B'];
+        
+            lineas.forEach(element => {
+                $('#linea'+element).DataTable().destroy()
+                if(element=='A' || element =='B'){
+                    generaTabla('#linea'+element,'L'+element,0)
+                }else if(element == '12'){
+                    generaTabla('#linea'+element,element,0)
+                }else{
+                    generaTabla('#linea'+element,'0'+element,0)
+                }
+            });
     }

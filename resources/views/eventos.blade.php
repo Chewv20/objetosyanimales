@@ -5,6 +5,7 @@
 @section('content_header')
     <h1 class="m-0 text-dark">Informe Diario de Operación</h1>
     <link rel="stylesheet" href="{{ URL::asset('css/eventos.css') }}" />
+    <link rel="icon" href="{{ URL::asset('img/logo.png') }}" />
 @stop
 
 @php
@@ -72,7 +73,7 @@
                                                             <div class="input-group-prepend">
                                                                <span class="input-group-text" id="hora">Hora:</span>
                                                             </div>  
-                                                            <input type="time" class="form-control" aria-label="Hora" aria-describedby="hora-evento" name="hora" required>
+                                                            <input type="time" id="hora_l" class="form-control" aria-label="Hora" aria-describedby="hora-evento" name="hora" required>
                                                          </div>
                                                     </div>
                                                 </div>
@@ -80,7 +81,7 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <x-adminlte-select2 style="width: 50%" name="larin" id="larin" label="Larin" required>
-                                                            <option value>-- Seleccione un larin --</option>
+                                                            <option value='0'>-- Seleccione un larin --</option>
                                                             @foreach ($larines as $item)
                                                                 <option value="{{ $item -> clave_larin }}">{{ $item -> clave_larin }} --- {{ $item -> descripcion_corta_larin }}</option>
                                                             @endforeach
@@ -94,7 +95,7 @@
                                                            <div class="input-group-prepend">
                                                               <span class="input-group-text" id="retardo">Minutos retardo</span>
                                                            </div>
-                                                           <input type="text" class="form-control" aria-label="Default" aria-describedby="min-retardo" name="retardo" required>
+                                                           <input type="text" class="form-control" id='retardo_l' aria-label="Default" aria-describedby="min-retardo" name="retardo" required>
                                                         </div>
                                                      </div>
                                                      <div class="col">
@@ -102,7 +103,7 @@
                                                            <div class="input-group-prepend">
                                                               <span class="input-group-text" id="vueltas">Vueltas perdidas</span>
                                                            </div>
-                                                           <input type="text" class="form-control" aria-label="Default" aria-describedby="vue-perdidas" name="vueltas" required>
+                                                           <input type="text" id="vueltas_l" class="form-control" aria-label="Default" aria-describedby="vue-perdidas" name="vueltas" required>
                                                         </div>
                                                      </div>
                                                 </div>
@@ -218,5 +219,8 @@
 @stop
 
 @section('js')
+<link href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 <script src="{{ URL::asset('js/eventos.js') }}"></script>
+
 @stop

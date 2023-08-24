@@ -61,7 +61,11 @@ class EventosController extends Controller
         DB::update('update folio set folio = ? where anio = ?', [$consulta_id[0]->folio+1,$anio]);
         DB::insert('insert into evento (id, fecha, linea, hora, larin, retardo, vueltas, descripcion) values (?, ?, ?, ?, ?, ?, ?, ?)', [$id, $request->fecha, $request->linea, $request->hora, $request->larin, $request->retardo, $request->vueltas, $descr_larga]);
 
-        return redirect('/eventos');
+        $respuesta = [
+            'success' => true,
+            'id' => $id
+        ];
+        return $respuesta;
     }
 
     /**
@@ -121,6 +125,23 @@ class EventosController extends Controller
             ->get();
 
             return datatables($eventos)->toJson();
+        }
+    }
+    public function getReporte(Request $request)
+    {
+        if(isset($request)){
+            $comprueba = DB::connection('pgsql')
+            ->table('evento')
+            ->where([
+                ['fecha',$request->fecha],
+                ['hora',$request->hora],
+                ['linea',$request->linea],
+                ['larin',$request->larin],
+            ])
+            ->orderBy('hora','desc')
+            ->get();
+
+            return response()->json($comprueba,200);
         }
     }
 }
