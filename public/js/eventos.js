@@ -79,11 +79,11 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         lineas.forEach(element => {
             
             if(element=='A' || element =='B'){
-                generaTabla('#linea'+element,'L'+element,0)
+                generaTabla('#linea'+element,'L'+element)
             }else if(element == '12'){
-                generaTabla('#linea'+element,element,0)
+                generaTabla('#linea'+element,element)
             }else{
-                generaTabla('#linea'+element,'0'+element,0)
+                generaTabla('#linea'+element,'0'+element)
             }
         });
         
@@ -97,24 +97,25 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             let tiempo = parseInt(document.getElementById('tiempo').value)
             let filtro = $('#filtros').val()
             let filtros = []
-            filtro.forEach(element => {
-                filtros.push({'descripcion':element})
-            })
-            filtros.push({'tiempo':tiempo})
+            filtros.push(tiempo)
             if(document.querySelector('.form-check-input').checked){
-                filtros.push({'vueltas': 0})
+                filtros.push('>')
+            }else{
+                filtros.push('<=')
             }
+            filtro.forEach(element => {
+                filtros.push(element)
+            })
             lineas.forEach(element => {
                 $('#linea'+element).DataTable().destroy()
                 if(element=='A' || element =='B'){
-                    generaTabla('#linea'+element,'L'+element,tiempo)
+                    generaTabla2('#linea'+element,'L'+element,filtros)
                 }else if(element == '12'){
-                    generaTabla('#linea'+element,element,tiempo)
+                    generaTabla2('#linea'+element,element,filtros)
                 }else{
-                    generaTabla('#linea'+element,'0'+element,tiempo)
+                    generaTabla2('#linea'+element,'0'+element,filtros)
                 }
             });
-            console.log(filtros);
             modal1.style.display = "none";
         })
 
@@ -142,9 +143,6 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         let inputsrequeridos = document.querySelectorAll('#form-evento [required]')  
         for(let i=0;i<inputsrequeridos.length;i++){
             if(inputsrequeridos[i].value =='' ){
-                inputsrequeridos[i].style.borderColor = '#FF0400'
-                error = true
-            }else if(inputsrequeridos[i].value == 0 ){
                 inputsrequeridos[i].style.borderColor = '#FF0400'
                 error = true
             }else{
@@ -190,7 +188,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         }).catch(error => console.error(error));
     }
 
-    function generaTabla(linea,idLinea,tiempo){
+    function generaTabla(linea,idLinea){
         new DataTable(linea, {
             responsive: true,
             autoWidth: false,
@@ -205,7 +203,49 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                 data : { 
                     fecha : document.getElementById('fecha').value,
                     linea : idLinea,
-                    tiempo : tiempo,
+                },
+            },
+            columns: [
+                { data: 'hora' },
+                { data: 'descripcion' },
+                { data: 'retardo' },
+            ],
+            paging: false,
+            searching: false,
+            ordering:  false,
+            info: false,
+            processing: true,
+            serverSide: true    
+        });
+
+    }
+
+    function generaTabla2(linea,idLinea,filtros){
+
+        new DataTable(linea, {
+            responsive: true,
+            autoWidth: false,
+            language: {
+                infoEmpty: 'No se han registrado Incidentes Relevantes durante el día',
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
+            },
+            ajax : {
+                method : "POST",
+                url : "/eventos/getLineaF",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data : { 
+                    fecha : document.getElementById('fecha').value,
+                    linea : idLinea,
+                    tiempo : filtros[0],
+                    vueltas : filtros[1],
+                    desc1 : filtros[2],
+                    desc2 : filtros[3],
+                    desc3 : filtros[4],
+                    desc4 : filtros[5],
+                    desc5 : filtros[6],
+                    desc6 : filtros[7],
+                    desc7 : filtros[8],
+                    desc8 : filtros[9],
                 },
             },
             columns: [
@@ -241,7 +281,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         let Pdescripcion = document.getElementById('descripcion').value
         let Pretardo = document.getElementById('retardo_l').value
         let Pvueltas = document.getElementById('vueltas_l').value        
-
+        let Pusuario = document.getElementById('usuario').value
         fetch('/eventos/',{
                 method : 'POST',
                 body: JSON.stringify({
@@ -251,7 +291,8 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                     larin   : Plarin,
                     descripcion : Pdescripcion,  
                     retardo : Pretardo,
-                    vueltas : Pvueltas
+                    vueltas : Pvueltas,
+                    usuario : Pusuario,
                 }),
                 headers:{
                     'Content-Type': 'application/json',
@@ -293,11 +334,11 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             lineas.forEach(element => {
                 $('#linea'+element).DataTable().destroy()
                 if(element=='A' || element =='B'){
-                    generaTabla('#linea'+element,'L'+element,0)
+                    generaTabla('#linea'+element,'L'+element)
                 }else if(element == '12'){
-                    generaTabla('#linea'+element,element,0)
+                    generaTabla('#linea'+element,element)
                 }else{
-                    generaTabla('#linea'+element,'0'+element,0)
+                    generaTabla('#linea'+element,'0'+element)
                 }
             });
     }

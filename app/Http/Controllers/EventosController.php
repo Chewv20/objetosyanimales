@@ -52,14 +52,16 @@ class EventosController extends Controller
         $id2 = 100000+$consulta_id[0]->folio+1;
         $id = "STC".substr(strval($anio),-2)."-".substr(strval($id2),1,5);   
         $descr_larga = "";
-        if($request->vueltas > 1){
+        if($request->vueltas > 1 || $request->vueltas == 0){
             $descr_larga = $request->descripcion." "."Pierde ".$request->vueltas." vueltas";
         }else{
             $descr_larga = $request->descripcion." "."Pierde ".$request->vueltas." vuelta";
         }
-
+        $fec_mov = date("Y-m-d");
+        $hor_mov = date('H:i');
+        
         DB::update('update folio set folio = ? where anio = ?', [$consulta_id[0]->folio+1,$anio]);
-        DB::insert('insert into evento (id, fecha, linea, hora, larin, retardo, vueltas, descripcion) values (?, ?, ?, ?, ?, ?, ?, ?)', [$id, $request->fecha, $request->linea, $request->hora, $request->larin, $request->retardo, $request->vueltas, $descr_larga]);
+        DB::insert('insert into evento (id, fecha, linea, hora, larin, retardo, vueltas, descripcion,usuario,hor_mov,fecha_mov) values (?,?,?,?, ?, ?, ?, ?, ?, ?, ?)', [$id, $request->fecha, $request->linea, $request->hora, $request->larin, $request->retardo, $request->vueltas, $descr_larga, $request->usuario, $hor_mov,$fec_mov]);
 
         $respuesta = [
             'success' => true,
@@ -111,21 +113,44 @@ class EventosController extends Controller
         return response()->json($larines,200);
     }
 
-    public function getLinea(Request $request)
+    public function getLineaF(Request $request)
     {
-        if(isset($request)){
-            $eventos = DB::connection('pgsql')
+        $eventos = DB::connection('pgsql')
             ->table('evento')
             ->where([
             ['linea',$request->linea],
             ['fecha',$request->fecha],
-            ['retardo','>=',$request->tiempo],    
+            ['retardo','>=',$request->tiempo],
+            ['vueltas',$request->vueltas,0],
+            ['descripcion','LIKE','%'.$request->desc1.'%'],
+            ['descripcion','LIKE','%'.$request->desc2.'%'],
+            ['descripcion','LIKE','%'.$request->desc3.'%'],
+            ['descripcion','LIKE','%'.$request->desc4.'%'],
+            ['descripcion','LIKE','%'.$request->desc5.'%'],
+            ['descripcion','LIKE','%'.$request->desc6.'%'],
+            ['descripcion','LIKE','%'.$request->desc7.'%'],
+            ['descripcion','LIKE','%'.$request->desc8.'%'],
             ])
             ->orderBy('hora')
             ->get();
 
-            return datatables($eventos)->toJson();
-        }
+            return datatables($eventos)->toJson(); 
+        
+    }
+
+    public function getLinea(Request $request)
+    {
+        $eventos = DB::connection('pgsql')
+            ->table('evento')
+            ->where([
+            ['linea',$request->linea],
+            ['fecha',$request->fecha],
+            ])
+            ->orderBy('hora')
+            ->get();
+
+            return datatables($eventos)->toJson(); 
+        
     }
     public function getReporte(Request $request)
     {

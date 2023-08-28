@@ -120,6 +120,11 @@
                                                         <input type="date" id="fecha_f" class="form-control" name="fecha" value="<?php echo $hoy;?>" min="<?php echo $hoy;?>" max="<?php echo $hoy;?>" hidden>
                                                     </div>
                                                 </div>
+                                                <div class="row"> 
+                                                    <div class="col" style="text-align: center">
+                                                        <input type="text" id="usuario" class="form-control" name="usuario" value="{{ auth()->user()->username }}" hidden>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="col">

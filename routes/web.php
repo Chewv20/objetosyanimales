@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('eventos', EventosController::class);
     Route::post('/eventos/getLarin', [EventosController::class, 'getLarin']);
     Route::post('/eventos/getLinea',[EventosController::class, 'getLinea']);
+    Route::post('/eventos/getLineaF',[EventosController::class, 'getLineaF']);
     Route::post('/eventos/getReporte',[EventosController::class, 'getReporte']);
 });
 
