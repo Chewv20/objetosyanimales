@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/eventos/getLinea',[EventosController::class, 'getLinea']);
     Route::post('/eventos/getLineaF',[EventosController::class, 'getLineaF']);
     Route::post('/eventos/getReporte',[EventosController::class, 'getReporte']);
+    Route::get('/eventos/pdf/{fecha}',[EventosController::class,'imprimir']);
 });
 
 require __DIR__.'/auth.php';

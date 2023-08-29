@@ -22,9 +22,6 @@
                 <div class="card-body">
                     
                     <div class="col-8 col-md-5 ">
-                        <div class="row">
-                            <button type="button" id="pdf" class="btn btn-outline-secondary"><span class="fa fa-file"></span> Exportar PDF</button>
-                        </div>
                         <div class="input-group input-group-sm mb-3">
                            <div class="input-group-prepend d-none d-md-block">
                               <span class="input-group-text" id="inputGroup-sizing-sm">Ver IDO del día</span>
@@ -34,17 +31,23 @@
                            </div>
                            <input type="date" id="fecha" class="form-control" name="fecha_inicial" value="<?php echo $hoy;?>" min="2020-11-04" max="<?php echo $hoy;?>">
                         </div>
-                        <div class="row">
+                    </div>
+                    <div class="container">
+                        <div class="row justify-content-end">
                             <div class="col">
-                                <button type="button" id="abrirFiltro" class="btn btn-outline-success float-left" ><span class="fa fa-plus"></span> Filtro</button>
+                                <button type="button" id="abrirModal" class="btn btn-outline-success"><span class="fa fa-plus"></span> Registrar evento</button>
                             </div>
+                            <button type="button" id="abrirFiltro" class="btn btn-outline-success float-left" ><span class="fa fa-plus"></span> Filtro</button>
                         </div>
-                        
+                    </div>
+                    <div class="container">
+                        <div class="row justify-content-end">
+                            <a href="/eventos/pdf/2023-08-25">
+                                <button type="button" id="pdf" class="btn btn-outline-secondary"><span class="fa fa-file"></span> Exportar PDF</button>
+                            </a>
+                        </div>
                     </div>
                     
-                    <div class="col">
-                        <button type="button" id="abrirModal" class="btn btn-outline-success"><span class="fa fa-plus"></span> Registrar evento</button>
-                    </div>
 
                     
                     
@@ -95,7 +98,7 @@
                                                            <div class="input-group-prepend">
                                                               <span class="input-group-text" id="retardo">Minutos retardo</span>
                                                            </div>
-                                                           <input type="text" class="form-control" id='retardo_l' aria-label="Default" aria-describedby="min-retardo" name="retardo" required>
+                                                           <input type="number" class="form-control" id='retardo_l' aria-label="Default" aria-describedby="min-retardo" name="retardo" required>
                                                         </div>
                                                      </div>
                                                      <div class="col">
@@ -103,7 +106,7 @@
                                                            <div class="input-group-prepend">
                                                               <span class="input-group-text" id="vueltas">Vueltas perdidas</span>
                                                            </div>
-                                                           <input type="text" id="vueltas_l" class="form-control" aria-label="Default" aria-describedby="vue-perdidas" name="vueltas" required>
+                                                           <input type="number" id="vueltas_l" class="form-control" aria-label="Default" aria-describedby="vue-perdidas" name="vueltas" required>
                                                         </div>
                                                      </div>
                                                 </div>

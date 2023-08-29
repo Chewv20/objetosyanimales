@@ -61,6 +61,12 @@ cursor: pointer;
 .color-line.line-B, .color-line.line-LB  { background: -webkit-linear-gradient(bottom,  #00843d 0%,#00843d 50%,#b1b3b3 50%,#b1b3b3 100%);}
 .color-line.line-B.diagonal  { background: linear-gradient(to bottom left, #b1b3b3 50% ,#00843d 50%);}
 
-#export-table_wrapper {
-    display: none;
-  }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}

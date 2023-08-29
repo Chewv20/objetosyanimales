@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use PhpParser\Node\Expr\AssignOp\Concat;
 
+
 class EventosController extends Controller
 {
     /**
@@ -52,8 +53,17 @@ class EventosController extends Controller
         $id2 = 100000+$consulta_id[0]->folio+1;
         $id = "STC".substr(strval($anio),-2)."-".substr(strval($id2),1,5);   
         $descr_larga = "";
-        if($request->vueltas > 1 || $request->vueltas == 0){
+        $retardo = '';
+        if($request->retardo == 0){
+            $retardo = '-';
+        }else{
+            $retardo = $request->retardo;
+        }
+
+        if($request->vueltas > 1 ){
             $descr_larga = $request->descripcion." "."Pierde ".$request->vueltas." vueltas";
+        }else if($request->vueltas == 0){
+            $descr_larga = $request->descripcion;
         }else{
             $descr_larga = $request->descripcion." "."Pierde ".$request->vueltas." vuelta";
         }
@@ -61,7 +71,7 @@ class EventosController extends Controller
         $hor_mov = date('H:i');
         
         DB::update('update folio set folio = ? where anio = ?', [$consulta_id[0]->folio+1,$anio]);
-        DB::insert('insert into evento (id, fecha, linea, hora, larin, retardo, vueltas, descripcion,usuario,hor_mov,fecha_mov) values (?,?,?,?, ?, ?, ?, ?, ?, ?, ?)', [$id, $request->fecha, $request->linea, $request->hora, $request->larin, $request->retardo, $request->vueltas, $descr_larga, $request->usuario, $hor_mov,$fec_mov]);
+        DB::insert('insert into evento (id, fecha, linea, hora, larin, retardo, vueltas, descripcion,usuario,hor_mov,fecha_mov) values (?,?,?,?, ?, ?, ?, ?, ?, ?, ?)', [$id, $request->fecha, $request->linea, $request->hora, $request->larin, $retardo, $request->vueltas, $descr_larga, $request->usuario, $hor_mov,$fec_mov]);
 
         $respuesta = [
             'success' => true,
@@ -152,6 +162,7 @@ class EventosController extends Controller
             return datatables($eventos)->toJson(); 
         
     }
+
     public function getReporte(Request $request)
     {
         if(isset($request)){
@@ -168,5 +179,20 @@ class EventosController extends Controller
 
             return response()->json($comprueba,200);
         }
+    }
+
+    public function imprimir($fecha)
+    {
+        $eventos = DB::connection('pgsql')
+            ->table('evento')
+            ->where([
+                ['fecha',$fecha],
+            ])
+            ->orderBy('hora','desc')
+            ->get();
+
+        $pdf = \PDF::loadView('PDF/ido', compact('eventos','fecha'));
+        //return $pdf->download('ejemplo.pdf');
+        return $pdf->stream();                      
     }
 }
