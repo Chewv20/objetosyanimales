@@ -19,23 +19,16 @@
         .texto{
             font-family: Arial;
             font-size : 11;
+        }
+        .texto.tabla{
             vertical-align: middle;
-        }
-        .textoT{
-            font-family: Arial;
-            font-size : 11;
-            text-align: right;
-        }
-        .texto2{
-            font-family: Arial;
-            font-size : 11;
         }
         footer {
             position: fixed;
             bottom: 0cm;
             left: 1.5cm;
             right: 0cm;
-            height: 1cm;
+            height: 2cm;
         }
         header{
             top: 0cm;
@@ -44,37 +37,24 @@
             height: 4cm;
         }
         body {
-            margin-top: 1cm;
-            margin-left: 1cm;
-            margin-right: 1cm;
-            margin-bottom: 1cm;
+            margin-top: 1.5cm;
+            margin-left: 1.5cm;
+            margin-right: 1.5cm;
+            margin-bottom: 1.5cm;
+        }
+        .footer{
+            position: fixed;
+            bottom: 0cm;
+            left: 1.5cm;
+            right: 0cm;
+            height: 2cm;
         }
     </style>
 </head>
 <body>
-    @php
-        $meses = ['','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-        $hoy = getdate();
-    @endphp
-    <header>
-        <img class="img" src="img/header.png" width="100%" height="100%">
-    </header>
-    <div class="container">
-        <div class="row">
-            <p class="textoT">Ciudad de México, <?php echo date('d') ; ?> de <?php echo $meses[$hoy['mon']];?> de <?php echo date('Y');?>.</p>
-            <p class="textoT" style="margin:-2.5% 0;">60000/SD.G.O./ /2023</p>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <p class="texto2" style="margin:2.5% 0;"><b><I>Ing. Guillermo Calderón Aguilera</I></b></p>
-            <p class="texto2" style="margin:-2.5% 0;"><b><I>Director General</I></b></p>
-            <p class="texto2" style="margin:2.5% 0;"><b><I>P R E S E N T E</I></b></p>
-        </div>
-    </div>
-    <div style="page-break-after:always;"></div>
+    
     <footer>
-        <p>Informe díario de operación</p>
+        <p class="texto"><b>Informe díario de operación</b></p>
     </footer>
     <?php
         $lineas = ['1','2','3','4','5','6','7','8','9','12','A','B'];
@@ -84,30 +64,28 @@
             <h5 class="mb-0" ><u>Línea <?php echo $linea; ?></u></h5>
         </div>
 
-        <table class="table table-bordered border-primary">
-            <thead class="text-center">
-                <tr>
-                    <th scope="col">Hora</th>
-                    <th scope="col" class="w-75">Descripción</th>
-                    <th scope="col">Retardo</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($eventos as $item)
-                    @if ($item -> linea == $linea)
-                        <tr>
-                            <td align="center"  class="texto">{{ $item->hora }}</td>
-                            <td align="justify" class="texto">{{ $item->descripcion }}</td>
-                            <td align="center"  class="texto">{{ $item->retardo }}</td>
-                        </tr>
-                    @endif
-                @endforeach
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table BORDER class="tabla" >
+                <thead class="text-center">
+                    <tr>
+                        <th scope="col">Hora</th>
+                        <th scope="col" class="w-75">Descripción</th>
+                        <th scope="col">Retardo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($eventos as $item)
+                        @if ($item -> linea == $linea)
+                            <tr>
+                                <td ALIGN="center"  class="texto tabla">{{ $item->hora }}</td>
+                                <td ALIGN="justify" class="texto tabla">{{ $item->descripcion }}</td>
+                                <td ALIGN="center"  class="texto tabla">{{ $item->retardo }}</td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     <?php } ?>
-
-    <footer>
-        <p>Informe díario de operación</p>
-    </footer>
 </body>
 </html>

@@ -47,6 +47,11 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                 $('#abrirModal').show()
             }
             crearTabla()
+            var link = document.getElementById("link");
+
+            let url = '/eventos/pdf/'+e.target.value
+            console.log(link);
+            link.setAttribute('href', url);
 
         })
         

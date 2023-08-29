@@ -191,8 +191,10 @@ class EventosController extends Controller
             ->orderBy('hora','desc')
             ->get();
 
-        $pdf = \PDF::loadView('PDF/ido', compact('eventos','fecha'));
+        $pdf = \PDF::loadView('PDF/ido-caratula', compact('eventos','fecha'));
+        $pdf2 = \PDF::loadView('PDF/ido', compact('eventos','fecha'));
+        
         //return $pdf->download('ejemplo.pdf');
-        return $pdf->stream();                      
+        return $pdf2->stream();                      
     }
 }

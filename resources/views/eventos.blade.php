@@ -42,7 +42,7 @@
                     </div>
                     <div class="container">
                         <div class="row justify-content-end">
-                            <a href="/eventos/pdf/2023-08-25">
+                            <a href="/eventos/pdf/<?php echo $hoy;?>" id="link">
                                 <button type="button" id="pdf" class="btn btn-outline-secondary"><span class="fa fa-file"></span> Exportar PDF</button>
                             </a>
                         </div>
