@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use PhpParser\Node\Expr\AssignOp\Concat;
-
+use iio\libmergepdf\Merger;
 
 class EventosController extends Controller
 {
@@ -193,6 +193,7 @@ class EventosController extends Controller
 
         $pdf = \PDF::loadView('PDF/ido-caratula', compact('eventos','fecha'));
         $pdf2 = \PDF::loadView('PDF/ido', compact('eventos','fecha'));
+        
         
         //return $pdf->download('ejemplo.pdf');
         return $pdf2->stream();                      

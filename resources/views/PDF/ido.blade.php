@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
     <title>IDO {{ $fecha }}</title>
     <style>
         @page {
@@ -23,6 +23,10 @@
         .texto.tabla{
             vertical-align: middle;
         }
+        .texto2{
+            font-family: Arial;
+            font-size : 10;
+        }
         footer {
             position: fixed;
             bottom: 0cm;
@@ -31,8 +35,9 @@
             height: 2cm;
         }
         header{
+            position: fixed;
             top: 0cm;
-            left: 0cm;
+            left: 17cm;
             right: 0cm;
             height: 4cm;
         }
@@ -52,7 +57,15 @@
     </style>
 </head>
 <body>
-    
+    @php
+        $meses = ['','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+        $fcreado = date_create($fecha)
+    @endphp
+    <header>
+        <p class="texto2"><b>Clave: 60000</b></p>
+        <p class="texto2" style="margin: -10% 0"><b>Ref.: S.D.G.O./ /<?php echo date_format($fcreado, 'y');?></b></p>
+        <p class="texto2" style="margin: 10% 0"><b><?php echo date_format($fcreado, 'd')?>/<?php echo strtoupper($meses[date_format($fcreado, 'n')]);?>/<?php echo date_format($fcreado, 'Y');?></b></p>
+    </header>
     <footer>
         <p class="texto"><b>Informe díario de operación</b></p>
     </footer>
@@ -87,5 +100,14 @@
             </table>
         </div>
     <?php } ?>
+
+    <script type="text/php">
+        if ( isset($pdf) ) {
+            $pdf->page_script('
+                $font = $fontMetrics->get_font("Arial, Helvetica, sans-serif", "normal");
+                $pdf->text(450, 798, "Página                           $PAGE_NUM", $font, 10);
+            ');
+        }
+    </script>
 </body>
 </html>
