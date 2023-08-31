@@ -63,7 +63,7 @@
     @endphp
     <header>
         <p class="texto2"><b>Clave: 60000</b></p>
-        <p class="texto2" style="margin: -10% 0"><b>Ref.: S.D.G.O./ /<?php echo date_format($fcreado, 'y');?></b></p>
+        <p class="texto2" style="margin: -10% 0"><b>Ref.: S.D.G.O./{{ $oficio }}/<?php echo date_format($fcreado, 'y');?></b></p>
         <p class="texto2" style="margin: 10% 0"><b><?php echo date_format($fcreado, 'd')?>/<?php echo strtoupper($meses[date_format($fcreado, 'n')]);?>/<?php echo date_format($fcreado, 'Y');?></b></p>
     </header>
     <footer>

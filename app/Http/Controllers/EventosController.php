@@ -181,7 +181,7 @@ class EventosController extends Controller
         }
     }
 
-    public function imprimir($fecha)
+    public function imprimir($fecha,$oficio)
     {
         $eventos = DB::connection('pgsql')
             ->table('evento')
@@ -191,11 +191,14 @@ class EventosController extends Controller
             ->orderBy('hora','desc')
             ->get();
 
-        $pdf = \PDF::loadView('PDF/ido-caratula', compact('eventos','fecha'));
-        $pdf2 = \PDF::loadView('PDF/ido', compact('eventos','fecha'));
-        
-        
+        $pdf = \PDF::loadView('PDF/ido-caratula', compact('eventos','fecha','oficio'));
+        $pdf2 = \PDF::loadView('PDF/ido', compact('eventos','fecha','oficio'));
+        $pdf->render();
+        $pdf2->render();
+        $pdf->save('../public/pdf/'.'caratula.pdf');
+        $pdf2->save('../public/pdf/'.'ido_'.$fecha.'.pdf');
         //return $pdf->download('ejemplo.pdf');
-        return $pdf2->stream();                      
+        //return $pdf2->stream(); 
+        return $pdf2->stream();                     
     }
 }
