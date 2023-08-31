@@ -210,7 +210,7 @@ class EventosController extends Controller
         //return $pdf->download('ejemplo.pdf');
         //return $pdf2->stream(); 
 
-        $pdfMerger->save(public_path('/pdf/ido.pdf'), "file");
-        return $pdf2->stream();                     
+        $pdfMerger->save($ido, "download");
+        //return $pdf2->stream();                     
     }
 }
