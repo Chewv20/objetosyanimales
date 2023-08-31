@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use PhpParser\Node\Expr\AssignOp\Concat;
 use iio\libmergepdf\Merger;
+use LynX39\LaraPdfMerger\Facades\PdfMerger;
 
 class EventosController extends Controller
 {
@@ -195,10 +196,21 @@ class EventosController extends Controller
         $pdf2 = \PDF::loadView('PDF/ido', compact('eventos','fecha','oficio'));
         $pdf->render();
         $pdf2->render();
-        $pdf->save('../public/pdf/'.'caratula.pdf');
-        $pdf2->save('../public/pdf/'.'ido_'.$fecha.'.pdf');
+        $caratula = 'caratula.pdf';
+        $ido = 'ido_'.$fecha.'.pdf';
+        $pdf->save('../public/pdf/'.$caratula);
+        $pdf2->save('../public/pdf/'.$ido);
+
+        $pdfMerger = PDFMerger::init();
+
+        $pdfMerger->addPDF(base_path('public/pdf/'.$caratula), 'all');
+        $pdfMerger->addPDF(base_path('public/pdf/'.$ido), 'all');
+
+        $pdfMerger->merge();
         //return $pdf->download('ejemplo.pdf');
         //return $pdf2->stream(); 
+
+        $pdfMerger->save(public_path('/pdf/ido.pdf'), "file");
         return $pdf2->stream();                     
     }
 }

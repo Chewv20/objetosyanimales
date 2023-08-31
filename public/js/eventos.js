@@ -75,12 +75,12 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             link.setAttribute('href', url);
         })
 
-        document.getElementById('fecha_e').addEventListener('change',(e)=>{
+        document.getElementById('fecha_2').addEventListener('change',(e)=>{
             var link = document.getElementById("link");
-
+            
             let oficio = document.getElementById('oficio_f').value
-            let url = '/eventos/pdf/'+e.target.value+oficio
-            console.log(oficio);
+            let url = '/eventos/pdf/'+e.target.value+'/'+oficio
+            console.log(url);
             link.setAttribute('href', url);
         })
 

@@ -124,7 +124,7 @@
                 <br><br>
                 <b>A T E N T A M E N T E</b>
                 <br><br><br>
-                <b>MTRO. FRANCISCO ECHEVARRI HERNÁNDEZ</b><br>
+                <b>MTRO. FRANCISCO ECHAVARRI HERNÁNDEZ</b><br>
                 <b>SUBDIRECTOR GENERAL DE OPERACIÓN</b>
             </p>
         </div>
