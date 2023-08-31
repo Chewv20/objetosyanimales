@@ -42,13 +42,9 @@
                     </div>
                     <div class="container">
                         <div class="row justify-content-end">
-                            <a href="/eventos/pdf/<?php echo $hoy;?>" id="link">
-                                <button type="button" id="pdf" class="btn btn-outline-secondary"><span class="fa fa-file"></span> Exportar PDF</button>
-                            </a>
+                            <button type="button" id="pdf" class="btn btn-outline-secondary"><span class="fa fa-file"></span> Exportar PDF</button>
                         </div>
                     </div>
-                    
-
                     
                     
                     <div id="ventanaModal" class="modal">
@@ -190,6 +186,52 @@
 
                                          <x-adminlte-button id="aplicarFiltro" class="btn-flat" label="Aplicar Filtros" theme="success" icon="fas fa-lg fa-save"/>
                                          <x-adminlte-button id="borrarFiltro" class="btn-flat" label="Borrar Filtros" theme="danger" icon="fa fa-trash"/>
+                                    </div>
+                                </div>
+                            </form> 
+                        </div>
+                    </div>
+
+                    <div id="ventanaModal2" class="modal">
+                        <div class="contenido-modal">
+                            <span class="cerrar">&times;</span>
+                                                       
+                            <form id='form-pdf' method="POST">
+                                @csrf
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="row"> 
+                                                    <div class="col">
+                                                        <div class="input-group input-group-sm mb-3">
+                                                           <div class="input-group-prepend d-none d-md-block">
+                                                              <span class="input-group-text" id="inputGroup-sizing-sm">Exportar IDO del día</span>
+                                                           </div>
+                                                           <div class="input-group-prepend d-md-none">
+                                                              <span class="input-group-text" id="inputGroup-sizing-sm">Ver Día</span>
+                                                           </div>
+                                                           <input type="date" id="fecha_2" class="form-control" name="fecha_inicial" value="<?php echo $hoy;?>" min="2020-11-04" max="<?php echo $hoy;?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="input-group input-group-sm mb-3">
+                                                            <div class="input-group-prepend">
+                                                               <span class="input-group-text" id="oficio">Oficio</span>
+                                                            </div>  
+                                                            <input type="number" id="oficio_f" class="form-control" aria-label="oficio" aria-describedby="oficio" name="oficio" required>
+                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <a href="/eventos/pdf/<?php echo $hoy;?>/0" id="link">
+                                                            <button type="button" id="pdfE" class="btn btn-outline-success"><span class="fa fa-file"></span> Exportar PDF</button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </form> 

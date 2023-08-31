@@ -82,7 +82,7 @@
     <div class="container">
         <div class="row">
             <p class="textoT">Ciudad de México, <?php echo date('d') ; ?> de <?php echo $meses[$hoy['mon']];?> de <?php echo date('Y');?>.</p>
-            <p class="textoT" style="margin:-2.5% 0;">60000/SD.G.O./ /2023</p>
+            <p class="textoT" style="margin:-2.5% 0;">60000/SD.G.O./{{ $oficio }}/2023</p>
         </div>
     </div>
     <div class="container">

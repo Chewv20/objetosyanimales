@@ -5,6 +5,8 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         // Ventana modal
         var modal = document.getElementById("ventanaModal");
         var modal1 = document.getElementById("ventanaModal1");
+        var modal2 = document.getElementById("ventanaModal2");
+
 
         document.getElementById("abrirModal").addEventListener("click",function() {
             modal.style.display = "block";
@@ -34,6 +36,20 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             }
         });
 
+        document.getElementById("pdf").addEventListener("click",function() {
+            modal2.style.display = "block";
+        });
+
+        document.getElementsByClassName("cerrar")[2].addEventListener("click",function() {
+            modal2.style.display = "none";
+        });
+
+        window.addEventListener("click",function(event) {
+            if (event.target == modal2) {
+                modal2.style.display = "none";
+            }
+        });
+
         cargarReloj();
 
         document.getElementById('fecha').addEventListener('change',(e)=>{
@@ -47,14 +63,27 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                 $('#abrirModal').show()
             }
             crearTabla()
-            var link = document.getElementById("link");
-
-            let url = '/eventos/pdf/'+e.target.value
-            console.log(link);
-            link.setAttribute('href', url);
+            
 
         })
         
+        document.getElementById('oficio_f').addEventListener('change',(e)=>{
+            var link = document.getElementById("link");
+            let fecha = document.getElementById('fecha_2').value
+            let url = '/eventos/pdf/'+fecha+'/'+e.target.value
+            console.log(url);
+            link.setAttribute('href', url);
+        })
+
+        document.getElementById('fecha_e').addEventListener('change',(e)=>{
+            var link = document.getElementById("link");
+
+            let oficio = document.getElementById('oficio_f').value
+            let url = '/eventos/pdf/'+e.target.value+oficio
+            console.log(oficio);
+            link.setAttribute('href', url);
+        })
+
         $('#larin').select2({
             dropdownAutoWidth : true,
             width: '400px'
@@ -123,6 +152,8 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             });
             modal1.style.display = "none";
         })
+
+        
 
         document.getElementById('submit').addEventListener('click',(e)=>{
             e.preventDefault()
