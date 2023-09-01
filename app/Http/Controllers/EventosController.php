@@ -54,8 +54,6 @@ class EventosController extends Controller
         $id2 = 100000+$consulta_id[0]->folio+1;
         $id = "STC".substr(strval($anio),-2)."-".substr(strval($id2),1,5);   
         $descr_larga = "";
-        $retardo = '';
-
         if($request->vueltas > 1 ){
             $descr_larga = $request->descripcion." "."Pierde ".$request->vueltas." vueltas";
         }else if($request->vueltas == 0){
@@ -199,7 +197,7 @@ class EventosController extends Controller
         $pdfMerger = PDFMerger::init();
 
         $pdfMerger->addPDF(base_path('public/pdf/'.$caratula), 'all');
-        $pdfMerger->addPDF(base_path('public/pdf/'.$ido), 'all');
+        $pdfMerger->addPDF(base_path('public/pdf/'.'ido.pdf'), 'all');
 
         $pdfMerger->merge();
         //return $pdf->download('ejemplo.pdf');
