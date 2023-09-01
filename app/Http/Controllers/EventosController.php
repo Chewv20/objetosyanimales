@@ -55,11 +55,6 @@ class EventosController extends Controller
         $id = "STC".substr(strval($anio),-2)."-".substr(strval($id2),1,5);   
         $descr_larga = "";
         $retardo = '';
-        if($request->retardo == 0){
-            $retardo = '-';
-        }else{
-            $retardo = $request->retardo;
-        }
 
         if($request->vueltas > 1 ){
             $descr_larga = $request->descripcion." "."Pierde ".$request->vueltas." vueltas";
@@ -72,7 +67,7 @@ class EventosController extends Controller
         $hor_mov = date('H:i');
         
         DB::update('update folio set folio = ? where anio = ?', [$consulta_id[0]->folio+1,$anio]);
-        DB::insert('insert into evento (id, fecha, linea, hora, larin, retardo, vueltas, descripcion,usuario,hor_mov,fecha_mov) values (?,?,?,?, ?, ?, ?, ?, ?, ?, ?)', [$id, $request->fecha, $request->linea, $request->hora, $request->larin, $retardo, $request->vueltas, $descr_larga, $request->usuario, $hor_mov,$fec_mov]);
+        DB::insert('insert into evento (id, fecha, linea, hora, larin, retardo, vueltas, descripcion,usuario,hor_mov,fecha_mov) values (?,?,?,?, ?, ?, ?, ?, ?, ?, ?)', [$id, $request->fecha, $request->linea, $request->hora, $request->larin, $request->retardo, $request->vueltas, $descr_larga, $request->usuario, $hor_mov,$fec_mov]);
 
         $respuesta = [
             'success' => true,
