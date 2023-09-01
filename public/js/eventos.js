@@ -75,12 +75,21 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             link.setAttribute('href', url);
         })
 
+<<<<<<< HEAD
         document.getElementById('fecha_2').addEventListener('change',(e)=>{
             var link = document.getElementById("link");
             
             let oficio = document.getElementById('oficio_f').value
             let url = '/eventos/pdf/'+e.target.value+'/'+oficio
             console.log(url);
+=======
+        document.getElementById('fecha_e').addEventListener('change',(e)=>{
+            var link = document.getElementById("link");
+
+            let oficio = document.getElementById('oficio_f').value
+            let url = '/eventos/pdf/'+e.target.value+oficio
+            console.log(oficio);
+>>>>>>> 77495fcac087df56f084e23312d9316629def3e6
             link.setAttribute('href', url);
         })
 
