@@ -16,8 +16,8 @@ class EventosController extends Controller
      */
     public function index()
     {
-        $larines = DB::connection('pgsql2')
-        ->table('tbl_ido_larines')
+        $larines = DB::connection('pgsql')
+        ->table('larines')
         ->orderBy('id_larin','asc')
         ->get();
 
@@ -115,8 +115,8 @@ class EventosController extends Controller
 
     public function getLarin(Request $request)
     {
-        $larines = DB::connection('pgsql2')
-        ->table('tbl_ido_larines')
+        $larines = DB::connection('pgsql')
+        ->table('larines')
         ->where('clave_larin', $request->id_larin)
         ->orderBy('id_larin','asc')
         ->get();
