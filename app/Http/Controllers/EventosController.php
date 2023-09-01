@@ -191,7 +191,6 @@ class EventosController extends Controller
         $pdf2 = \PDF::loadView('PDF/ido', compact('eventos','fecha','oficio'));
         $pdf->render();
         $pdf2->render();
-<<<<<<< HEAD
         $caratula = 'caratula.pdf';
         $ido = 'ido_'.$fecha.'.pdf';
         $pdf->save('../public/pdf/'.$caratula);
@@ -208,12 +207,5 @@ class EventosController extends Controller
 
         $pdfMerger->save($ido, "download");
         //return $pdf2->stream();                     
-=======
-        $pdf->save('../public/pdf/'.'caratula.pdf');
-        $pdf2->save('../public/pdf/'.'ido_'.$fecha.'.pdf');
-        //return $pdf->download('ejemplo.pdf');
-        //return $pdf2->stream(); 
-        return $pdf2->stream();                     
->>>>>>> 77495fcac087df56f084e23312d9316629def3e6
     }
 }
