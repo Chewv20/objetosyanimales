@@ -192,7 +192,7 @@ class EventosController extends Controller
         $caratula = 'caratula.pdf';
         $ido = 'ido_'.$fecha.'.pdf';
         $pdf->save('../public/pdf/'.$caratula);
-        $pdf2->save('../public/pdf/'.$ido);
+        $pdf2->save('../public/pdf/ido.pdf');
 
         $pdfMerger = PDFMerger::init();
 
