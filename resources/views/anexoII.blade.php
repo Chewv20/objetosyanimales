@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
 @section('title', 'Informe Diario de Operación')
+<link rel="icon" href="{{ URL::asset('img/logo.png') }}" />
 
 @section('content_header')
     <h1 class="m-0 text-dark">Incidentes Registrados en las Estaciones</h1>
     <link rel="stylesheet" href="{{ URL::asset('css/anexoii.css') }}" />
-    <link rel="icon" href="{{ URL::asset('img/logo.png') }}" />
 @stop
 
 @php

@@ -319,12 +319,12 @@ return [
             'submenu' => [
                 [
                     'text'        => 'Anexo I',
-                    'url'         => '/',
+                    'url'         => '/larinI',
                     'icon'        => 'far fa-fw fa-file',
                 ],
                 [
                     'text'        => 'Anexo II',
-                    'url'         => '/',
+                    'url'         => '/larinII',
                     'icon'        => 'far fa-fw fa-file',
                 ],
                 [

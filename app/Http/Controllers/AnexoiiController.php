@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
-use PhpParser\Node\Expr\AssignOp\Concat;
-use iio\libmergepdf\Merger;
-use LynX39\LaraPdfMerger\Facades\PdfMerger;
+
 
 class AnexoiiController extends Controller
 {
