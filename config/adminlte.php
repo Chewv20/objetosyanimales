@@ -296,9 +296,43 @@ return [
             'topnav_right' => true,
         ],
         [
-            'text'        => 'Eventos',
+            'header' => 'Registrar Anexos',
+        ],
+        [
+            'text'        => 'Anexo I',
             'url'         => '/eventos',
             'icon'        => 'far fa-fw fa-file',
+        ],
+        [
+            'text'        => 'Anexo II',
+            'url'         => '/anexoii',
+            'icon'        => 'far fa-fw fa-file',
+        ],
+        [
+            'text'        => 'Anexo III',
+            'url'         => '/',
+            'icon'        => 'far fa-fw fa-file',
+        ],
+        [
+            'text'    => 'Modulos',
+            'icon'    => 'fa fa-archive',
+            'submenu' => [
+                [
+                    'text'        => 'Anexo I',
+                    'url'         => '/',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'Anexo II',
+                    'url'         => '/',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'Anexo III',
+                    'url'         => '/',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+            ],
         ],
     ],
 

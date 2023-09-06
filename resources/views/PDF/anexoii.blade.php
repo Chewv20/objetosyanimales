@@ -63,8 +63,8 @@
     @endphp
     <header>
         <p class="texto2"><b>Clave: 60000</b></p>
-        <p class="texto2" style="margin: -10% 0"><b>Ref.: S.D.G.O./{{ $oficio }}/<?php echo date_format($fcreado, 'y');?></b></p>
-        <p class="texto2" style="margin: 10% 0"><b><?php echo date_format($fcreado, 'd')?>/<?php echo strtoupper($meses[date_format($fcreado, 'n')]);?>/<?php echo date_format($fcreado, 'Y');?></b></p>
+        <p class="texto2" style="margin: -10% 0"><b>SGCC/{{ $oficio }}/<?php echo date_format($fcreado, 'Y');?></b></p>
+        <p class="texto2" style="margin: 10% 0"><b>00/00/<?php echo date_format($fcreado, 'Y');?></b></p>
     </header>
     <footer>
         <p class="texto"><b>Informe díario de operación</b></p>
@@ -83,16 +83,14 @@
                     <tr>
                         <th scope="col">Hora</th>
                         <th scope="col" class="w-75">Descripción</th>
-                        <th scope="col">Retardo</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($eventos as $item)
+                    @foreach ($anexoii as $item)
                         @if ($item -> linea == $linea)
                             <tr>
                                 <td ALIGN="center"  class="texto tabla">{{ $item->hora }}</td>
                                 <td ALIGN="justify" class="texto tabla">{{ $item->descripcion }}</td>
-                                <td ALIGN="center"  class="texto tabla">{{ $item->retardo }}</td>
                             </tr>
                         @endif
                     @endforeach

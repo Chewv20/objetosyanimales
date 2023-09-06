@@ -21,15 +21,16 @@ class EventosController extends Controller
         ->orderBy('id_larin','asc')
         ->get();
 
-        $lineas = DB::select('select * from lineas order by id_linea asc');
-
-        $eventos1 = DB::connection('pgsql')
-        ->table('evento')
-        ->where('linea','01')
-        ->orderBy('id')
+        $lineas = DB::connection('pgsql')
+        ->table('lineas')
+        ->orderBy('id_linea','asc')
         ->get();
 
-        return view('eventos',compact('larines','lineas','eventos1'));
+        //$lineas = DB::select('select * from lineas order by id_linea asc');
+
+
+
+        return view('eventos',compact('larines','lineas'));
     }
 
     /**
@@ -178,26 +179,38 @@ class EventosController extends Controller
     public function imprimir($fecha,$oficio)
     {
         $eventos = DB::connection('pgsql')
-            ->table('evento')
-            ->where([
-                ['fecha',$fecha],
-            ])
-            ->orderBy('hora','desc')
-            ->get();
+        ->table('evento')
+        ->where([
+            ['fecha',$fecha],
+        ])
+        ->orderBy('hora','desc')
+        ->get();
+        
+        $anexoii = DB::connection('pgsql')
+        ->table('anexoii')
+        ->where([
+            ['fecha',$fecha],
+        ])
+        ->orderBy('hora','desc')
+        ->get();
 
         $pdf = \PDF::loadView('PDF/ido-caratula', compact('eventos','fecha','oficio'));
         $pdf2 = \PDF::loadView('PDF/ido', compact('eventos','fecha','oficio'));
+        $pdf3 = \PDF::loadView('PDF/anexoii', compact('anexoii','fecha','oficio'));
         $pdf->render();
         $pdf2->render();
+        $pdf3->render();
         $caratula = 'caratula.pdf';
         $ido = 'ido_'.$fecha.'.pdf';
         $pdf->save('../public/pdf/'.$caratula);
         $pdf2->save('../public/pdf/ido.pdf');
+        $pdf3->save('../public/pdf/anexoii.pdf');
 
         $pdfMerger = PDFMerger::init();
 
         $pdfMerger->addPDF(base_path('public/pdf/'.$caratula), 'all');
         $pdfMerger->addPDF(base_path('public/pdf/'.'ido.pdf'), 'all');
+        $pdfMerger->addPDF(base_path('public/pdf/'.'anexoii.pdf'), 'all');
 
         $pdfMerger->merge();
         //return $pdf->download('ejemplo.pdf');
