@@ -10,7 +10,9 @@
         @page {
             margin: 0cm 0cm;
         }
-        
+        h2{
+            text-align: center;
+        }
         h5{
             font-family: Arial;
             font-size : 11;
@@ -69,6 +71,7 @@
     <footer>
         <p class="texto"><b>Informe díario de operación</b></p>
     </footer>
+    <h2>Anexo I</h2>
     <?php
         $lineas = ['1','2','3','4','5','6','7','8','9','12','LA','LB'];
         foreach( $lineas as $linea){ ?>

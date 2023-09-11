@@ -10,12 +10,15 @@
         @page {
             margin: 0cm 0cm;
         }
-        
+        h2{
+            text-align: center;
+        }
         h5{
             font-family: Arial;
             font-size : 11;
             text-align: center;
         }
+        
         .texto{
             font-family: Arial;
             font-size : 11;
@@ -67,8 +70,9 @@
         <p class="texto2" style="margin: 10% 0"><b>00/00/<?php echo date_format($fcreado, 'Y');?></b></p>
     </header>
     <footer>
-        <p class="texto"><b>Informe díario de operación</b></p>
+        <p class="texto"><b>Anexo II</b></p>
     </footer>
+    <h2>Anexo II</h1>
     <?php
         $lineas = ['1','2','3','4','5','6','7','8','9','12','LA','LB'];
         foreach( $lineas as $linea){ ?>
@@ -81,8 +85,8 @@
             <table BORDER class="tabla" >
                 <thead class="text-center">
                     <tr>
-                        <th scope="col">Hora</th>
-                        <th scope="col" class="w-75">Descripción</th>
+                        <th scope="col" class="texto">Hora</th>
+                        <th scope="col" class="w-75 texto">Descripción</th>
                     </tr>
                 </thead>
                 <tbody>
