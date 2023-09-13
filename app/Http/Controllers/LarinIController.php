@@ -16,7 +16,17 @@ class LarinIController extends Controller
         ->table('larines')
         ->orderBy('id_larin','asc')
         ->get();
-        return view('larinI',compact('larinI'));
+
+        $heads = [
+            ['label' => 'ID Larin'],
+            ['label' => 'Tipo de Larin'],
+            ['label'=>  'Clave del Larin'],
+            ['label' => 'Descripcion Corta del Larin'],
+            ['label' => 'Larin'],
+            ['label' => 'Acciones', 'no-export' => true]
+        ];
+
+        return view('larinI',compact('larinI','heads'));
     }
 
     /**
@@ -24,7 +34,8 @@ class LarinIController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('larini-create');
     }
 
     /**
@@ -40,7 +51,12 @@ class LarinIController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $larin = DB::connection('pgsql')
+        ->table('larines')
+        ->where('clave_larin',$id)
+        ->get();
+
+        return view('larini-update',compact('larin'));
     }
 
     /**
@@ -56,7 +72,8 @@ class LarinIController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DB::update('update larines set tipo_larin = ?, descripcion_corta_larin = ?, larin = ? where clave_larin = ?', [$request->tipo_larin,$request->descripcion_corta, $request->larin, $id]);
+        return redirect('larinI');
     }
 
     /**
@@ -64,7 +81,8 @@ class LarinIController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('larines')->where('clave_larin', $id)->delete();
+        return redirect('larinI');
     }
 
     public function get()

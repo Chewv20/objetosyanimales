@@ -170,6 +170,21 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             }
         })
 
+        document.getElementById('vueltas_l').addEventListener('change',(e)=>{
+            if(e.target.value != ''){
+                document.getElementById('vueltas_R').readOnly= true
+            }else{
+                document.getElementById('vueltas_R').readOnly= false
+            }
+        })
+
+        document.getElementById('vueltas_R').addEventListener('change',(e)=>{
+            if(e.target.value != ''){
+                document.getElementById('vueltas_l').readOnly= true
+            }else{
+                document.getElementById('vueltas_l').readOnly= false
+            }
+        })
 
     })
 
@@ -318,6 +333,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         let Pretardo = document.getElementById('retardo_l').value
         let Pvueltas = document.getElementById('vueltas_l').value        
         let Pusuario = document.getElementById('usuario').value
+        let PvueltasR = document.getElementById('vueltas_R').value
         fetch('/eventos/',{
                 method : 'POST',
                 body: JSON.stringify({
@@ -329,6 +345,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                     retardo : Pretardo,
                     vueltas : Pvueltas,
                     usuario : Pusuario,
+                    vueltasR : PvueltasR
                 }),
                 headers:{
                     'Content-Type': 'application/json',
@@ -360,6 +377,9 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         document.getElementById('retardo_l').value = ""
         document.getElementById('descripcion').value = ""
         document.getElementById('larin').value = '0'
+        document.getElementById('vueltas_R').value = ""
+        document.getElementById('vueltas_l').readOnly= false
+        document.getElementById('vueltas_R').readOnly= false
         $('#larin').trigger('change');
         crearTabla()
     }

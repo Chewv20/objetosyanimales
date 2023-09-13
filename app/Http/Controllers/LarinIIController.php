@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+
 
 class LarinIIController extends Controller
 {
@@ -11,7 +12,21 @@ class LarinIIController extends Controller
      */
     public function index()
     {
-        return view('larinII');
+        $larin = DB::connection('pgsql')
+        ->table('larinesii')
+        ->orderBy('id_larin','asc')
+        ->get();
+
+        $heads = [
+            ['label' => 'ID Larin'],
+            ['label' => 'Tipo de Larin'],
+            ['label'=>  'Clave del Larin'],
+            ['label' => 'Descripcion Corta del Larin'],
+            ['label' => 'Larin'],
+            ['label' => 'Acciones', 'no-export' => true]
+        ];
+
+        return view('larinII',compact('larin','heads'));
     }
 
     /**
@@ -35,7 +50,12 @@ class LarinIIController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $larin = DB::connection('pgsql')
+        ->table('larinesii')
+        ->where('clave_larin',$id)
+        ->get();
+
+        return view('larinii-update',compact('larin'));
     }
 
     /**
@@ -51,7 +71,8 @@ class LarinIIController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DB::update('update larinesii set tipo_larin = ?, descripcion_corta_larin = ?, larin = ? where clave_larin = ?', [$request->tipo_larin,$request->descripcion_corta, $request->larin, $id]);
+        return redirect('larinII');
     }
 
     /**
@@ -59,6 +80,17 @@ class LarinIIController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('larinesii')->where('clave_larin', $id)->delete();
+        return redirect('larinII');
+    }
+
+    public function get()
+    {
+        $anexoi = DB::connection('pgsql')
+        ->table('larinesii')
+        ->orderBy('id_larin')
+        ->get();
+
+        return datatables($anexoi)->toJson();
     }
 }

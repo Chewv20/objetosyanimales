@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnexoiiController;
+use App\Http\Controllers\AnexoIIIController;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\LarinIController;
 use App\Http\Controllers\LarinIIController;
@@ -32,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('eventos', EventosController::class);
     Route::resource('anexoii', AnexoiiController::class);
+    Route::resource('anexoIII', AnexoIIIController::class);
     Route::resource('larinI', LarinIController::class);
     Route::resource('larinII', LarinIIController::class);
     Route::post('/eventos/getLarin', [EventosController::class, 'getLarin']);

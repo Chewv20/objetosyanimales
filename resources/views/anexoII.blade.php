@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Informe Diario de Operación')
+@section('title', 'Anexo II')
 <link rel="icon" href="{{ URL::asset('img/logo.png') }}" />
 
 @section('content_header')

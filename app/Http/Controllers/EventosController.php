@@ -64,9 +64,16 @@ class EventosController extends Controller
         }
         $fec_mov = date("Y-m-d");
         $hor_mov = date('H:i');
-        
+        $vueltasP = 0;
+        $vueltasR = 0;
+        if($request->vueltas != ''){
+            $vueltasP = $request->vueltas;
+        }
+        if($request->vueltasR != ''){
+            $vueltasR = $request->vueltasR;
+        }
         DB::update('update folio set folio = ? where anio = ?', [$consulta_id[0]->folio+1,$anio]);
-        DB::insert('insert into evento (id, fecha, linea, hora, larin, retardo, vueltas, descripcion,usuario,hor_mov,fecha_mov) values (?,?,?,?, ?, ?, ?, ?, ?, ?, ?)', [$id, $request->fecha, $request->linea, $request->hora, $request->larin, $request->retardo, $request->vueltas, $descr_larga, $request->usuario, $hor_mov,$fec_mov]);
+        DB::insert('insert into evento (id, fecha, linea, hora, larin, retardo, vueltas, descripcion,usuario,hor_mov,fecha_mov,vueltas_realizadas) values (?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?)', [$id, $request->fecha, $request->linea, $request->hora, $request->larin, $request->retardo, $vueltasP, $descr_larga, $request->usuario, $hor_mov,$fec_mov,$vueltasR]);
 
         $respuesta = [
             'success' => true,

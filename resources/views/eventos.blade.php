@@ -102,12 +102,22 @@
                                                            <div class="input-group-prepend">
                                                               <span class="input-group-text" id="vueltas">Vueltas perdidas</span>
                                                            </div>
-                                                           <input type="number" id="vueltas_l" class="form-control" aria-label="Default" aria-describedby="vue-perdidas" name="vueltas" required>
+                                                           <input type="number" id="vueltas_l" class="form-control" aria-label="Default" aria-describedby="vue-perdidas" name="vueltas">
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                                <br>
+                                                <div class="row"> 
+                                                    <div class="col">
+                                                        <div class="input-group input-group-sm mt-1 mt-md-0">
+                                                           <div class="input-group-prepend">
+                                                              <span class="input-group-text" id="vueltasProgramadas">Vueltas Realizadas</span>
+                                                           </div>
+                                                           <input type="number" id="vueltas_R" class="form-control" aria-label="Default" aria-describedby="vue-perdidas" name="vueltas">
                                                         </div>
                                                      </div>
                                                 </div>
                                                 <br><br>
-
                                                 <div class="row"> 
                                                     <div class="col" style="text-align: center">
                                                         <x-adminlte-button id="submit" class="btn-flat" type="submit" label="Guardar Evento" theme="success" icon="fas fa-lg fa-save"/>

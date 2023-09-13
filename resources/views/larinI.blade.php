@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Modulos Anexo I')
+@section('title', 'Anexo I')
 <link rel="icon" href="{{ URL::asset('img/logo.png') }}" />
 
 @section('content_header')
@@ -12,36 +12,32 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    {{-- <a href="/larinI/create"><x-adminlte-button label="Agregar Larin" theme="success" icon="fa fa-plus"/></a> --}}
                     <div class=" col-12 table-responsive tbl_anexoi">
-                        <table class="table table-sm table-bordered" id="anexoi">
-                        <thead class="text-center">
-                            <tr>
-                                <th scope="col">Tipo de Larin</th>
-                                <th scope="col">Clave Larin</th>
-                                <th scope="col">Descripcion Corta del Larin</th>
-                                <th scope="col">Descripcion del Larin</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($larinI as $item)
+                        <x-adminlte-datatable id="table1" :heads="$heads" head-theme='dark' scrollable hoverable with-footer beautify bordered footer-theme='dark' >
+                            @forelse ($larinI as $item)
                                 <tr>
-                                    <td>{{ $item -> tipo_larin }}</td>
-                                    <td>{{ $item -> clave_larin }}</td>
-                                    <td>{{ $item -> descripcion_corta_larin }}</td>
-                                    <td>{{ $item -> larin }}</td>
+                                        <th>{{ $item -> id_larin }}</th>
+                                        <th>{{ $item -> tipo_larin }}</th>
+                                        <th>{{ $item -> clave_larin }}</th>
+                                        <th>{{ $item -> descripcion_corta_larin }}</th>
+                                        <th>{{ $item -> larin }}</th>
+                                        <th>
+                                            <a href="/larinI/{{ $item->clave_larin }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a>
+                                            <form action="{{ route('larinI.destroy', $item->clave_larin) }}" method="post">
+                                                <input class="btn btn-danger" type="submit" value="Eliminar" />
+                                                @method('delete')
+                                                @csrf
+                                            </form>
+                                        </th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                        </table>
+                            @empty
+                                <tr>Sin larines</tr>
+                            @endforelse
+                        </x-adminlte-datatable>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@stop
-
-@section('js')
-
-<script src="{{ URL::asset('js/larinI.js') }}"></script>
-
 @stop
