@@ -11,13 +11,6 @@
 @php
 use App\Http\Controllers\AnexoIIIController;
     $hoy = date("Y-m-d");
-    $vueltasP = 0;
-    $vueltasR = 0;
-    $evento = AnexoIIIController::get($hoy);
-    foreach ($evento as $item) {
-       $vueltasP+=$item->vueltas;
-       $vueltasR+=$item->vueltas_realizadas;
-    }
 @endphp
 
 @section('content')
@@ -30,8 +23,22 @@ use App\Http\Controllers\AnexoIIIController;
                 <div class="card-body">
                     <div>
                         <canvas id="myChart"></canvas>
-                        <p>Las vueltas Perdidas del día son: {{ $vueltasP }}</p>
-                        <p>Las vueltas Realizadas del día son: {{ $vueltasR }}</p>
+                        <?php
+                        $lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB'];
+                        foreach( $lineas as $linea){ 
+                            $evento = AnexoIIIController::get($hoy,$linea);
+                            $vueltasP = 0;
+                            $vueltasR = 0;
+                            foreach ($evento as $item) {
+                                $vueltasP+=$item->vueltas;
+                                $vueltasR+=$item->vueltas_realizadas;
+                            }
+                        ?>
+                        <x-adminlte-input name="vueltasP" id="vueltasP<?php echo $linea; ?>" type="numer" value="{{ $vueltasP }}" hidden/>
+                        <x-adminlte-input name="vueltasR" id="vueltasR<?php echo $linea; ?>" type="numer" value="{{ $vueltasR }}" hidden/>
+                        <p>Graficas Linea: {{ $linea }}</p>
+                        <canvas id="graficaLinea<?php echo $linea; ?>"></canvas>
+                    <?php } ?>
                     </div>
                 </div>
             </div>
@@ -46,27 +53,56 @@ use App\Http\Controllers\AnexoIIIController;
 
 <script>
     $(document).ready(function(){
-    const ctx = document.getElementById('myChart');
+        const lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB']
+        
+        lineas.forEach(element => {
+            perdidas = document.getElementById('vueltasP'+element).value
+            realizadas = document.getElementById('vueltasR'+element).value
+            generaGrafica('graficaLinea'+element,perdidas,realizadas)
+        });
 
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
+        
 })
+
+function generaGrafica(id,perdidas,realizadas)
+{
+    new Chart(id, {
+        type: 'bar',
+        data: {
+            labels: ['Perdidas', 'Realizadas'],
+            datasets: [{
+            label: '# de vueltas',
+            data: [perdidas,realizadas],
+            backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+            y: {
+                beginAtZero: true
+            }
+            }
+        }
+        });
+}
 </script>
 
 @stop

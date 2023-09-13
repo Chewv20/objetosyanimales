@@ -64,12 +64,13 @@ class AnexoIIIController extends Controller
         //
     }
 
-    public static function get(string $fecha)
+    public static function get(string $fecha, string $linea)
     {
         $eventos = DB::connection('pgsql')
         ->table('evento')
         ->where([        
         ['fecha',$fecha],
+        ['linea',$linea],
         ])
         ->orderBy('hora')
         ->get();
