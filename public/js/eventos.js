@@ -63,8 +63,6 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                 $('#abrirModal').show()
             }
             crearTabla()
-            
-
         })
         
         document.getElementById('oficio_f').addEventListener('change',(e)=>{

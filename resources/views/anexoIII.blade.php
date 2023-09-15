@@ -22,17 +22,19 @@ use App\Http\Controllers\AnexoIIIController;
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <canvas id="myChart"></canvas>
+                        <div class="col-8 col-md-5 ">
+                            <div class="input-group input-group-sm mb-3">
+                               <div class="input-group-prepend d-none d-md-block">
+                                  <span class="input-group-text" id="inputGroup-sizing-sm">Ver Gráficas del día</span>
+                               </div>
+                               <input type="date" id="fecha" class="form-control" name="fecha_inicial" value="<?php echo $hoy;?>" min="2020-11-04" max="<?php echo $hoy;?>">
+                            </div>
+                        </div>
                         <?php
-                        $lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB'];
+                        $lineas = ['1','2','3','4','5','6','7','8','9','12','A','B'];
                         foreach( $lineas as $linea){ 
-                            $evento = AnexoIIIController::get($hoy,$linea);
-                            $vueltasP = 0;
-                            $vueltasR = 0;
-                            foreach ($evento as $item) {
-                                $vueltasP+=$item->vueltas;
-                                $vueltasR+=$item->vueltas_realizadas;
-                            }
+                            $vueltasP = 10;
+                            $vueltasR = 10;
                         ?>
                         <x-adminlte-input name="vueltasP" id="vueltasP<?php echo $linea; ?>" type="numer" value="{{ $vueltasP }}" hidden/>
                         <x-adminlte-input name="vueltasR" id="vueltasR<?php echo $linea; ?>" type="numer" value="{{ $vueltasR }}" hidden/>
@@ -52,27 +54,71 @@ use App\Http\Controllers\AnexoIIIController;
 
 
 <script>
+    let chart
+    const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
     $(document).ready(function(){
-        const lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB']
-        
+        const lineas = ['1','2','3','4','5','6','7','8','9','12','A','B']
         lineas.forEach(element => {
             perdidas = document.getElementById('vueltasP'+element).value
             realizadas = document.getElementById('vueltasR'+element).value
             generaGrafica('graficaLinea'+element,perdidas,realizadas)
         });
+        document.getElementById('fecha').addEventListener('change',(e)=>{
+            console.log(e.target.value);
+            creaGrafica()
+        })
 
         
 })
 
-function generaGrafica(id,perdidas,realizadas)
+function creaGrafica(){
+    let vueltas = []
+    fetch('/anexoIII/get',{
+        method : 'POST',
+        body: JSON.stringify({
+            fecha : document.getElementById('fecha').value,      
+        }),
+        headers:{
+            'Content-Type': 'application/json',
+            "X-CSRF-Token": csrfToken
+        }
+    }).then(response=>{
+        return response.json()
+    }).then( data=>{      
+        lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB']
+        lineas.forEach(element => {
+            vueltas[element] = 0
+        })
+        lineas.forEach(element=>{
+            data.forEach(item => {
+                if(element==item.linea){
+                    vueltas[element]-=parseInt(item.vueltas)
+                    vueltas[element]+=parseInt(item.vueltas_realizadas)
+                }
+            })
+        })
+        console.log(vueltas);
+        lineas.forEach(element=>{
+            if(chart){
+                chart.destroy()
+                generaGrafica('graficaLineaB',320,320+vueltas[element])
+            }else{
+                generaGrafica('graficaLineaB',320,320+vueltas[element])
+            }
+        })
+    }).catch(error => console.error(error));
+
+}
+
+function generaGrafica(id,programadas,realizadas)
 {
-    new Chart(id, {
+    chart = new Chart(id, {
         type: 'bar',
         data: {
-            labels: ['Perdidas', 'Realizadas'],
+            labels: ['Programadas', 'Realizadas'],
             datasets: [{
             label: '# de vueltas',
-            data: [perdidas,realizadas],
+            data: [programadas,realizadas],
             backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(255, 159, 64, 0.2)',

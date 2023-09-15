@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/anexoii/getLineaF',[AnexoiiController::class, 'getLineaF']);
     Route::post('/anexoii/getReporte',[AnexoiiController::class, 'getReporte']);
     Route::post('/larinI/get',[LarinIController::class, 'get']);
+    Route::post('anexoIII/get', [AnexoIIIController::class,'get']);
 
     
 });
