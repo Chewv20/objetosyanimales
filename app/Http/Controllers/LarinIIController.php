@@ -34,7 +34,7 @@ class LarinIIController extends Controller
      */
     public function create()
     {
-        //
+        return view('larinii-create');
     }
 
     /**
@@ -42,7 +42,9 @@ class LarinIIController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::insert('insert into larinesii (tipo_larin, clave_larin, descripcion_corta_larin, larin) values (?, ?, ?, ?)', [$request->tipo_larin, $request->clave_larin,$request->descripcion_corta,$request->larin]);
+
+        return redirect('larinII');
     }
 
     /**

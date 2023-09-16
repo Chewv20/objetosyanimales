@@ -23,6 +23,10 @@
                             </div>
 
                             <div class="row">
+                                <x-adminlte-input name="clave_larin" label="Clave del larin" placeholder="Clave Larin" fgroup-class="col-md-7" value="{{ $item->clave_larin }}" required/>
+                            </div>
+
+                            <div class="row">
                                 <x-adminlte-input name="descripcion_corta" label="Descripcion Corta del Larin" placeholder="Ingresa una descripción corta para el larin" fgroup-class="col-md-7" value="{{ $item->descripcion_corta_larin }}" required/>
                             </div>
 

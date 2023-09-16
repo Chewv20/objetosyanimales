@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Anexo I')
+@section('title', 'Anexo II')
 <link rel="icon" href="{{ URL::asset('img/logo.png') }}" />
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Actualizar Larin Anexo I</h1>
+    <h1 class="m-0 text-dark">Actualizar Larin Anexo II</h1>
 @stop
 
 @section('content')
@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <div class=" col-12 table-responsive">
                         
-                        <form action="{{ route('larinI.store') }}" method="POST">
+                        <form action="{{ route('larinII.store') }}" method="POST">
                             @csrf
 
                             <div class="row">

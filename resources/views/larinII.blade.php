@@ -12,6 +12,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <a href="/larinII/create"><x-adminlte-button label="Agregar Larin" theme="success" icon="fa fa-plus"/></a>
+                    <br>
                     <div class=" col-12 table-responsive tbl_anexoii">
                         <x-adminlte-datatable id="table1" :heads="$heads" head-theme='dark' scrollable hoverable with-footer beautify bordered footer-theme='dark' >
                             @forelse ($larin as $item)
