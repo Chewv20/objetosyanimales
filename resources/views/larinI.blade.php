@@ -12,7 +12,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    {{-- <a href="/larinI/create"><x-adminlte-button label="Agregar Larin" theme="success" icon="fa fa-plus"/></a> --}}
+                    <a href="/larinI/create"><x-adminlte-button label="Agregar Larin" theme="success" icon="fa fa-plus"/></a>
                     <div class=" col-12 table-responsive tbl_anexoi">
                         <x-adminlte-datatable id="table1" :heads="$heads" head-theme='dark' scrollable hoverable with-footer beautify bordered footer-theme='dark' >
                             @forelse ($larinI as $item)

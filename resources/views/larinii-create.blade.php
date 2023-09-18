@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Anexo I')
+@section('title', 'Anexo II')
 <link rel="icon" href="{{ URL::asset('img/logo.png') }}" />
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Actualizar Larin Anexo I</h1>
+    <h1 class="m-0 text-dark">Actualizar Larin Anexo II</h1>
 @stop
 
 @section('content')
@@ -12,27 +12,26 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class=" col-12 table-responsive tbl_anexoi">
-                        @foreach ($larin as $item)
-                        <form action="{{ route('larinI.update', $item->clave_larin) }}" method="POST">
-                            @csrf
-                            @method('PUT')
+                    <div class=" col-12 table-responsive">
                         
+                        <form action="{{ route('larinII.store') }}" method="POST">
+                            @csrf
+
                             <div class="row">
-                                <x-adminlte-input name="tipo_larin" label="Tipo de Larin" placeholder="Tipo de Larin" fgroup-class="col-md-7" value="{{ $item->tipo_larin }}" required/>
+                                <x-adminlte-input name="clave_larin" label="Clave Larin" placeholder="Ingrese la clave del larin" fgroup-class="col-md-7"  required/>
                             </div>
 
                             <div class="row">
-                                <x-adminlte-input name="clave_larin" label="Clave del larin" placeholder="Clave Larin" fgroup-class="col-md-7" value="{{ $item->clave_larin }}" required/>
+                                <x-adminlte-input name="tipo_larin" label="Tipo de Larin" placeholder="Ingrese el tipo de Larin" fgroup-class="col-md-7" required/>
                             </div>
 
                             <div class="row">
-                                <x-adminlte-input name="descripcion_corta" label="Descripcion Corta del Larin" placeholder="Ingresa una descripción corta para el larin" fgroup-class="col-md-7" value="{{ $item->descripcion_corta_larin }}" required/>
+                                <x-adminlte-input name="descripcion_corta" label="Descripcion Corta del Larin" placeholder="Ingresa una descripción corta para el larin" fgroup-class="col-md-7" required/>
                             </div>
 
                             <div class="row">
                                 <x-adminlte-textarea name="larin" label="Larin" placeholder="Ingresa el larin" fgroup-class="col-md-7" rows=10 required>
-                                    {{ $item->larin }}
+                                    
                                 </x-adminlte-textarea>
                             </div>
 
@@ -43,7 +42,6 @@
                             </div>
                         
                         </form>
-                        @endforeach
                     </div>
                 </div>
             </div>

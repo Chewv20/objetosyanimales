@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Anexo II')
+@section('title', 'Anexo I')
 <link rel="icon" href="{{ URL::asset('img/logo.png') }}" />
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Actualizar Larin Anexo II</h1>
+    <h1 class="m-0 text-dark">Actualizar Larin Anexo I</h1>
 @stop
 
 @section('content')
@@ -16,10 +16,6 @@
                         
                         <form action="{{ route('larinI.store') }}" method="POST">
                             @csrf
-                        
-                            <div class="row">
-                                <x-adminlte-input name="id_larin" label="ID larin" placeholder="Ingresa el id del larin" fgroup-class="col-md-7"  required/>
-                            </div>
 
                             <div class="row">
                                 <x-adminlte-input name="clave_larin" label="Clave Larin" placeholder="Ingrese la clave del larin" fgroup-class="col-md-7"  required/>

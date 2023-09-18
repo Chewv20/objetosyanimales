@@ -43,7 +43,9 @@ class LarinIController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::insert('insert into larines (tipo_larin, clave_larin, descripcion_corta_larin, larin) values (?, ?, ?, ?)', [$request->tipo_larin, $request->clave_larin,$request->descripcion_corta,$request->larin]);
+
+        return redirect('larinI');
     }
 
     /**
@@ -72,7 +74,7 @@ class LarinIController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        DB::update('update larines set tipo_larin = ?, descripcion_corta_larin = ?, larin = ? where clave_larin = ?', [$request->tipo_larin,$request->descripcion_corta, $request->larin, $id]);
+        DB::update('update larines set tipo_larin = ?, clave_larin=? descripcion_corta_larin = ?, larin = ? where clave_larin = ?', [$request->tipo_larin,$request->clave_larin,$request->descripcion_corta, $request->larin, $id]);
         return redirect('larinI');
     }
 
