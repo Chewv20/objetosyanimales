@@ -265,6 +265,7 @@
                                     <th scope="col">Hora</th>
                                     <th scope="col" class="w-75">Descripción</th>
                                     <th scope="col">Retardo</th>
+                                    <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             </table>

@@ -166,6 +166,7 @@
                                 <tr class="color-line line-<?php echo $linea; ?>">
                                     <th scope="col" class="col-1">Hora</th>
                                     <th scope="col" class="w-75">Descripción</th>
+                                    <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             </table>

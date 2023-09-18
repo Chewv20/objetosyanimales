@@ -75,7 +75,6 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                 return response.json()
             }).then( respuesta=>{
                 document.getElementById('descripcion').value=respuesta[0].larin
-                console.log(respuesta[0].larin);
             }).catch(error => console.error(error));
         });
 
@@ -207,6 +206,13 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             columns: [
                 { data: 'hora' },
                 { data: 'descripcion' },
+                {
+                    "data": null,
+                    "bSortable": false,
+                    "mRender": function(data, type, value) {
+                        return '<a href="/anexoii/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/anexoii/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
+                    }
+                },
             ],
             paging: false,
             searching: false,

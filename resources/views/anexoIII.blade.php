@@ -31,7 +31,7 @@ use App\Http\Controllers\AnexoIIIController;
                             </div>
                         </div>
                         <?php
-                        $lineas = ['1','2','3','4','5','6','7','8','9','12','A','B'];
+                        $lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB'];
                         foreach( $lineas as $linea){ 
                             $vueltasP = 10;
                             $vueltasR = 10;
@@ -54,25 +54,33 @@ use App\Http\Controllers\AnexoIIIController;
 
 
 <script>
-    let chart
+    let graficaLinea1
+    let graficaLinea2
+    let graficaLinea3
+    let graficaLinea4
+    let graficaLinea5
+    let graficaLinea6
+    let graficaLinea7
+    let graficaLinea8
+    let graficaLinea9
+    let graficaLinea12
+    let graficaLineaA
+    let graficaLineaB
+    let vueltas = []
+    let lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB']
     const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
     $(document).ready(function(){
-        const lineas = ['1','2','3','4','5','6','7','8','9','12','A','B']
-        lineas.forEach(element => {
-            perdidas = document.getElementById('vueltasP'+element).value
-            realizadas = document.getElementById('vueltasR'+element).value
-            generaGrafica('graficaLinea'+element,perdidas,realizadas)
-        });
+        obtieneVueltas()
         document.getElementById('fecha').addEventListener('change',(e)=>{
-            console.log(e.target.value);
-            creaGrafica()
+            //console.log(e.target.value);
+            obtieneVueltas()
         })
 
         
 })
 
-function creaGrafica(){
-    let vueltas = []
+function obtieneVueltas(){
+    
     fetch('/anexoIII/get',{
         method : 'POST',
         body: JSON.stringify({
@@ -85,15 +93,15 @@ function creaGrafica(){
     }).then(response=>{
         return response.json()
     }).then( data=>{      
-        lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB']
+        
         lineas.forEach(element => {
             vueltas[element] = 0
         })
         lineas.forEach(element=>{
             data.forEach(item => {
                 if(element==item.linea){
-                    vueltas[element]-=parseInt(item.vueltas)
-                    vueltas[element]+=parseInt(item.vueltas_realizadas)
+                    vueltas[element]-=parseFloat(item.vueltas)
+                    vueltas[element]+=parseFloat(item.vueltas_realizadas)
                 }
             })
         })
@@ -101,9 +109,11 @@ function creaGrafica(){
 
 }
 
+
 function generaGrafica(id,programadas,realizadas)
 {
-    chart = new Chart(id, {
+    
+    id = new Chart(id, {
         type: 'bar',
         data: {
             labels: ['Programadas', 'Realizadas'],

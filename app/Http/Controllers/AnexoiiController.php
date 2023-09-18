@@ -67,7 +67,22 @@ class AnexoiiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $anexoii = DB::connection('pgsql')
+        ->table('anexoii')
+        ->where('id',$id)
+        ->get();
+
+        $linea = DB::connection('pgsql')
+        ->table('lineas')
+        ->orderBy('id_linea','asc')
+        ->get();
+
+        $larin = DB::connection('pgsql')
+        ->table('larinesii')
+        ->orderBy('id_larin','asc')
+        ->get();
+
+        return view('anexoii-update',compact('anexoii','linea','larin'));
     }
 
     /**
@@ -83,7 +98,13 @@ class AnexoiiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $fec_mov = date("Y-m-d");
+        $hor_mov = date('H:i');
+
+        DB::update('update anexoii set fecha=?, linea = ?, hora=?, larin = ?, descripcion=?, usu_correccion=?, fecha_correccion=?, hora_correccion=? where id = ?', [$request->fecha,$request->linea,$request->hora, $request->larin, $request->descripcion,$request->usuario,$fec_mov,$hor_mov,$id]);
+        return redirect('anexoii');
+
+        // return $request;
     }
 
     /**
@@ -92,6 +113,14 @@ class AnexoiiController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function delete(string $id)
+    {
+        DB::table('anexoii')->where('id', $id)->delete();
+        return redirect('anexoii');
+
+        /* return $id; */
     }
 
     public function getLarin(Request $request)

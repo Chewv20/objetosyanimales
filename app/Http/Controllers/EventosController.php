@@ -18,7 +18,7 @@ class EventosController extends Controller
     {
         $larines = DB::connection('pgsql')
         ->table('larines')
-        ->orderBy('id_larin','asc')
+        ->orderBy('id','asc')
         ->get();
 
         $lineas = DB::connection('pgsql')
@@ -87,7 +87,22 @@ class EventosController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $evento = DB::connection('pgsql')
+        ->table('evento')
+        ->where('id',$id)
+        ->get();
+
+        $linea = DB::connection('pgsql')
+        ->table('lineas')
+        ->orderBy('id_linea','asc')
+        ->get();
+
+        $larin = DB::connection('pgsql')
+        ->table('larines')
+        ->orderBy('id','asc')
+        ->get();
+
+        return view('anexoi-update',compact('evento','linea','larin'));
     }
 
     /**
@@ -103,7 +118,21 @@ class EventosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $descr_larga = "";
+        if($request->vueltas > 1 ){
+            $descr_larga = $request->descripcion." "."Pierde ".$request->vueltas." vueltas";
+        }else if($request->vueltas == 0){
+            $descr_larga = $request->descripcion;
+        }else{
+            $descr_larga = $request->descripcion." "."Pierde ".$request->vueltas." vuelta";
+        }
+        $fec_mov = date("Y-m-d");
+        $hor_mov = date('H:i');
+
+        DB::update('update evento set fecha=?, linea = ?, hora=?, larin = ?, vueltas=?, descripcion=?, retardo = ?, vueltas_realizadas=?, usu_correccion=?, fecha_correccion=?, hora_correccion=? where id = ?', [$request->fecha,$request->linea,$request->hora, $request->larin, $request->vueltas, $descr_larga,$request->retardo,$request->vueltas_realizadas,$request->usuario,$fec_mov,$hor_mov,$id]);
+        return redirect('eventos');
+
+        // return $request;
     }
 
     /**
@@ -114,12 +143,18 @@ class EventosController extends Controller
         //
     }
 
+    public function delete(string $id)
+    {
+        DB::table('evento')->where('id', $id)->delete();
+        return redirect('eventos');
+    }
+
     public function getLarin(Request $request)
     {
         $larines = DB::connection('pgsql')
         ->table('larines')
         ->where('clave_larin', $request->id_larin)
-        ->orderBy('id_larin','asc')
+        ->orderBy('id','asc')
         ->get();
 
         return response()->json($larines,200);

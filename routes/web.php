@@ -40,11 +40,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/eventos/getLinea',[EventosController::class, 'getLinea']);
     Route::post('/eventos/getLineaF',[EventosController::class, 'getLineaF']);
     Route::post('/eventos/getReporte',[EventosController::class, 'getReporte']);
+    Route::get('/eventos/delete/{id}',[EventosController::class, 'delete']);
     Route::get('/eventos/pdf/{fecha}/{oficio}',[EventosController::class,'imprimir']);
     Route::post('/anexoii/getLarin', [AnexoiiController::class, 'getLarin']);
     Route::post('/anexoii/getLinea',[AnexoiiController::class, 'getLinea']);
     Route::post('/anexoii/getLineaF',[AnexoiiController::class, 'getLineaF']);
     Route::post('/anexoii/getReporte',[AnexoiiController::class, 'getReporte']);
+    Route::get('/anexoii/delete/{id}',[AnexoiiController::class, 'delete']);
     Route::post('/larinI/get',[LarinIController::class, 'get']);
     Route::post('anexoIII/get', [AnexoIIIController::class,'get']);
 

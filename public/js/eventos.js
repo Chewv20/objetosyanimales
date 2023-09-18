@@ -258,6 +258,14 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                 { data: 'hora' },
                 { data: 'descripcion' },
                 { data: 'retardo' },
+                {
+                    "data": null,
+                    "bSortable": false,
+                    "mRender": function(data, type, value) {
+                        return '<a href="/eventos/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/eventos/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
+                        
+                    }
+                },
             ],
             paging: false,
             searching: false,
@@ -301,6 +309,13 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                 { data: 'hora' },
                 { data: 'descripcion' },
                 { data: 'retardo' },
+                {
+                    "data": null,
+                    "bSortable": false,
+                    "mRender": function(data, type, value) {
+                        return '<button id="btnActivar" class="btn btn-warning"><span><i class="fa fa-edit"></i></span></button>';
+                    }
+                },
             ],
             paging: false,
             searching: false,
