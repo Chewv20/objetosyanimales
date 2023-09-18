@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Anexo II')
+@section('title', 'Anexo I')
 <link rel="icon" href="{{ URL::asset('img/logo.png') }}" />
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Actualizar Larin Anexo II</h1>
+    <h1 class="m-0 text-dark">Actualizar Larin Anexo I</h1>
 @stop
 
 @section('content')

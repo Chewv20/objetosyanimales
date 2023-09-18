@@ -97,15 +97,6 @@ function creaGrafica(){
                 }
             })
         })
-        console.log(vueltas);
-        lineas.forEach(element=>{
-            if(chart){
-                chart.destroy()
-                generaGrafica('graficaLineaB',320,320+vueltas[element])
-            }else{
-                generaGrafica('graficaLineaB',320,320+vueltas[element])
-            }
-        })
     }).catch(error => console.error(error));
 
 }

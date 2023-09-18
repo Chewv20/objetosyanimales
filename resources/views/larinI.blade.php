@@ -17,7 +17,7 @@
                         <x-adminlte-datatable id="table1" :heads="$heads" head-theme='dark' scrollable hoverable with-footer beautify bordered footer-theme='dark' >
                             @forelse ($larinI as $item)
                                 <tr>
-                                        <th>{{ $item -> id_larin }}</th>
+                                        <th>{{ $item -> id }}</th>
                                         <th>{{ $item -> tipo_larin }}</th>
                                         <th>{{ $item -> clave_larin }}</th>
                                         <th>{{ $item -> descripcion_corta_larin }}</th>

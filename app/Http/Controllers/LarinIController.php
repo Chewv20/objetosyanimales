@@ -14,7 +14,7 @@ class LarinIController extends Controller
     {
         $larinI = DB::connection('pgsql')
         ->table('larines')
-        ->orderBy('id_larin','asc')
+        ->orderBy('id','asc')
         ->get();
 
         $heads = [
@@ -89,7 +89,7 @@ class LarinIController extends Controller
     {
         $anexoi = DB::connection('pgsql')
         ->table('larines')
-        ->orderBy('id_larin')
+        ->orderBy('id')
         ->get();
 
         return datatables($anexoi)->toJson();
