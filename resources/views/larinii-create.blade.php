@@ -4,7 +4,7 @@
 <link rel="icon" href="{{ URL::asset('img/logo.png') }}" />
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Actualizar Larin Anexo II</h1>
+    <h1 class="m-0 text-dark">Agregar Larin Anexo II</h1>
 @stop
 
 @section('content')

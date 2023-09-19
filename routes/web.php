@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/anexoii/delete/{id}',[AnexoiiController::class, 'delete']);
     Route::post('/larinI/get',[LarinIController::class, 'get']);
     Route::post('anexoIII/get', [AnexoIIIController::class,'get']);
+    Route::post('anexoIII/getvueltas', [AnexoIIIController::class,'getVueltas']);
 
     
 });
