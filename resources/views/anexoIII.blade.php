@@ -205,7 +205,7 @@ function generaGrafica1(id,programadas,realizadas)
             y: {
                 beginAtZero: true
             }
-            }
+            } 
         }
         });
 }
