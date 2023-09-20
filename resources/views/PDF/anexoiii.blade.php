@@ -69,8 +69,11 @@
     <footer>
         <p class="texto"><b>Anexo III</b></p>
     </footer>
-    <h2>Anexo II</h1>
-    <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:[2012,2013,2014,2015,2016],datasets:[{label:'Users',data:[120,60,50,180,120]}]}}" width="500" height="600">
+    <h2>Anexo III</h2>
+    <div class="col-6">
+        <p>{{ $dia }}</p>
+    </div>
+    {{-- <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:[2012,2013,2014,2015,2016],datasets:[{label:'Users',data:[120,60,50,180,120]}]}}" width="500" height="600"> --}}
 
     <script type="text/php">
         if ( isset($pdf) ) {

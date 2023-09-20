@@ -44,6 +44,12 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             modal2.style.display = "none";
         });
 
+        document.getElementById('pdfE').addEventListener('click',(e)=>{
+            modal2.style.display = "none";
+            document.getElementById('oficio_f').value=''
+            document.getElementById('fecha_2').value=''
+        })
+
         window.addEventListener("click",function(event) {
             if (event.target == modal2) {
                 modal2.style.display = "none";

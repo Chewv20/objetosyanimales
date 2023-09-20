@@ -236,15 +236,26 @@ class EventosController extends Controller
         ->orderBy('hora','desc')
         ->get();
 
+        $fcreado = date_create($fecha);
+        $dia = date_format($fcreado, 'w');
+
+        $vueltas = DB::connection('pgsql')
+        ->table('vueltas')
+        ->where([        
+        ['id',$dia],
+        ])
+        ->orderBy('linea','asc')
+        ->get();
+
         $pdf = \PDF::loadView('PDF/ido-caratula', compact('eventos','fecha','oficio'));
         $pdf2 = \PDF::loadView('PDF/ido', compact('eventos','fecha','oficio'));
         $pdf3 = \PDF::loadView('PDF/anexoii', compact('anexoii','fecha','oficio'));
-        $pdf4 = \PDF::loadView('PDF/anexoiii', compact('fecha'));
+        $pdf4 = \PDF::loadView('PDF/anexoiii', compact('fecha','dia'));
         $pdf->render();
         $pdf2->render();
         $pdf3->render();
         $pdf4->render();
-        $caratula = 'caratula.pdf';
+        /* $caratula = 'caratula.pdf';
         $ido = 'ido_'.$fecha.'.pdf';
         $pdf->save('../public/pdf/'.$caratula);
         $pdf2->save('../public/pdf/ido.pdf');
@@ -262,7 +273,7 @@ class EventosController extends Controller
         //return $pdf->download('ejemplo.pdf');
         //return $pdf2->stream(); 
 
-        $pdfMerger->save($ido, "download");
-        //return $pdf2->stream();                     
+        $pdfMerger->save($ido, "download"); */
+        return $pdf4->stream();                     
     }
 }
