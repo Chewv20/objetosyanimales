@@ -33,13 +33,10 @@ use App\Http\Controllers\AnexoIIIController;
                         <?php
                         $lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB'];
                         foreach( $lineas as $linea){ 
-                            $vueltasP = 10;
-                            $vueltasR = 10;
                         ?>
-                        <x-adminlte-input name="vueltasP" id="vueltasP<?php echo $linea; ?>" type="numer" value="{{ $vueltasP }}" hidden/>
-                        <x-adminlte-input name="vueltasR" id="vueltasR<?php echo $linea; ?>" type="numer" value="{{ $vueltasR }}" hidden/>
-                        <p>Graficas Linea: {{ $linea }}</p>
-                        <canvas id="graficaLinea<?php echo $linea; ?>"></canvas>
+                        <div class="col-5">
+                            <canvas id="graficaLinea<?php echo $linea; ?>"></canvas>
+                        </div>
                     <?php } ?>
                     </div>
                 </div>
@@ -180,32 +177,28 @@ function generaGrafica1(id,programadas,realizadas)
             label: '# de vueltas',
             data: [programadas,realizadas],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
+            'rgba(240, 78, 152)',
+            'rgba(240, 78, 152)'
             ],
             borderColor: [
             'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
+            'rgba(240, 78, 152)'
             ],
             borderWidth: 1
             }]
         },
         options: {
             scales: {
-            y: {
-                beginAtZero: true
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Vueltas Línea 1'
+                }
             }
-            } 
         }
         });
 }
@@ -221,31 +214,27 @@ function generaGrafica2(id,programadas,realizadas)
             label: '# de vueltas',
             data: [programadas,realizadas],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
+                'rgba(0,94,184)',
+                'rgba(0,94,184)'
             ],
             borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
+                'rgba(0,94,184)',
+                'rgba(0,94,184)'
             ],
             borderWidth: 1
             }]
         },
         options: {
             scales: {
-            y: {
-                beginAtZero: true
-            }
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Vueltas Línea 2'
+                }
             }
         }
         });
@@ -262,31 +251,28 @@ function generaGrafica3(id,programadas,realizadas)
             label: '# de vueltas',
             data: [programadas,realizadas],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
+                'rgba(175, 152, 0)',
+                'rgba(175, 152, 0)',            
             ],
             borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
+                'rgba(175, 152, 0)',
+                'rgba(175, 152, 0)',
+
             ],
             borderWidth: 1
             }]
         },
         options: {
             scales: {
-            y: {
-                beginAtZero: true
-            }
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Vueltas Línea 3'
+                }
             }
         }
         });
@@ -303,31 +289,29 @@ function generaGrafica4(id,programadas,realizadas)
             label: '# de vueltas',
             data: [programadas,realizadas],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
+            'rgba(107, 187, 174)',
+            'rgba(107, 187, 174)',
+            
             ],
             borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
+            'rgb(107, 187, 174)',
+            'rgb(107, 187, 174)',
+            
             ],
             borderWidth: 1
             }]
         },
         options: {
             scales: {
-            y: {
-                beginAtZero: true
-            }
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Vueltas Línea 4'
+                }
             }
         }
         });
@@ -344,31 +328,28 @@ function generaGrafica5(id,programadas,realizadas)
             label: '# de vueltas',
             data: [programadas,realizadas],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
+            'rgba(255, 209, 0)',
+            'rgba(255, 209, 0)',
+            
             ],
             borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
+                'rgba(255, 209, 0)',
+                'rgba(255, 209, 0)',
             ],
             borderWidth: 1
             }]
         },
         options: {
             scales: {
-            y: {
-                beginAtZero: true
-            }
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Vueltas Línea 5'
+                }
             }
         }
         });
@@ -385,31 +366,29 @@ function generaGrafica6(id,programadas,realizadas)
             label: '# de vueltas',
             data: [programadas,realizadas],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
+            'rgba(218, 41, 28)',
+            'rgba(218, 41, 28)',
+            
+            
             ],
             borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
+                'rgba(218, 41, 28)',
+                'rgba(218, 41, 28)',
             ],
             borderWidth: 1
             }]
         },
         options: {
             scales: {
-            y: {
-                beginAtZero: true
-            }
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Vueltas Línea 6'
+                }
             }
         }
         });
@@ -426,31 +405,28 @@ function generaGrafica7(id,programadas,realizadas)
             label: '# de vueltas',
             data: [programadas,realizadas],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
+                'rgba(232, 119, 34)',
+                'rgba(232, 119, 34)',
+            
             ],
             borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
+                'rgba(232, 119, 34)',
+                'rgba(232, 119, 34)',
             ],
             borderWidth: 1
             }]
         },
         options: {
             scales: {
-            y: {
-                beginAtZero: true
-            }
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Vueltas Línea 7'
+                }
             }
         }
         });
@@ -467,31 +443,28 @@ function generaGrafica8(id,programadas,realizadas)
             label: '# de vueltas',
             data: [programadas,realizadas],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
+            'rgba(0, 154, 68)',
+            'rgba(0, 154, 68)',
+            
             ],
             borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
+                'rgba(0, 154, 68)',
+            'rgba(0, 154, 68)',
             ],
             borderWidth: 1
             }]
         },
         options: {
             scales: {
-            y: {
-                beginAtZero: true
-            }
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Vueltas Línea 8'
+                }
             }
         }
         });
@@ -508,31 +481,28 @@ function generaGrafica9(id,programadas,realizadas)
             label: '# de vueltas',
             data: [programadas,realizadas],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
+            'rgba(81, 47, 46)',
+            'rgba(81, 47, 46)',
+            
             ],
             borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
+                'rgba(81, 47, 46)',
+                'rgba(81, 47, 46)',
             ],
             borderWidth: 1
             }]
         },
         options: {
             scales: {
-            y: {
-                beginAtZero: true
-            }
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Vueltas Línea 9'
+                }
             }
         }
         });
@@ -549,31 +519,28 @@ function generaGrafica12(id,programadas,realizadas)
             label: '# de vueltas',
             data: [programadas,realizadas],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
+            'rgba(192, 155, 87)',
+            'rgba(192, 155, 87)',
+            
             ],
             borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
+                'rgba(192, 155, 87)',
+                'rgba(192, 155, 87)',
             ],
             borderWidth: 1
             }]
         },
         options: {
             scales: {
-            y: {
-                beginAtZero: true
-            }
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Vueltas Línea 12'
+                }
             }
         }
         });
@@ -590,31 +557,28 @@ function generaGraficaA(id,programadas,realizadas)
             label: '# de vueltas',
             data: [programadas,realizadas],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
+            'rgba(152, 29, 151)',
+            'rgba(152, 29, 151)',
+            
             ],
             borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
+                'rgba(152, 29, 151)',
+            'rgba(152, 29, 151)',
             ],
             borderWidth: 1
             }]
         },
         options: {
             scales: {
-            y: {
-                beginAtZero: true
-            }
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Vueltas Línea A'
+                }
             }
         }
         });
@@ -631,37 +595,32 @@ function generaGraficaB(id,programadas,realizadas)
             label: '# de vueltas',
             data: [programadas,realizadas],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
+            'rgb(0, 132, 61)',
+            'rgb(177,179,179)'
+            
             ],
             borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
+                'rgb(0, 132, 61)',
+                'rgb(177,179,179)'
             ],
             borderWidth: 1
             }]
         },
         options: {
             scales: {
-            y: {
-                beginAtZero: true
-            }
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Vueltas Línea B'
+                }
             }
         }
         });
 }
-
-
 
 function destruyeGraficas()
 {
