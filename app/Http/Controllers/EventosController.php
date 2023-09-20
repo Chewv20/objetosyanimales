@@ -239,20 +239,24 @@ class EventosController extends Controller
         $pdf = \PDF::loadView('PDF/ido-caratula', compact('eventos','fecha','oficio'));
         $pdf2 = \PDF::loadView('PDF/ido', compact('eventos','fecha','oficio'));
         $pdf3 = \PDF::loadView('PDF/anexoii', compact('anexoii','fecha','oficio'));
+        $pdf4 = \PDF::loadView('PDF/anexoiii', compact('fecha'));
         $pdf->render();
         $pdf2->render();
         $pdf3->render();
+        $pdf4->render();
         $caratula = 'caratula.pdf';
         $ido = 'ido_'.$fecha.'.pdf';
         $pdf->save('../public/pdf/'.$caratula);
         $pdf2->save('../public/pdf/ido.pdf');
         $pdf3->save('../public/pdf/anexoii.pdf');
+        $pdf4->save('../public/pdf/anexoiii.pdf');
 
         $pdfMerger = PDFMerger::init();
 
         $pdfMerger->addPDF(base_path('public/pdf/'.$caratula), 'all');
         $pdfMerger->addPDF(base_path('public/pdf/'.'ido.pdf'), 'all');
         $pdfMerger->addPDF(base_path('public/pdf/'.'anexoii.pdf'), 'all');
+        $pdfMerger->addPDF(base_path('public/pdf/'.'anexoiii.pdf'), 'all');
 
         $pdfMerger->merge();
         //return $pdf->download('ejemplo.pdf');
