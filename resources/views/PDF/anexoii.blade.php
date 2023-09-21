@@ -72,7 +72,7 @@
     <footer>
         <p class="texto"><b>Anexo II</b></p>
     </footer>
-    <h2>Anexo II</h1>
+    <h2>Anexo II</h2>
     <?php
         $lineas = ['1','2','3','4','5','6','7','8','9','12','LA','LB'];
         foreach( $lineas as $linea){ ?>

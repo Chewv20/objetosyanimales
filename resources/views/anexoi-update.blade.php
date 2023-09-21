@@ -67,7 +67,7 @@
                                        <div class="input-group-prepend">
                                           <span class="input-group-text" id="vueltas">Vueltas perdidas</span>
                                        </div>
-                                       <input type="number" id="vueltas_l" class="form-control" aria-label="Default" aria-describedby="vue-perdidas" name="vueltas" value="{{ $item->vueltas }}">
+                                       <input id="vueltas_l" class="form-control" aria-label="Default" aria-describedby="vue-perdidas" name="vueltas" value="{{ $item->vueltas }}">
                                     </div>
                                  </div>
                             </div>
@@ -78,7 +78,7 @@
                                        <div class="input-group-prepend">
                                           <span class="input-group-text" id="vueltasProgramadas">Vueltas Realizadas</span>
                                        </div>
-                                       <input type="number" id="vueltas_R" class="form-control" aria-label="Default" aria-describedby="vue-perdidas" name="vueltas_realizadas" value="{{ $item->vueltas_realizadas }}">
+                                       <input id="vueltas_R" class="form-control" aria-label="Default" aria-describedby="vue-perdidas" name="vueltas_realizadas" value="{{ $item->vueltas_realizadas }}">
                                     </div>
                                 </div>
                                 <div class="col-8 col-md-5 ">

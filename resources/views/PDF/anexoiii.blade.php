@@ -57,6 +57,13 @@
             right: 0cm;
             height: 2cm;
         }
+        td{
+            text-align: center;
+        }
+        .table{
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -71,9 +78,52 @@
     </footer>
     <h2>Anexo III</h2>
     <div class="col-6">
-        <p>{{ $dia }}</p>
+        <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['Línea 1','Línea 3','Línea 4'], datasets:[{label:'Vueltas Programadas',backgroundColor: 'rgb(0, 0, 0)',data:[{{ $vueltasPr['01'] }},{{ $vueltasPr['03'] }},{{ $vueltasPr['04'] }}]},{label:'Vueltas Realizadas',backgroundColor: 'rgb(0, 0, 0)',data:[{{ $realizadas['01'] }},{{ $realizadas['03'] }},{{ $realizadas['04'] }}]}]},}" width="500" height="300">
+        <div class="table">
+            <table BORDER class="tabla">
+                <thead class="text-center">
+                    <tr>
+                        <th>Línea</th>
+                        <th>Programadas</th>
+                        <th>Realizadas</th>
+                        <th>Porcentaje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Línea 1</td>
+                        <td>{{ $vueltasPr['01'] }}</td>
+                        <td>{{ $realizadas['01'] }}</td>
+                        <td>{{ $porcentaje['01']}}%</td>           
+                    </tr>
+                    <tr>
+                        <td>Línea 3</td>
+                        <td>{{ $vueltasPr['03'] }}</td>
+                        <td>{{ $realizadas['03'] }}</td>
+                        <td>{{ $porcentaje['03'] }}%</td>                 
+                    </tr>
+                    <tr>
+                        <td>Línea 4</td>
+                        <td>{{ $vueltasPr['04'] }}</td>
+                        <td>{{ $realizadas['04'] }}</td>
+                        <td>{{ $porcentaje['04']}}%</td>                  
+                    </tr>
+                    <tr>
+                        <td>Cumplimiento del servicio</td>
+                        <td>{{ $vueltasPr['01']+$vueltasPr['03']+$vueltasPr['04'] }}</td>
+                        <td>{{ $realizadas['01']+$realizadas['03']+$realizadas['04'] }}</td>
+                        <td>{{ ($porcentaje['01']+$porcentaje['03']+$porcentaje['04'])/3 }}%</td>                  
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    {{-- <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:[2012,2013,2014,2015,2016],datasets:[{label:'Users',data:[120,60,50,180,120]}]}}" width="500" height="600"> --}}
+    <div class="col-6">
+        <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['Línea 2','Línea 5','Línea 6','Línea B'], datasets:[{label:'Vueltas Programadas',backgroundColor: 'rgb(0, 0, 0)',data:[{{ $vueltasPr['02'] }},{{ $vueltasPr['05'] }},{{ $vueltasPr['06'] }},{{ $vueltasPr['LB'] }}]},{label:'Vueltas Realizadas',backgroundColor: 'rgb(0, 0, 0)',data:[{{ $realizadas['02'] }},{{ $realizadas['05'] }},{{ $realizadas['06'] }},{{ $realizadas['LB'] }}]}]}}" width="500" height="300">
+    </div>
+    <div class="col-6">
+        <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['Línea 7','Línea 8','Línea 9','Línea A','Línea 12'], datasets:[{label:'Vueltas Programadas',backgroundColor: 'rgb(0, 0, 0)',data:[{{ $vueltasPr['07'] }},{{ $vueltasPr['08'] }},{{ $vueltasPr['09'] }},{{ $vueltasPr['LA'] }},{{ $vueltasPr['12'] }}]},{label:'Vueltas Realizadas',backgroundColor: 'rgb(0, 0, 0)',data:[{{ $realizadas['07'] }},{{ $realizadas['08'] }},{{ $realizadas['09'] }},{{ $realizadas['LA'] }},{{ $realizadas['12'] }}]}]}}" width="500" height="300">
+    </div>
 
     <script type="text/php">
         if ( isset($pdf) ) {

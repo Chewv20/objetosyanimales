@@ -55,15 +55,6 @@ class EventosController extends Controller
         $id2 = 100000+$consulta_id[0]->folio+1;
         $id = "STC".substr(strval($anio),-2)."-".substr(strval($id2),1,5);   
         $descr_larga = "";
-        if($request->vueltas > 1 ){
-            $descr_larga = $request->descripcion." "."Pierde ".$request->vueltas." vueltas";
-        }else if($request->vueltas == 0){
-            $descr_larga = $request->descripcion;
-        }else{
-            $descr_larga = $request->descripcion." "."Pierde ".$request->vueltas." vuelta";
-        }
-        $fec_mov = date("Y-m-d");
-        $hor_mov = date('H:i');
         $vueltasP = 0;
         $vueltasR = 0;
         if($request->vueltas != ''){
@@ -72,6 +63,29 @@ class EventosController extends Controller
         if($request->vueltasR != ''){
             $vueltasR = $request->vueltasR;
         }
+
+        if($vueltasR > 1 ){
+            $descr_larga = $request->descripcion." "."Realiza ".$vueltasR." vueltas";
+        }else if($vueltasR == 0){
+            $descr_larga = $request->descripcion;
+        }else if($vueltasR > 0 && $vueltasR < 1){
+            $descr_larga = $request->descripcion." "."Realiza ".$vueltasR." de vuelta";;
+        }else if($vueltasR == 1 ){
+            $descr_larga = $request->descripcion." "."Realiza ".$vueltasR." vuelta";
+        }
+
+        if($vueltasP > 1 ){
+            $descr_larga = $request->descripcion." "."Pierde ".$vueltasP." vueltas";
+        }else if($vueltasP > 0 && $vueltasP < 1){
+            $descr_larga = $request->descripcion." "."Pierde ".$vueltasP." de vuelta";;
+        }else if($vueltasP == 1){
+            $descr_larga = $request->descripcion." "."Pierde ".$vueltasP." vuelta";
+        }
+
+        
+        $fec_mov = date("Y-m-d");
+        $hor_mov = date('H:i');
+        
         DB::update('update folio set folio = ? where anio = ?', [$consulta_id[0]->folio+1,$anio]);
         DB::insert('insert into evento (id, fecha, linea, hora, larin, retardo, vueltas, descripcion,usuario,hor_mov,fecha_mov,vueltas_realizadas) values (?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?)', [$id, $request->fecha, $request->linea, $request->hora, $request->larin, $request->retardo, $vueltasP, $descr_larga, $request->usuario, $hor_mov,$fec_mov,$vueltasR]);
 
@@ -210,6 +224,7 @@ class EventosController extends Controller
                 ['hora',$request->hora],
                 ['linea',$request->linea],
                 ['larin',$request->larin],
+                ['descripcion',$request->descripcion],
             ])
             ->orderBy('hora','desc')
             ->get();
@@ -220,12 +235,18 @@ class EventosController extends Controller
 
     public function imprimir($fecha,$oficio)
     {
+        $lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB'];
+        $vueltasPr = [];
+        $vueltasP = [];
+        $realizadas = [];
+        $porcentaje = [];
+
         $eventos = DB::connection('pgsql')
         ->table('evento')
         ->where([
             ['fecha',$fecha],
         ])
-        ->orderBy('hora','desc')
+        ->orderBy('hora','asc')
         ->get();
         
         $anexoii = DB::connection('pgsql')
@@ -242,38 +263,52 @@ class EventosController extends Controller
         $vueltas = DB::connection('pgsql')
         ->table('vueltas')
         ->where([        
-        ['id',$dia],
+            ['id',$dia],
         ])
         ->orderBy('linea','asc')
         ->get();
 
+        foreach ($lineas as $item) {
+            foreach ($vueltas as $item2) {
+                if($item==$item2->linea){
+                    $vueltasPr[$item]=$item2->vueltas;
+                }
+            }
+        }
+        foreach ($lineas as $item) {
+            $vueltasP[$item]=0;
+        }
+        foreach ($lineas as $item) {
+            foreach ($eventos as $item2) {
+                if($item==$item2->linea){
+                    $vueltasP[$item]-=$item2->vueltas;
+                    $vueltasP[$item]+=$item2->vueltas_realizadas;
+                }
+            }
+        }
+        foreach ($lineas as $item) {
+            $realizadas[$item]=$vueltasPr[$item]+$vueltasP[$item];
+            $porcentaje[$item]=$realizadas[$item]*100/$vueltasPr[$item];
+        }
+
         $pdf = \PDF::loadView('PDF/ido-caratula', compact('eventos','fecha','oficio'));
-        $pdf2 = \PDF::loadView('PDF/ido', compact('eventos','fecha','oficio'));
-        $pdf3 = \PDF::loadView('PDF/anexoii', compact('anexoii','fecha','oficio'));
-        $pdf4 = \PDF::loadView('PDF/anexoiii', compact('fecha','dia'));
+        $pdf2 = \PDF::loadView('PDF/ido', compact('eventos','fecha','oficio','anexoii','vueltasPr','realizadas','porcentaje'));
         $pdf->render();
         $pdf2->render();
-        $pdf3->render();
-        $pdf4->render();
-        /* $caratula = 'caratula.pdf';
+        $caratula = 'caratula.pdf';
         $ido = 'ido_'.$fecha.'.pdf';
         $pdf->save('../public/pdf/'.$caratula);
         $pdf2->save('../public/pdf/ido.pdf');
-        $pdf3->save('../public/pdf/anexoii.pdf');
-        $pdf4->save('../public/pdf/anexoiii.pdf');
 
         $pdfMerger = PDFMerger::init();
 
         $pdfMerger->addPDF(base_path('public/pdf/'.$caratula), 'all');
         $pdfMerger->addPDF(base_path('public/pdf/'.'ido.pdf'), 'all');
-        $pdfMerger->addPDF(base_path('public/pdf/'.'anexoii.pdf'), 'all');
-        $pdfMerger->addPDF(base_path('public/pdf/'.'anexoiii.pdf'), 'all');
-
         $pdfMerger->merge();
         //return $pdf->download('ejemplo.pdf');
         //return $pdf2->stream(); 
 
-        $pdfMerger->save($ido, "download"); */
-        return $pdf4->stream();                     
+        $pdfMerger->save($ido, "download");
+        // return $pdf4->stream();                     
     }
 }

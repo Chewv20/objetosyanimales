@@ -213,6 +213,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         let Phora = document.getElementById('hora_l').value
         let Plinea = document.getElementById('linea').value
         let Plarin = document.getElementById('larin').value
+        let Pdescripcion = document.getElementById('descripcion').value
 
         
         fetch('/eventos/getReporte/',{
@@ -221,7 +222,8 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                 fecha : Pfecha,
                 hora  : Phora,
                 linea : Plinea,
-                larin : Plarin,       
+                larin : Plarin, 
+                descripcion : Pdescripcion,      
             }),
             headers:{
                 'Content-Type': 'application/json',
@@ -391,7 +393,6 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
 
 
     function limpiar(){
-        document.getElementById('linea').value = "" 
         document.getElementById('hora_l').value = ""
         document.getElementById('vueltas_l').value = ""
         document.getElementById('retardo_l').value = ""

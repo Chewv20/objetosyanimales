@@ -126,7 +126,7 @@
 
                                                 <div class="row"> 
                                                     <div class="col" style="text-align: center">
-                                                        <input type="date" id="fecha_f" class="form-control" name="fecha" value="<?php echo $hoy;?>" min="<?php echo $hoy;?>" max="<?php echo $hoy;?>" hidden>
+                                                        <input type="date" id="fecha_f" class="form-control" name="fecha" value="2023-09-20" min="<?php echo $hoy;?>" max="<?php echo $hoy;?>" hidden>
                                                     </div>
                                                 </div>
                                                 <div class="row"> 
