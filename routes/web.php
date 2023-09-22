@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/eventos/getLineaF',[EventosController::class, 'getLineaF']);
     Route::post('/eventos/getReporte',[EventosController::class, 'getReporte']);
     Route::get('/eventos/delete/{id}',[EventosController::class, 'delete']);
-    Route::get('/eventos/pdf/{fecha}/{oficio}',[EventosController::class,'imprimir']);
+    Route::get('/eventos/pdf/{fecha}/{oficio}/{preliminar}',[EventosController::class,'imprimir']);
     Route::post('/anexoii/getLarin', [AnexoiiController::class, 'getLarin']);
     Route::post('/anexoii/getLinea',[AnexoiiController::class, 'getLinea']);
     Route::post('/anexoii/getLineaF',[AnexoiiController::class, 'getLineaF']);

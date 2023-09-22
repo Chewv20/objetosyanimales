@@ -74,8 +74,16 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         document.getElementById('oficio_f').addEventListener('change',(e)=>{
             var link = document.getElementById("link");
             let fecha = document.getElementById('fecha_2').value
-            let url = '/eventos/pdf/'+fecha+'/'+e.target.value
+            let url = ''
+            if(document.querySelector('.preliminar-check-input').checked){
+                url = '/eventos/pdf/'+fecha+'/'+e.target.value+'/1'
+                
+            }else{
+                url = '/eventos/pdf/'+fecha+'/'+e.target.value+'/0'
+                
+            }
             console.log(url);
+
             link.setAttribute('href', url);
         })
 
@@ -84,6 +92,33 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             
             let oficio = document.getElementById('oficio_f').value
             let url = '/eventos/pdf/'+e.target.value+'/'+oficio
+            if(document.querySelector('.preliminar-check-input').checked){
+                url = '/eventos/pdf/'+e.target.value+'/'+oficio+'/1'
+                
+            }else{
+                url = '/eventos/pdf/'+e.target.value+'/'+oficio+'/0'
+                
+            }
+            console.log(url);
+
+            link.setAttribute('href', url);
+        })
+
+        document.getElementById('preliminar').addEventListener('change',(e)=>{
+            var link = document.getElementById("link");
+            
+            let oficio = document.getElementById('oficio_f').value
+            let fecha = document.getElementById('fecha_2').value
+
+            let url = ''
+
+            if(document.querySelector('.preliminar-check-input').checked){
+                url = '/eventos/pdf/'+fecha+'/'+oficio+'/1'
+                
+            }else{
+                url = '/eventos/pdf/'+fecha+'/'+oficio+'/0'
+                
+            }
             console.log(url);
             link.setAttribute('href', url);
         })

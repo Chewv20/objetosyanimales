@@ -233,7 +233,7 @@ class EventosController extends Controller
         }
     }
 
-    public function imprimir($fecha,$oficio)
+    public function imprimir($fecha,$oficio,$preliminar)
     {
         $lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB'];
         $vueltasPr = [];
@@ -291,24 +291,51 @@ class EventosController extends Controller
             $porcentaje[$item]=$realizadas[$item]*100/$vueltasPr[$item];
         }
 
-        $pdf = \PDF::loadView('PDF/ido-caratula', compact('eventos','fecha','oficio'));
-        $pdf2 = \PDF::loadView('PDF/ido', compact('eventos','fecha','oficio','anexoii','vueltasPr','realizadas','porcentaje'));
-        $pdf->render();
-        $pdf2->render();
-        $caratula = 'caratula.pdf';
-        $ido = 'ido_'.$fecha.'.pdf';
-        $pdf->save('../public/pdf/'.$caratula);
-        $pdf2->save('../public/pdf/ido.pdf');
+        if($preliminar == 1){
+            $pdf = \PDF::loadView('PDF/ido-caratulaP', compact('eventos','fecha','oficio'));
+            $pdf2 = \PDF::loadView('PDF/idoP', compact('eventos','fecha','oficio','anexoii','vueltasPr','realizadas','porcentaje'));
+            $pdf->render();
+            $pdf2->render();
 
-        $pdfMerger = PDFMerger::init();
+            
 
-        $pdfMerger->addPDF(base_path('public/pdf/'.$caratula), 'all');
-        $pdfMerger->addPDF(base_path('public/pdf/'.'ido.pdf'), 'all');
-        $pdfMerger->merge();
-        //return $pdf->download('ejemplo.pdf');
-        //return $pdf2->stream(); 
+            $caratula = 'caratula.pdf';
+            $ido = 'ido_'.$fecha.'_preliminar.pdf';
+            $pdf->save('../public/pdf/'.$caratula);
+            $pdf2->save('../public/pdf/ido.pdf');
 
-        $pdfMerger->save($ido, "download");
-        // return $pdf4->stream();                     
+            $pdfMerger = PDFMerger::init();
+
+            $pdfMerger->addPDF(base_path('public/pdf/'.$caratula), 'all');
+            $pdfMerger->addPDF(base_path('public/pdf/'.'ido.pdf'), 'all');
+            $pdfMerger->merge();
+            //return $pdf->download('ejemplo.pdf');
+            //return $pdf2->stream(); 
+
+            $pdfMerger->save($ido, "download");
+        }else{
+            $pdf = \PDF::loadView('PDF/ido-caratula', compact('eventos','fecha','oficio'));
+            $pdf2 = \PDF::loadView('PDF/ido', compact('eventos','fecha','oficio','anexoii','vueltasPr','realizadas','porcentaje'));
+            $pdf->render();
+            $pdf2->render();
+
+            
+
+            $caratula = 'caratula.pdf';
+            $ido = 'ido_'.$fecha.'.pdf';
+            $pdf->save('../public/pdf/'.$caratula);
+            $pdf2->save('../public/pdf/ido.pdf');
+
+            $pdfMerger = PDFMerger::init();
+
+            $pdfMerger->addPDF(base_path('public/pdf/'.$caratula), 'all');
+            $pdfMerger->addPDF(base_path('public/pdf/'.'ido.pdf'), 'all');
+            $pdfMerger->merge();
+            //return $pdf->download('ejemplo.pdf');
+            //return $pdf2->stream(); 
+
+            $pdfMerger->save($ido, "download");
+        }
+        //return $pdf2->stream();                     
     }
 }

@@ -74,10 +74,31 @@
             margin-right: auto;
             width: 100%;
         }
+        #watermark {
+            position: fixed;
+            bottom:   -2cm;
+            left:    -2cm;
+
+
+            /** Change image dimensions**/
+            width:    28cm;
+            height:   28cm;
+
+            /** Your watermark should be behind every content**/
+            z-index:  -1000;
+        }
+        .watermark{
+            font-family: Arial;
+            font-size : 170;
+            color: #D5D5D5;
+            transform: rotate(-46deg);
+        }
     </style>
 </head>
 <body>
-    
+    <div id="watermark">
+        <p class="watermark">Preliminar</p>
+    </div>
     @php
         $meses = ['','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
         $fcreado = date_create($fecha)

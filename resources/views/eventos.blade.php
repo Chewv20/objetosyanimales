@@ -126,7 +126,7 @@
 
                                                 <div class="row"> 
                                                     <div class="col" style="text-align: center">
-                                                        <input type="date" id="fecha_f" class="form-control" name="fecha" value="2023-09-20" min="<?php echo $hoy;?>" max="<?php echo $hoy;?>" hidden>
+                                                        <input type="date" id="fecha_f" class="form-control" name="fecha" value="<?php echo $hoy;?>" min="<?php echo $hoy;?>" max="<?php echo $hoy;?>" hidden>
                                                     </div>
                                                 </div>
                                                 <div class="row"> 
@@ -232,10 +232,16 @@
                                                             <input type="number" id="oficio_f" class="form-control" aria-label="oficio" aria-describedby="oficio" name="oficio" required>
                                                          </div>
                                                     </div>
+                                                    <div class="col">
+                                                        <div class="form-check">
+                                                            <input class="preliminar-check-input" type="checkbox" value="0" id="preliminar">
+                                                            <label class="preliminar-check-label" for="defaultCheckPV"> Preliminar </label>
+                                                         </div>
+                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <a href="/eventos/pdf/<?php echo $hoy;?>/0" id="link">
+                                                        <a href="/eventos/pdf" id="link">
                                                             <button type="button" id="pdfE" class="btn btn-outline-success"><span class="fa fa-file"></span> Exportar PDF</button>
                                                         </a>
                                                     </div>

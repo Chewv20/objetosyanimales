@@ -391,6 +391,16 @@ return [
                 ],
             ],
         ],
+        'BootstrapSwitch' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/bootstrap-switch/js/bootstrap-switch.min.js',
+                ],
+            ],
+        ],
         'Select2' => [
             'active' => true,
             'files' => [
