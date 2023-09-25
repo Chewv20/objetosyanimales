@@ -30,6 +30,12 @@ use App\Http\Controllers\AnexoIIIController;
                                <input type="date" id="fecha" class="form-control" name="fecha_inicial" value="<?php echo $hoy;?>" min="2020-11-04" max="<?php echo $hoy;?>">
                             </div>
                         </div>
+                        <div class="col-2">
+                            <div class="form-check">
+                                <input class="festivo-check-input" type="checkbox" value="0" id="festivo">
+                                <label class="festivo-check-label" for="defaultCheckPV"> Día Festivo </label>
+                             </div>
+                        </div>
                         <?php
                         $lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB'];
                         foreach( $lineas as $linea){ 
@@ -72,26 +78,40 @@ use App\Http\Controllers\AnexoIIIController;
     $(document).ready(function(){
         fecha = new Date(document.getElementById('fecha').value)
         fecha.setTime(fecha.getTime() + fecha.getTimezoneOffset() * 60 * 1000);
-        obtieneVueltas()
+        obtieneVueltas(0)
 
         document.getElementById('fecha').addEventListener('change',(e)=>{
             //console.log(e.target.value);
             destruyeGraficas()
             fecha = new Date(document.getElementById('fecha').value)
             fecha.setTime(fecha.getTime() + fecha.getTimezoneOffset() * 60 * 1000);
-            obtieneVueltas()
+            obtieneVueltas(0)
+        })
+
+        document.getElementById('festivo').addEventListener('change',(e)=>{
+            if(document.querySelector('.festivo-check-input').checked){
+                destruyeGraficas()
+                fecha = new Date(document.getElementById('fecha').value)
+                fecha.setTime(fecha.getTime() + fecha.getTimezoneOffset() * 60 * 1000);
+                obtieneVueltas(1)
+            }else{
+                destruyeGraficas()
+                fecha = new Date(document.getElementById('fecha').value)
+                fecha.setTime(fecha.getTime() + fecha.getTimezoneOffset() * 60 * 1000);
+                obtieneVueltas(0)
+            }
         })
 
         
 })
 
-function obtieneVueltas()
+function obtieneVueltas(festivo)
 {
     
     fetch('/anexoIII/get',{
         method : 'POST',
         body: JSON.stringify({
-            fecha : document.getElementById('fecha').value,      
+            fecha : document.getElementById('fecha').value    
         }),
         headers:{
             'Content-Type': 'application/json',
@@ -113,17 +133,18 @@ function obtieneVueltas()
             })
         })
 
-        obtieneVueltasP(fecha.getDay())
+        obtieneVueltasP(fecha.getDay(),festivo)
     }).catch(error => console.error(error));
 
 }
 
-function obtieneVueltasP(Pid)
+function obtieneVueltasP(Pid, Pfestivo)
 {
     fetch('/anexoIII/getvueltas',{
         method : 'POST',
         body: JSON.stringify({
-            id : Pid      
+            id : Pid,
+            festivo : Pfestivo    
         }),
         headers:{
             'Content-Type': 'application/json',

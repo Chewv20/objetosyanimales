@@ -233,7 +233,7 @@ class EventosController extends Controller
         }
     }
 
-    public function imprimir($fecha,$oficio,$preliminar)
+    public function imprimir($fecha,$oficio,$preliminar,$festivo)
     {
         $lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB'];
         $vueltasPr = [];
@@ -260,13 +260,23 @@ class EventosController extends Controller
         $fcreado = date_create($fecha);
         $dia = date_format($fcreado, 'w');
 
-        $vueltas = DB::connection('pgsql')
-        ->table('vueltas')
-        ->where([        
-            ['id',$dia],
-        ])
-        ->orderBy('linea','asc')
-        ->get();
+        if($festivo==1){
+            $vueltas = DB::connection('pgsql')
+            ->table('vueltas')
+            ->where([        
+                ['id',7],
+            ])
+            ->orderBy('linea','asc')
+            ->get();
+        }else{
+            $vueltas = DB::connection('pgsql')
+            ->table('vueltas')
+            ->where([        
+                ['id',$dia],
+            ])
+            ->orderBy('linea','asc')
+            ->get();
+        }
 
         foreach ($lineas as $item) {
             foreach ($vueltas as $item2) {

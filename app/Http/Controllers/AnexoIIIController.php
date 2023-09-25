@@ -79,14 +79,26 @@ class AnexoIIIController extends Controller
     
     public function getVueltas(Request $request)
     {
-        $vueltas = DB::connection('pgsql')
-        ->table('vueltas')
-        ->where([        
-        ['id',$request->id],
-        ])
-        ->orderBy('linea','asc')
-        ->get();
+        if($request->festivo == 1){
+            $vueltas = DB::connection('pgsql')
+            ->table('vueltas')
+            ->where([        
+            ['id',7],
+            ])
+            ->orderBy('linea','asc')
+            ->get();
 
-        return $vueltas;
+            return $vueltas;
+        }else{
+            $vueltas = DB::connection('pgsql')
+            ->table('vueltas')
+            ->where([        
+            ['id',$request->id],
+            ])
+            ->orderBy('linea','asc')
+            ->get();
+
+            return $vueltas;
+        }
     }
 }

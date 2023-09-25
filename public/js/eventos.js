@@ -76,10 +76,18 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             let fecha = document.getElementById('fecha_2').value
             let url = ''
             if(document.querySelector('.preliminar-check-input').checked){
-                url = '/eventos/pdf/'+fecha+'/'+e.target.value+'/1'
+                if(document.querySelector('.festivo-check-input').checked){
+                    url = '/eventos/pdf/'+fecha+'/'+e.target.value+'/1/1'
+                }else{
+                    url = '/eventos/pdf/'+fecha+'/'+e.target.value+'/1/0'
+                }
                 
             }else{
-                url = '/eventos/pdf/'+fecha+'/'+e.target.value+'/0'
+                if(document.querySelector('.festivo-check-input').checked){
+                    url = '/eventos/pdf/'+fecha+'/'+e.target.value+'/0/1'
+                }else{
+                    url = '/eventos/pdf/'+fecha+'/'+e.target.value+'/0/0'
+                }
                 
             }
             console.log(url);
@@ -93,11 +101,18 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             let oficio = document.getElementById('oficio_f').value
             let url = '/eventos/pdf/'+e.target.value+'/'+oficio
             if(document.querySelector('.preliminar-check-input').checked){
-                url = '/eventos/pdf/'+e.target.value+'/'+oficio+'/1'
+                if(document.querySelector('.festivo-check-input').checked){
+                    url = '/eventos/pdf/'+e.target.value+'/'+oficio+'/1/1'
+                }else{
+                    url = '/eventos/pdf/'+e.target.value+'/'+oficio+'/1/0'
+                }
                 
             }else{
-                url = '/eventos/pdf/'+e.target.value+'/'+oficio+'/0'
-                
+                if(document.querySelector('.festivo-check-input').checked){
+                    url = '/eventos/pdf/'+e.target.value+'/'+oficio+'/0/1'
+                }else{
+                    url = '/eventos/pdf/'+e.target.value+'/'+oficio+'/0/0'
+                }
             }
             console.log(url);
 
@@ -113,10 +128,43 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             let url = ''
 
             if(document.querySelector('.preliminar-check-input').checked){
-                url = '/eventos/pdf/'+fecha+'/'+oficio+'/1'
-                
+                if(document.querySelector('.festivo-check-input').checked){
+                    url = '/eventos/pdf/'+fecha+'/'+oficio+'/1/1'
+                }else{
+                    url = '/eventos/pdf/'+fecha+'/'+oficio+'/1/0'
+                }   
             }else{
-                url = '/eventos/pdf/'+fecha+'/'+oficio+'/0'
+                if(document.querySelector('.festivo-check-input').checked){
+                    url = '/eventos/pdf/'+fecha+'/'+oficio+'/0/1'
+                }else{
+                    url = '/eventos/pdf/'+fecha+'/'+oficio+'/0/0'
+                }
+                
+            }
+            console.log(url);
+            link.setAttribute('href', url);
+        })
+
+        document.getElementById('festivo').addEventListener('change',(e)=>{
+            var link = document.getElementById("link");
+            
+            let oficio = document.getElementById('oficio_f').value
+            let fecha = document.getElementById('fecha_2').value
+
+            let url = ''
+
+            if(document.querySelector('.preliminar-check-input').checked){
+                if(document.querySelector('.festivo-check-input').checked){
+                    url = '/eventos/pdf/'+fecha+'/'+oficio+'/1/1'
+                }else{
+                    url = '/eventos/pdf/'+fecha+'/'+oficio+'/1/0'
+                }   
+            }else{
+                if(document.querySelector('.festivo-check-input').checked){
+                    url = '/eventos/pdf/'+fecha+'/'+oficio+'/0/1'
+                }else{
+                    url = '/eventos/pdf/'+fecha+'/'+oficio+'/0/0'
+                }
                 
             }
             console.log(url);

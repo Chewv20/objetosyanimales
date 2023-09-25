@@ -224,7 +224,7 @@
                                                            <input type="date" id="fecha_2" class="form-control" name="fecha_inicial" value="<?php echo $hoy;?>" min="2020-11-04" max="<?php echo $hoy;?>">
                                                         </div>
                                                     </div>
-                                                    <div class="col">
+                                                    <div class="col-3">
                                                         <div class="input-group input-group-sm mb-3">
                                                             <div class="input-group-prepend">
                                                                <span class="input-group-text" id="oficio">Oficio</span>
@@ -232,10 +232,16 @@
                                                             <input type="number" id="oficio_f" class="form-control" aria-label="oficio" aria-describedby="oficio" name="oficio" required>
                                                          </div>
                                                     </div>
-                                                    <div class="col">
+                                                    <div class="col-2">
                                                         <div class="form-check">
                                                             <input class="preliminar-check-input" type="checkbox" value="0" id="preliminar">
                                                             <label class="preliminar-check-label" for="defaultCheckPV"> Preliminar </label>
+                                                         </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="form-check">
+                                                            <input class="festivo-check-input" type="checkbox" value="0" id="festivo">
+                                                            <label class="festivo-check-label" for="defaultCheckPV"> Día Festivo </label>
                                                          </div>
                                                     </div>
                                                 </div>
