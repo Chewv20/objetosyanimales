@@ -264,7 +264,7 @@ class EventosController extends Controller
             $vueltas = DB::connection('pgsql')
             ->table('vueltas')
             ->where([        
-                ['id',7],
+                ['id_numerico',7],
             ])
             ->orderBy('linea','asc')
             ->get();
@@ -272,7 +272,7 @@ class EventosController extends Controller
             $vueltas = DB::connection('pgsql')
             ->table('vueltas')
             ->where([        
-                ['id',$dia],
+                ['id_numerico',$dia],
             ])
             ->orderBy('linea','asc')
             ->get();
