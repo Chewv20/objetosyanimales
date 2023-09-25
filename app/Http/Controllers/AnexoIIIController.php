@@ -83,7 +83,7 @@ class AnexoIIIController extends Controller
             $vueltas = DB::connection('pgsql')
             ->table('vueltas')
             ->where([        
-            ['id_numerico',7],
+            ['dia_numerico',7],
             ])
             ->orderBy('linea','asc')
             ->get();
@@ -93,7 +93,7 @@ class AnexoIIIController extends Controller
             $vueltas = DB::connection('pgsql')
             ->table('vueltas')
             ->where([        
-            ['id_numerico',$request->id],
+            ['dia_numerico',$request->id],
             ])
             ->orderBy('linea','asc')
             ->get();
