@@ -5,6 +5,7 @@ use App\Http\Controllers\AnexoIIIController;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\LarinIController;
 use App\Http\Controllers\LarinIIController;
+use App\Http\Controllers\LarinIIIController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('anexoIII', AnexoIIIController::class);
     Route::resource('larinI', LarinIController::class);
     Route::resource('larinII', LarinIIController::class);
+    Route::resource('larinIII',LarinIIIController::class);
     Route::post('/eventos/getLarin', [EventosController::class, 'getLarin']);
     Route::post('/eventos/getLinea',[EventosController::class, 'getLinea']);
     Route::post('/eventos/getLineaF',[EventosController::class, 'getLineaF']);
