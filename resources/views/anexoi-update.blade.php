@@ -86,7 +86,7 @@
                                        <div class="input-group-prepend d-none d-md-block">
                                           <span class="input-group-text" id="inputGroup-sizing-sm">Fecha:</span>
                                        </div>
-                                       <input type="date" id="fecha" class="form-control" name="fecha" value="{{ $item->fecha }}" min="2020-11-04" max="<?php echo $hoy;?>">
+                                       <input type="date" id="fecha" class="form-control" name="fecha" value="{{ $item->fecha }}" min="2020-11-04" max="<?php echo $hoy;?>" disabled>
                                     </div>
                                 </div>
                             </div>

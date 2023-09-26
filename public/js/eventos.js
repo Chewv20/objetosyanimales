@@ -422,7 +422,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
     function cargarReloj(){
         let hoy = new Date()
         const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-        const dias_semana = ['Domingo', 'Lunes', 'martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+        const dias_semana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
         let fecha = dias_semana[hoy.getDay()] + ', ' + hoy.getDate() + ' de ' + meses[hoy.getMonth()] + ' de ' + hoy.getUTCFullYear()
         document.getElementById('fechaHoy').innerHTML = fecha + ', '+hoy.toLocaleTimeString('en-US')
         setTimeout(cargarReloj, 500);
@@ -500,5 +500,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                 }else{
                     generaTabla('#linea'+element,'0'+element)
                 }
-            });
+        });
+
+        setTimeout(crearTabla,10)
     }
