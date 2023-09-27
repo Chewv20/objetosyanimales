@@ -502,5 +502,5 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                 }
         });
 
-        setTimeout(crearTabla,10)
+        setTimeout(crearTabla,200)
     }
