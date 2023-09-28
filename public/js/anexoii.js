@@ -132,8 +132,20 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             }
         })
 
+        actualizarTabla()
 
     })
+
+    function actualizarTabla(){
+        let lineas = ['1','2','3','4','5','6','7','8','9','12','A','B'];
+        
+            lineas.forEach(element => {
+                $('#linea'+element).DataTable().ajax.reload();
+        });
+
+        setTimeout(actualizarTabla,2000)
+        
+    }
 
     function validar(){
         let error = false;

@@ -238,6 +238,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                 }
             });
             modal1.style.display = "none";
+
         })
 
         
@@ -272,6 +273,9 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                 document.getElementById('vueltas_l').readOnly= false
             }
         })
+
+        actualizarTabla()
+
 
     })
 
@@ -484,8 +488,18 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         document.getElementById('vueltas_R').value = ""
         document.getElementById('vueltas_l').readOnly= false
         document.getElementById('vueltas_R').readOnly= false
-        $('#larin').trigger('change');
-        crearTabla()
+        $('#larin').trigger('change'); 
+    }
+
+    function actualizarTabla(){
+        let lineas = ['1','2','3','4','5','6','7','8','9','12','A','B'];
+        
+            lineas.forEach(element => {
+                $('#linea'+element).DataTable().ajax.reload();
+        });
+
+        setTimeout(actualizarTabla,2000)
+        
     }
 
     function crearTabla(){
@@ -501,6 +515,4 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
                     generaTabla('#linea'+element,'0'+element)
                 }
         });
-
-        setTimeout(crearTabla,200)
     }

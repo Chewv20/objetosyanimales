@@ -158,7 +158,7 @@
         <div class="table-responsive">
             <table BORDER class="tabla" >
                 <thead class="text-center">
-                    <tr>
+                    <tr class="color-line">
                         <th scope="col" class="texto">Hora</th>
                         <th scope="col" class="w-75 texto">Descripción</th>
                     </tr>
