@@ -274,7 +274,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
             }
         })
 
-        actualizarTabla()
+        // actualizarTabla()
 
 
     })
@@ -491,7 +491,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         $('#larin').trigger('change'); 
     }
 
-    function actualizarTabla(){
+    /* function actualizarTabla(){
         let lineas = ['1','2','3','4','5','6','7','8','9','12','A','B'];
         
             lineas.forEach(element => {
@@ -500,7 +500,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
 
         setTimeout(actualizarTabla,2000)
         
-    }
+    } */
 
     function crearTabla(){
         let lineas = ['1','2','3','4','5','6','7','8','9','12','A','B'];
