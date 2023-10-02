@@ -36,6 +36,8 @@ use App\Http\Controllers\AnexoIIIController;
                                 <label class="festivo-check-label" for="defaultCheckPV"> Día Festivo </label>
                              </div>
                         </div>
+
+                        
                         <?php
                         $lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB'];
                         foreach( $lineas as $linea){ 
@@ -219,9 +221,11 @@ function generaGrafica1(id,programadas,realizadas)
                     display: true,
                     text: 'Vueltas Línea 1'
                 }
-            }
+            },
         }
-        });
+    });
+
+
 }
 
 function generaGrafica2(id,programadas,realizadas)

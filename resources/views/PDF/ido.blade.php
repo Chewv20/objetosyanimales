@@ -221,7 +221,7 @@
                 </tbody>
             </table>
         </div>
-        <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['Línea 1','Línea 3','Línea 4'], datasets:[{label:'Vueltas Programadas',backgroundColor: 'rgb(251, 255, 0)',data:[{{ $vueltasPr['01'] }},{{ $vueltasPr['03'] }},{{ $vueltasPr['04'] }}]},{label:'Vueltas Realizadas',backgroundColor: 'rgb(138, 138, 138)',data:[{{ $realizadas['01'] }},{{ $realizadas['03'] }},{{ $realizadas['04'] }}]}]},}" width="500" height="300" class="center">
+        <img src="https://quickchart.io/chart/render/sf-a69a3672-286f-4899-822e-4922c9726803?data1={{$vueltasPr['01']}},{{$vueltasPr['03']}},{{$vueltasPr['04']}}&data2={{$realizadas['01']}},{{$realizadas['03']}},{{$realizadas['04']}}" width="500" height="300" class="center">
     </div>
     <div style="page-break-after:always;"></div>
 
@@ -270,7 +270,7 @@
                 </tbody>
             </table>
         </div>
-        <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['Línea 2','Línea 5','Línea 6','Línea B'], datasets:[{label:'Vueltas Programadas',backgroundColor: 'rgb(251, 255, 0)',data:[{{ $vueltasPr['02'] }},{{ $vueltasPr['05'] }},{{ $vueltasPr['06'] }},{{ $vueltasPr['LB'] }}]},{label:'Vueltas Realizadas',backgroundColor: 'rgb(138, 138, 138)',data:[{{ $realizadas['02'] }},{{ $realizadas['05'] }},{{ $realizadas['06'] }},{{ $realizadas['LB'] }}]}]}}" width="500" height="300" class="center">
+        <img src="https://quickchart.io/chart/render/sf-a69a3672-286f-4899-822e-4922c9726803?labels=Línea 2,Línea 5,Línea 6,Línea B&data1={{$vueltasPr['02']}},{{$vueltasPr['05']}},{{$vueltasPr['06']}},{{$vueltasPr['LB']}}&data2={{$realizadas['02']}},{{$realizadas['05']}},{{$realizadas['06']}},{{$realizadas['LB']}}" width="500" height="300" class="center">
     </div>
 
     <div style="page-break-after:always;"></div>
