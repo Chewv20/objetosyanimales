@@ -26,9 +26,6 @@
                            <div class="input-group-prepend d-none d-md-block">
                               <span class="input-group-text" id="inputGroup-sizing-sm">Ver IDO del día</span>
                            </div>
-                           <div class="input-group-prepend d-md-none">
-                              <span class="input-group-text" id="inputGroup-sizing-sm">Ver Día</span>
-                           </div>
                            <input type="date" id="fecha" class="form-control" name="fecha_inicial" value="<?php echo $hoy;?>" min="2020-11-04" max="<?php echo $hoy;?>">
                         </div>
                     </div>
@@ -139,7 +136,7 @@
                                             <div class="col">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <x-adminlte-textarea name="descripcion" id="descripcion" rows="15" style="resize: none;" placeholder="Descripcion del evento" required/>
+                                                        <x-adminlte-textarea name="descripcion" id="descripcion" rows="15" style="resize: none;" placeholder="Descripcion del evento" required />
                                                     </div>
                                                 </div>
                                             </div>
