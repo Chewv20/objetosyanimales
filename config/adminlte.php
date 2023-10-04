@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Informe Diario de Operación',
+    'title' => 'Objetos y animales',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>IDO</b>',
+    'logo' => '<b>Objetos y Animales</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'eventos',
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -298,7 +298,7 @@ return [
         [
             'header' => 'Registrar Anexos',
         ],
-        [
+        /* [
             'text'        => 'Anexo I',
             'url'         => '/eventos',
             'icon'        => 'far fa-fw fa-file',
@@ -333,7 +333,7 @@ return [
                     'icon'        => 'far fa-fw fa-file',
                 ],
             ],
-        ],
+        ], */
     ],
 
     /*

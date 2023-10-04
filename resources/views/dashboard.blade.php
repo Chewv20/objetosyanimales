@@ -1,6 +1,8 @@
 @extends('adminlte::page')
 
-@section('title', 'Informe Diario de Operación')
+@section('title', 'Objetos y Animales')
+<link rel="icon" href="{{ URL::asset('img/logo.png') }}" />
+
 
 @section('content_header')
     <h1 class="m-0 text-dark">Dashboard</h1>
