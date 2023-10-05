@@ -3,18 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Lineas;
 
-class ObjetoController extends Controller
+class LineasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $lineas = Lineas::all();
-
-        return view('objetos',compact('lineas'));
+        //
     }
 
     /**

@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Estaciones;
 use Illuminate\Http\Request;
-use App\Models\Lineas;
 
-class ObjetoController extends Controller
+class EstacionesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $lineas = Lineas::all();
-
-        return view('objetos',compact('lineas'));
+        //
     }
 
     /**
@@ -63,5 +61,14 @@ class ObjetoController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function get(Request $request)
+    {
+        $estaciones = Estaciones::where('linea',$request->linea)
+                                ->orderBy('id_estacion')
+                                ->get();
+        
+        return $estaciones;
     }
 }
