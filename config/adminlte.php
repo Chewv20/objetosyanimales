@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Objetos y Animales</b>',
+    'logo' => '<b>Estadísticas</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -296,11 +296,11 @@ return [
             'topnav_right' => true,
         ],
         [
-            'header' => 'Registrar Anexos',
+            'header' => 'Registrar',
         ],
-        /* [
-            'text'        => 'Anexo I',
-            'url'         => '/eventos',
+        [
+            'text'        => 'Objetos en vías',
+            'url'         => '/',
             'icon'        => 'far fa-fw fa-file',
         ],
         [
@@ -333,7 +333,7 @@ return [
                     'icon'        => 'far fa-fw fa-file',
                 ],
             ],
-        ], */
+        ],
     ],
 
     /*
