@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Objeto extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'linea',
+        'fecha',
+        'estacion',
+        'retardo',
+        'corte_corriente',
+    ];
 }

@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('objeto',ObjetoController::class);
     Route::post('/estaciones/get/',[EstacionesController::class,'get']);
+    Route::post('/objeto/get/',[ObjetoController::class,'get']);
+    Route::post('/objeto/getReporte/',[ObjetoController::class,'getReporte']);
+
 });
 
 require __DIR__.'/auth.php';

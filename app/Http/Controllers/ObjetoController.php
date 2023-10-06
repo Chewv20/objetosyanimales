@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lineas;
+use App\Models\Objeto;
+use Illuminate\Support\Facades\DB;
+
 
 class ObjetoController extends Controller
 {
@@ -13,6 +16,7 @@ class ObjetoController extends Controller
     public function index()
     {
         $lineas = Lineas::all();
+        
 
         return view('objetos',compact('lineas'));
     }
@@ -30,7 +34,9 @@ class ObjetoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::insert('insert into objetos (linea, fecha, estacion, retardo, corte_corriente, tipo_objeto) values (?, ?, ?, ?, ?, ?)', [$request->linea,$request->fecha,$request->estacion,$request->retardo,$request->corte_corriente,$request->tipo_objeto]);
+
+        return true;
     }
 
     /**
@@ -63,5 +69,29 @@ class ObjetoController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getReporte(Request $request)
+    {
+        $objetos = DB::table('objetos')
+        ->where([
+            ['linea',$request->linea],
+            ['estacion',$request->estacion],
+            ['retardo',$request->retardo],
+            ['fecha',$request->fecha],
+            ['corte_corriente',$request->corte_corriente],
+            ['tipo_objeto',$request->tipo_objeto],
+        ])
+        ->orderBy('id')
+        ->get();
+
+        return $objetos;
+    }
+
+    public function get()
+    {
+        $objetos = Objeto::all();
+
+        return datatables($objetos)->toJson();
     }
 }
