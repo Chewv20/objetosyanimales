@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Estadísticas</b>',
+    'logo' => '<b>Objetos y Animales</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'dashboard',
+    'dashboard_url' => 'estadisticas',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
