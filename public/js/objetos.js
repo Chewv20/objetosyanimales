@@ -179,10 +179,6 @@ function generaTabla(){
                 }
             },
         ],
-        paging: false,
-        searching: false,
-        ordering:  false,
-        info: false,
         processing: true,
         serverSide: true    
     });

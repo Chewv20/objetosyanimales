@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/estaciones/get/',[EstacionesController::class,'get']);
     Route::post('/objeto/get/',[ObjetoController::class,'get']);
     Route::post('/objeto/getReporte/',[ObjetoController::class,'getReporte']);
+    Route::get('/objeto/delete/{id}',[ObjetoController::class, 'delete']);
+
 
 });
 
