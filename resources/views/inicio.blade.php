@@ -29,7 +29,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="card bg-success"  style="width: 5cm;">
+                    <div class="card bg-success"  style="text-align:center; width: 5cm;">
                         <div class="card-header">
                             <i class='fa fa-trash'> Objetos en Vías</i>
                         </div>
