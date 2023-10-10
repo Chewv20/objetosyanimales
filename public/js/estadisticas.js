@@ -22,6 +22,10 @@ function actualizaEstadisticas(Pdata){
     }).then( data=>{      
         document.getElementById('numObjetos').innerHTML= data[0]
         document.getElementById('numAnimales').innerHTML= data[1]
+        document.getElementById('numAccidentados').innerHTML= data[2]
+        document.getElementById('numPersonasAjenas').innerHTML= data[3]
+
+        
 
     }).catch(error => console.error(error));
     

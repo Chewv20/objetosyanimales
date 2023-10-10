@@ -50,6 +50,27 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col">
+                            <div class="card bg-success"  style="text-align:center; width: 5cm;">
+                                <div class="card-header">
+                                    <i class='fa fa-trash'>Arrollados y Accidentados</i>
+                                </div>
+                                <div class="card-body textCard" >
+                                    <p id='numAccidentados' ></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card bg-success"  style="text-align:center; width: 5cm;">
+                                <div class="card-header">
+                                    <i class='fa fa-trash'>Personas Ajenas en Vías</i>
+                                </div>
+                                <div class="card-body textCard" >
+                                    <p id='numPersonasAjenas' ></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     

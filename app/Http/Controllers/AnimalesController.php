@@ -73,7 +73,7 @@ class AnimalesController extends Controller
             'descripcion'=>$request->descripcion,
             'status'=>$request->status,
             'retardo'=>$request->retardo,
-            'usu_correccion'=>$request->usu_correcion,
+            'usu_correccion'=>$request->usu_correccion,
         ]);
 
         return redirect('animales');
@@ -96,7 +96,7 @@ class AnimalesController extends Controller
 
     public function getReporte(Request $request)
     {
-        $objetos = DB::table('animales')
+        $animales = DB::table('animales')
         ->where([
             ['fecha',$request->fecha],
             ['hora',$request->hora],
@@ -109,7 +109,7 @@ class AnimalesController extends Controller
         ->orderBy('id')
         ->get();
 
-        return $objetos;
+        return $animales;
     }
 
     public function get()

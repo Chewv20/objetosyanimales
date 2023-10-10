@@ -5,8 +5,8 @@
 
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Animales en Vías</h1>
-    <link rel="stylesheet" href="{{ URL::asset('css/animales.css') }}" />
+    <h1 class="m-0 text-dark">Arrollados y Accidentados</h1>
+    <link rel="stylesheet" href="{{ URL::asset('css/accidentados.css') }}" />
 
 @stop
 
@@ -19,8 +19,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    @foreach ($animales as $item)
-                        <form action="{{ route('animales.update', $item->id) }}" method="post" id='form-animales'>
+                    @foreach ($accidentados as $item)
+                        <form action="{{ route('accidentados.update', $item->id) }}" method="post" id='form-accidentados'>
                             @csrf
                             @method('PUT')
 
@@ -87,12 +87,35 @@
                                     <x-adminlte-select name='status' id="status" label='Status' >
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text ">
-                                                <i class="fa fa-paw"></i>
+                                                <i class="fa fa-heart"></i>
                                             </div>
                                         </x-slot>
-                                        <option value="Muerto" @if ($item->status == 'Muerto') selected @endif >Muerto</option>
-                                        <option value="Vivo" @if ($item->status == 'Vivo') selected @endif>Vivo</option>
+                                        <option value="Sin Vida" @if ($item->status == 'Sin Vida') selected @endif >Sin Vida</option>
+                                        <option value="Con Vida" @if ($item->status == 'Con Vida') selected @endif>Con Vida</option>
                                     </x-adminlte-select>
+                                </div>
+
+                                <div class="col">
+                                    <x-adminlte-select name='genero' id="genero" label='Genero' >
+                                        <x-slot name="prependSlot">
+                                            <div class="input-group-text ">
+                                                <i class="fa fa-male"></i>
+                                            </div>
+                                        </x-slot>
+                                        <option value="" selected>-- Seleccione un genero --</option>
+                                        <option value="Masculino" @if ($item->genero == 'Masculino') selected @endif>Masculino</option>
+                                        <option value="Femenino" @if ($item->genero == 'Femenino') selected @endif >Femenino</option>
+                                    </x-adminlte-select>
+                                </div>
+
+                                <div class="col-3">
+                                    <x-adminlte-input name="edad" id="edad" label="Edad" placeholder="Ingresa la edad" type="number" min=0 value='{{ $item->edad }}' required>
+                                        <x-slot name="prependSlot">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-clock"></i>
+                                            </div>
+                                        </x-slot>
+                                    </x-adminlte-input>
                                 </div>
                             </div>
                             
@@ -114,6 +137,6 @@
 @section('js')
 <link href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<script src="{{ URL::asset('js/animales-update.js') }}"></script>
+<script src="{{ URL::asset('js/personasajenas-update.js') }}"></script>
 
 @stop

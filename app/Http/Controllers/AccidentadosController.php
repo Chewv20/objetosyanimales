@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Lineas;
-use App\Models\Objeto;
+use App\Models\Accidentados;
 use App\Models\Estaciones;
+use App\Models\Lineas;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
-class ObjetoController extends Controller
+class AccidentadosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +18,7 @@ class ObjetoController extends Controller
         $lineas = Lineas::all();
         
 
-        return view('objetos',compact('lineas'));
+        return view('accidentados',compact('lineas'));
     }
 
     /**
@@ -35,7 +34,7 @@ class ObjetoController extends Controller
      */
     public function store(Request $request)
     {
-        Objeto::create($request->all());
+        Accidentados::create($request->all());
 
         return true;
     }
@@ -45,11 +44,11 @@ class ObjetoController extends Controller
      */
     public function show(string $id)
     {
-        $objeto = Objeto::where('id',$id)->get();
+        $accidentados = Accidentados::where('id',$id)->get();
         $lineas = Lineas::all();
         $estaciones = Estaciones::all();
 
-        return view('objetos-update',compact('objeto','lineas','estaciones'));
+        return view('accidentados-update',compact('accidentados','lineas','estaciones'));
     }
 
     /**
@@ -65,18 +64,21 @@ class ObjetoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Objeto::where('id',$id)
+        Accidentados::where('id',$id)
         ->update([
-            'linea'=>$request->linea,
             'fecha'=>$request->fecha,
+            'hora'=>$request->hora,
+            'linea'=>$request->linea,
             'estacion'=>$request->estacion,
+            'descripcion'=>$request->descripcion,
+            'status'=>$request->status,
+            'genero'=>$request->genero,
+            'edad'=>$request->edad,
             'retardo'=>$request->retardo,
-            'corte_corriente'=>$request->corte_corriente,
-            'tipo_objeto'=>$request->tipo_objeto,
             'usu_correccion'=>$request->usu_correccion,
         ]);
 
-        return redirect('objeto');
+        return redirect('accidentados');
     }
 
     /**
@@ -89,48 +91,52 @@ class ObjetoController extends Controller
 
     public function delete(string $id)
     {
-        DB::table('objetos')->where('id', $id)->delete();
-        return redirect('objeto');
+        $accidentados = Accidentados::find($id);
+        $accidentados->delete();
+        return redirect('accidentados');
     }
 
     public function getReporte(Request $request)
     {
-        $objetos = DB::table('objetos')
+        $accidentados = DB::table('accidentados')
         ->where([
+            ['fecha',$request->fecha],
+            ['hora',$request->hora],
             ['linea',$request->linea],
             ['estacion',$request->estacion],
+            ['descripcion',$request->descripcion],
+            ['status',$request->status],
+            ['genero',$request->genero],
+            ['edad',$request->edad],
             ['retardo',$request->retardo],
-            ['fecha',$request->fecha],
-            ['corte_corriente',$request->corte_corriente],
-            ['tipo_objeto',$request->tipo_objeto],
         ])
         ->orderBy('id')
         ->get();
 
-        return $objetos;
+        return $accidentados;
     }
 
     public function get()
     {
-        $objetos = Objeto::all();
+        $accidentados = Accidentados::all();
         $lineas = Lineas::all();
         $estaciones = Estaciones::all();
 
 
-        foreach ($objetos as $objeto) {
+        foreach ($accidentados as $accidentado) {
             foreach ($lineas as $linea) {
-                if ($objeto->linea==$linea->id_linea) {
-                    $objeto->linea=$linea->linea;
+                if ($accidentado->linea==$linea->id_linea) {
+                    $accidentado->linea=$linea->linea;
                 }
             }
 
             foreach ($estaciones as $estacion) {
-                if ($objeto->estacion==$estacion->id_estacion) {
-                    $objeto->estacion=$estacion->estacion;
+                if ($accidentado->estacion==$estacion->id_estacion) {
+                    $accidentado->estacion=$estacion->estacion;
                 }
             }
         }
 
-        return datatables($objetos)->toJson();
+        return datatables($accidentados)->toJson();
     }
 }

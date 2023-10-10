@@ -308,6 +308,16 @@ return [
             'url'         => '/animales',
             'icon'        => 'fa fa-paw',
         ],
+        [
+            'text'        => 'Arrollados y Accidentados',
+            'url'         => '/accidentados',
+            'icon'        => 'fa fa-male',
+        ],
+        [
+            'text'        => 'Personas Ajenas en Vías',
+            'url'         => '/personasajenas',
+            'icon'        => 'fa fa-male',
+        ],
         /*[
             'text'        => 'Anexo III',
             'url'         => '/anexoIII',
