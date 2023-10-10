@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('objetos', function (Blueprint $table) {
+        Schema::create('animales', function (Blueprint $table) {
             $table->id();
-            $table->string('linea');
             $table->date('fecha');
+            $table->string('linea');
+            $table->string('hora');
             $table->string('estacion');
+            $table->text('descripcion');
+            $table->string('status');
             $table->integer('retardo');
-            $table->string('corte_corriente');
-            $table->string('tipo_objeto');
             $table->string('usuario');
             $table->string('usu_correccion')->nullable();
             $table->timestamps();
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('objeto');
+        Schema::dropIfExists('animales');
     }
 };

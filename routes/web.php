@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnimalesController;
 use App\Http\Controllers\EstacionesController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\ProfileController;
@@ -32,11 +33,14 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('estadisticas',EstadisticasController::class);
     Route::resource('objeto',ObjetoController::class);
+    Route::resource('animales',AnimalesController::class);
     Route::post('/estaciones/get/',[EstacionesController::class,'get']);
     Route::post('/objeto/get/',[ObjetoController::class,'get']);
     Route::post('/objeto/getReporte/',[ObjetoController::class,'getReporte']);
     Route::get('/objeto/delete/{id}',[ObjetoController::class, 'delete']);
-
+    Route::post('/animales/get/',[AnimalesController::class,'get']);
+    Route::post('/animales/getReporte/',[AnimalesController::class,'getReporte']);
+    Route::get('/animales/delete/{id}',[AnimalesController::class, 'delete']);
     Route::post('/estadisticas/getcuentas',[EstadisticasController::class, 'getCount']);
 
 

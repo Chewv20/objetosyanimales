@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Objeto extends Model
+class Animales extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'id',
-        'linea',
         'fecha',
+        'linea',
+        'hora',
         'estacion',
+        'descripcion',
+        'status',
         'retardo',
-        'corte_corriente',
-        'tipo_objeto',
         'usuario',
         'usu_correccion',
     ];

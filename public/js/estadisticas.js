@@ -21,6 +21,8 @@ function actualizaEstadisticas(Pdata){
         return response.json()
     }).then( data=>{      
         document.getElementById('numObjetos').innerHTML= data[0]
+        document.getElementById('numAnimales').innerHTML= data[1]
+
     }).catch(error => console.error(error));
     
     setTimeout(actualizaEstadisticas,5000)

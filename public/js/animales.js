@@ -46,7 +46,7 @@ $(document).ready(function(){
 function validar(){
     let error = false;
 
-        let inputsrequeridos = document.querySelectorAll('#form-objeto [required]')  
+        let inputsrequeridos = document.querySelectorAll('#form-animales [required]')  
         for(let i=0;i<inputsrequeridos.length;i++){
             if(inputsrequeridos[i].value =='' ){
                 inputsrequeridos[i].style.borderColor = '#FF0400'
@@ -61,23 +61,25 @@ function validar(){
 }
 
 function compruebaRep(){
-    Plinea = document.getElementById('selLinea').value
-    Pestacion = document.getElementById('selEstacion').value
-    Pretardo = document.getElementById('retardo').value
     Pfecha = document.getElementById('fecha').value
-    Pcorte_corriente = document.getElementById('corte_corriente').value
-    Ptipo_objeto = document.getElementById('tipo_objeto').value
+    Plinea = document.getElementById('selLinea').value
+    Phora = document.getElementById('hora').value
+    Pestacion = document.getElementById('selEstacion').value
+    Pdescripcion = document.getElementById('descripcion').value
+    Pstatus = document.getElementById('status').value
+    Pretardo = document.getElementById('retardo').value
 
-    fetch('/objeto/getReporte/',{
+
+    fetch('/animales/getReporte/',{
         method : 'POST',
         body: JSON.stringify({
-            linea :  Plinea,
-            estacion :  Pestacion,     
-            retardo :  Pretardo,     
             fecha :  Pfecha,     
-            corte_corriente :  Pcorte_corriente,     
-            tipo_objeto :  Ptipo_objeto,     
-
+            linea :  Plinea,
+            hora : Phora,
+            estacion :  Pestacion,     
+            descripcion : Pdescripcion,
+            status : Pstatus,
+            retardo :  Pretardo,     
         }),
         headers:{
             'Content-Type': 'application/json',
@@ -100,24 +102,26 @@ function compruebaRep(){
 }
 
 function guardar(){
-    Plinea = document.getElementById('selLinea').value
-    Pestacion = document.getElementById('selEstacion').value
-    Pretardo = document.getElementById('retardo').value
     Pfecha = document.getElementById('fecha').value
-    Pcorte_corriente = document.getElementById('corte_corriente').value
-    Ptipo_objeto = document.getElementById('tipo_objeto').value
+    Plinea = document.getElementById('selLinea').value
+    Phora = document.getElementById('hora').value
+    Pestacion = document.getElementById('selEstacion').value
+    Pdescripcion = document.getElementById('descripcion').value
+    Pstatus = document.getElementById('status').value
+    Pretardo = document.getElementById('retardo').value
     Pusuario = document.getElementById('usuario').value
 
     
-    fetch('/objeto/',{
+    fetch('/animales/',{
         method : 'POST',
         body: JSON.stringify({
-            linea :  Plinea,
             fecha :  Pfecha,     
+            linea :  Plinea,
+            hora : Phora,
             estacion :  Pestacion,     
-            retardo :  Pretardo,     
-            corte_corriente :  Pcorte_corriente,     
-            tipo_objeto :  Ptipo_objeto,
+            descripcion : Pdescripcion,
+            status : Pstatus,
+            retardo :  Pretardo,
             usuario : Pusuario,
         }),
         headers:{
@@ -143,18 +147,20 @@ function guardar(){
 }
 
 function limpiar(){
-    document.getElementById('selLinea').value = '0'
-    document.getElementById('selEstacion').value = '0'
-    document.getElementById('retardo').value = ""
     document.getElementById('fecha').value = ""
-    document.getElementById('corte_corriente').value = ''
-    document.getElementById('tipo_objeto').value = ""
+    document.getElementById('selLinea').value = '0'
+    document.getElementById('hora').value = ""
+    document.getElementById('selEstacion').value = '0'
+    document.getElementById('descripcion').value = ''
+    document.getElementById('status').value = ""
+    document.getElementById('retardo').value = ""
+
 
     actualizarTabla()
 }
 
 function generaTabla(){
-    new DataTable(objetosVia, {
+    new DataTable(animalesVias, {
         responsive: true,
         autoWidth: false,
         language: {
@@ -162,21 +168,22 @@ function generaTabla(){
         },
         ajax : {
             method : "POST",
-            url : "/objeto/get",
+            url : "/animales/get",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         },
         columns: [
-            { data: 'linea' },
             { data: 'fecha' },
+            { data: 'linea' },
+            { data: 'hora' },
             { data: 'estacion' },
+            { data: 'descripcion' },
+            { data: 'status' },
             { data: 'retardo' },
-            { data: 'corte_corriente' },
-            { data: 'tipo_objeto' },
             {
                 "data": null,
                 "bSortable": false,
                 "mRender": function(data, type, value) {
-                    return '<a href="/objeto/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/objeto/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
+                    return '<a href="/animales/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/animales/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
                     
                 }
             },
@@ -188,5 +195,5 @@ function generaTabla(){
 }
 
 function actualizarTabla(){
-    $('#objetosVia').DataTable().ajax.reload();
+    $('#animalesVias').DataTable().ajax.reload();
 }

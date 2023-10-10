@@ -73,9 +73,16 @@ class EstadisticasController extends Controller
         ->whereDate('fecha','<=',$request->fecha2)
         ->get();
 
+        $animales = DB::table('animales')
+        ->whereDate('fecha','>=',$request->fecha,'and')
+        ->whereDate('fecha','<=',$request->fecha2)
+        ->get();
+
         $cuentas = [];
 
         $cuentas[0] = count($objetos);
+        $cuentas[1] = count($animales);
+        
 
         return $cuentas;
 

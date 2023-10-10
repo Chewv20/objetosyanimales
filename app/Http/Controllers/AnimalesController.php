@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Lineas;
-use App\Models\Objeto;
+use App\Models\Animales;
 use App\Models\Estaciones;
+use App\Models\Lineas;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
-class ObjetoController extends Controller
+class AnimalesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +18,7 @@ class ObjetoController extends Controller
         $lineas = Lineas::all();
         
 
-        return view('objetos',compact('lineas'));
+        return view('animales',compact('lineas'));
     }
 
     /**
@@ -35,7 +34,7 @@ class ObjetoController extends Controller
      */
     public function store(Request $request)
     {
-        Objeto::create($request->all());
+        Animales::create($request->all());
 
         return true;
     }
@@ -45,11 +44,11 @@ class ObjetoController extends Controller
      */
     public function show(string $id)
     {
-        $objeto = Objeto::where('id',$id)->get();
+        $animales = Animales::where('id',$id)->get();
         $lineas = Lineas::all();
         $estaciones = Estaciones::all();
 
-        return view('objetos-update',compact('objeto','lineas','estaciones'));
+        return view('animales-update',compact('animales','lineas','estaciones'));
     }
 
     /**
@@ -65,18 +64,19 @@ class ObjetoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Objeto::where('id',$id)
+        Animales::where('id',$id)
         ->update([
-            'linea'=>$request->linea,
             'fecha'=>$request->fecha,
+            'hora'=>$request->hora,
+            'linea'=>$request->linea,
             'estacion'=>$request->estacion,
+            'descripcion'=>$request->descripcion,
+            'status'=>$request->status,
             'retardo'=>$request->retardo,
-            'corte_corriente'=>$request->corte_corriente,
-            'tipo_objeto'=>$request->tipo_objeto,
             'usu_correccion'=>$request->usu_correcion,
         ]);
 
-        return redirect('objeto');
+        return redirect('animales');
     }
 
     /**
@@ -89,20 +89,22 @@ class ObjetoController extends Controller
 
     public function delete(string $id)
     {
-        DB::table('objetos')->where('id', $id)->delete();
-        return redirect('objeto');
+        $animales = Animales::find($id);
+        $animales->delete();
+        return redirect('animales');
     }
 
     public function getReporte(Request $request)
     {
-        $objetos = DB::table('objetos')
+        $objetos = DB::table('animales')
         ->where([
+            ['fecha',$request->fecha],
+            ['hora',$request->hora],
             ['linea',$request->linea],
             ['estacion',$request->estacion],
+            ['descripcion',$request->descripcion],
+            ['status',$request->status],
             ['retardo',$request->retardo],
-            ['fecha',$request->fecha],
-            ['corte_corriente',$request->corte_corriente],
-            ['tipo_objeto',$request->tipo_objeto],
         ])
         ->orderBy('id')
         ->get();
@@ -112,25 +114,25 @@ class ObjetoController extends Controller
 
     public function get()
     {
-        $objetos = Objeto::all();
+        $animales = Animales::all();
         $lineas = Lineas::all();
         $estaciones = Estaciones::all();
 
 
-        foreach ($objetos as $objeto) {
+        foreach ($animales as $animal) {
             foreach ($lineas as $linea) {
-                if ($objeto->linea==$linea->id_linea) {
-                    $objeto->linea=$linea->linea;
+                if ($animal->linea==$linea->id_linea) {
+                    $animal->linea=$linea->linea;
                 }
             }
 
             foreach ($estaciones as $estacion) {
-                if ($objeto->estacion==$estacion->id_estacion) {
-                    $objeto->estacion=$estacion->estacion;
+                if ($animal->estacion==$estacion->id_estacion) {
+                    $animal->estacion=$estacion->estacion;
                 }
             }
         }
 
-        return datatables($objetos)->toJson();
+        return datatables($animales)->toJson();
     }
 }

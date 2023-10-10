@@ -5,8 +5,8 @@
 
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Objetos en Vías</h1>
-    <link rel="stylesheet" href="{{ URL::asset('css/objetos.css') }}" />
+    <h1 class="m-0 text-dark">Animales en Vías</h1>
+    <link rel="stylesheet" href="{{ URL::asset('css/animales.css') }}" />
 
 @stop
 
@@ -91,7 +91,8 @@
                                 <x-adminlte-button id="submit" class="btn-flat" type="submit" label="Guardar Evento" theme="success" icon="fas fa-lg fa-save"/>
                             </div>
 
-                            <input type="number" id="estacion" value="{{ $item->estacion }}" hidden >
+                            <input type="text" id="estacion" value="{{ $item->estacion }}" hidden >
+                            <input type="text" id='usu_correccion' value="{{ auth()->user()->username }}" hidden>
                             
                         </form>
                     @endforeach
@@ -104,6 +105,6 @@
 @section('js')
 <link href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<script src="{{ URL::asset('js/objetos-update.js') }}"></script>
+<script src="{{ URL::asset('js/animales-update.js') }}"></script>
 
 @stop

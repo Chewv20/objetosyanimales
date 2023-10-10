@@ -299,16 +299,16 @@ return [
             'header' => 'Registrar',
         ],
         [
-            'text'        => 'Objetos en vías',
+            'text'        => ' Objetos en vías',
             'url'         => '/objeto',
-            'icon'        => 'far fa-fw fa-file',
-        ],
-        /* [
-            'text'        => 'Anexo II',
-            'url'         => '/anexoii',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fa fa-trash',
         ],
         [
+            'text'        => ' Animales en vías',
+            'url'         => '/animales',
+            'icon'        => 'fa fa-paw',
+        ],
+        /*[
             'text'        => 'Anexo III',
             'url'         => '/anexoIII',
             'icon'        => 'far fa-fw fa-file',
