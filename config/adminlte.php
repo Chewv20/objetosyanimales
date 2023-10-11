@@ -298,67 +298,44 @@ return [
         [
             'text'        => 'Estadísticas',
             'url'         => '/estadisticas',
-            'icon'        => 'fa fa-chart',
+            'icon'        => 'fa fa-line-chart',
         ],
         [
-            'header' => 'Registrar',
-        ],
-        [
-            'text'        => ' Objetos en vías',
-            'url'         => '/objeto',
-            'icon'        => 'fa fa-trash',
-        ],
-        [
-            'text'        => ' Animales en vías',
-            'url'         => '/animales',
-            'icon'        => 'fa fa-paw',
-        ],
-        [
-            'text'        => 'Arrollados y Accidentados',
-            'url'         => '/accidentados',
-            'icon'        => 'fa fa-male',
-        ],
-        [
-            'text'        => 'Personas Ajenas en Vías',
-            'url'         => '/personasajenas',
-            'icon'        => 'fa fa-male',
-        ],
-        [
-            'text'        => 'Incidentes Relevantes Dictaminados',
-            'url'         => '/incidentesrelevantes',
-            'icon'        => 'fa fa-ban',
-        ],
-        [
-            'text'        => 'Cierre de Puertas',
-            'url'         => '/puertas',
-            'icon'        => 'fa fa-wrench',
-        ],
-        /*[
-            'text'        => 'Anexo III',
-            'url'         => '/anexoIII',
-            'icon'        => 'far fa-fw fa-file',
-        ],
-        [
-            'text'    => 'Modulos',
-            'icon'    => 'fa fa-archive',
+            'text' => 'Registrar',
+            'icon' => '',
             'submenu' => [
                 [
-                    'text'        => 'Anexo I',
-                    'url'         => '/larinI',
-                    'icon'        => 'far fa-fw fa-file',
+                    'text'        => ' Objetos en vías',
+                    'url'         => '/objeto',
+                    'icon'        => 'fa fa-trash',
                 ],
                 [
-                    'text'        => 'Anexo II',
-                    'url'         => '/larinII',
-                    'icon'        => 'far fa-fw fa-file',
+                    'text'        => ' Animales en vías',
+                    'url'         => '/animales',
+                    'icon'        => 'fa fa-paw',
                 ],
                 [
-                    'text'        => 'Anexo III',
-                    'url'         => '/larinIII',
-                    'icon'        => 'far fa-fw fa-file',
+                    'text'        => 'Arrollados y Accidentados',
+                    'url'         => '/accidentados',
+                    'icon'        => 'fa fa-male',
                 ],
-            ],
-        ], */
+                [
+                    'text'        => 'Personas Ajenas en Vías',
+                    'url'         => '/personasajenas',
+                    'icon'        => 'fa fa-male',
+                ],
+                [
+                    'text'        => 'Incidentes Relevantes Dictaminados',
+                    'url'         => '/incidentesrelevantes',
+                    'icon'        => 'fa fa-ban',
+                ],
+                [
+                    'text'        => 'Cierre de Puertas',
+                    'url'         => '/puertas',
+                    'icon'        => 'fa fa-wrench',
+                ],
+            ]
+        ],
     ],
 
     /*

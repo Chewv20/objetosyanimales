@@ -89,6 +89,17 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col">
+                            <div class="card bg-success"  style="text-align:center; width: 5cm;">
+                                <div class="card-header">
+                                    <i class='fa fa-trash'>Cierre de Puertas</i>
+                                </div>
+                                <div class="card-body textCard" >
+                                    <p id='numPuertas' ></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     

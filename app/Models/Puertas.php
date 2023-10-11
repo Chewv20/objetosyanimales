@@ -15,6 +15,7 @@ class Puertas extends Model
         'hora',
         'linea',
         'estacion',
+        'via',
         'descripcion',
         'puerta_opuesta',
         'desalojo',

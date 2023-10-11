@@ -65,9 +65,10 @@ function compruebaRep(){
     Plinea = document.getElementById('selLinea').value
     Phora = document.getElementById('hora').value
     Pestacion = document.getElementById('selEstacion').value
+    Pvia = document.getElementById('via').value
     Pdescripcion = document.getElementById('descripcion').value
     Ppuerta_opuesta = document.getElementById('puerta_opuesta').value
-    Pdesalojo = document.getElementById('desalojo').value
+    Pdesalojo = document.getElementById('desalojado').value
     Pasistencia_policia = document.getElementById('asistencia_policia').value
 
     fetch('/puertas/getReporte/',{
@@ -76,7 +77,8 @@ function compruebaRep(){
             fecha :  Pfecha,     
             linea :  Plinea,
             hora : Phora,
-            estacion :  Pestacion,     
+            estacion :  Pestacion,
+            via : Pvia,  
             descripcion : Pdescripcion,
             puerta_opuesta : Ppuerta_opuesta,
             desalojo : Pdesalojo,
@@ -107,9 +109,10 @@ function guardar(){
     Plinea = document.getElementById('selLinea').value
     Phora = document.getElementById('hora').value
     Pestacion = document.getElementById('selEstacion').value
+    Pvia = document.getElementById('via').value
     Pdescripcion = document.getElementById('descripcion').value
     Ppuerta_opuesta = document.getElementById('puerta_opuesta').value
-    Pdesalojo = document.getElementById('desalojo').value
+    Pdesalojo = document.getElementById('desalojado').value
     Pasistencia_policia = document.getElementById('asistencia_policia').value
     Pusuario = document.getElementById('usuario').value
 
@@ -120,12 +123,13 @@ function guardar(){
             fecha :  Pfecha,     
             linea :  Plinea,
             hora : Phora,
-            estacion :  Pestacion,     
+            estacion :  Pestacion,
+            via : Pvia,  
             descripcion : Pdescripcion,
             puerta_opuesta : Ppuerta_opuesta,
             desalojo : Pdesalojo,
             asistencia_policia : Pasistencia_policia,
-            usuario : Pusuario,
+            usuario : Pusuario, 
         }),
         headers:{
             'Content-Type': 'application/json',
@@ -153,10 +157,11 @@ function limpiar(){
     document.getElementById('fecha').value = ""
     document.getElementById('selLinea').value = '0'
     document.getElementById('hora').value = ""
-    document.getElementById('selEstacion').value = '0'
+    document.getElementById('selEstacion').value = ''
+    document.getElementById('via').value=''
     document.getElementById('descripcion').value = ''
     document.getElementById('puerta_opuesta').value = ""
-    document.getElementById('desalojo').value = ""
+    document.getElementById('desalojado').value = ""
     document.getElementById('asistencia_policia').value = ''
 
     actualizarTabla()
@@ -179,6 +184,7 @@ function generaTabla(){
             { data: 'linea' },
             { data: 'hora' },
             { data: 'estacion' },
+            { data: 'via' },
             { data: 'descripcion' },
             { data: 'puerta_opuesta' },
             { data: 'desalojo' },

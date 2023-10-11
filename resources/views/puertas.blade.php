@@ -42,14 +42,28 @@
                                         @endforeach
                                     </x-adminlte-select>  
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <x-adminlte-select name='estacion' id='selEstacion' label='Estación' required>
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text ">
                                                 <i class="fa fa-dot-circle"></i>
                                             </div>
                                         </x-slot>
-                                        <option value='0'>-- Seleccione una estación o terminal--</option>
+                                        <option value='0'>-- Seleccione una estación --</option>
+                                    </x-adminlte-select>
+                                </div>
+                                <div class="col">
+                                    <x-adminlte-select name='via' id="via" label='Vía' >
+                                        <x-slot name="prependSlot">
+                                            <div class="input-group-text ">
+                                                <i class="fa fa-map-pin"></i>
+                                            </div>
+                                        </x-slot>
+                                        <option value="">-- Seleccione una opción --</option>
+                                        <option value="VIA 1">Vía 1</option>
+                                        <option value="VIA 2">Vía 2</option>
+                                        <option value="SIN ESPECIFICAR">Sin Especificar</option>
+
                                     </x-adminlte-select>
                                 </div>
                                 <div class="col">
@@ -128,6 +142,7 @@
                                 <th scope="col">Hora</th>
                                 <th scope="col">Linea</th>
                                 <th scope="col">Estacion / Terminal</th>
+                                <th scope="col">Vía</th>
                                 <th scope="col">Descripción</th>
                                 <th scope="col">Puerta Opuesta</th>
                                 <th scope="col">Desalojo</th>

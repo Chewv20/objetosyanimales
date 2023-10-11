@@ -54,6 +54,20 @@
                                     </x-adminlte-select>
                                 </div>
                                 <div class="col">
+                                    <x-adminlte-select name='via' id="via" label='Vía' >
+                                        <x-slot name="prependSlot">
+                                            <div class="input-group-text ">
+                                                <i class="fa fa-map-pin"></i>
+                                            </div>
+                                        </x-slot>
+                                        <option value="">-- Seleccione una opción --</option>
+                                        <option value="VIA 1" @if ($item->via == 'VIA 1') selected @endif>Vía 1</option>
+                                        <option value="VIA 2" @if ($item->via == 'VIA 2') selected @endif>Vía 2</option>
+                                        <option value="SIN ESPECIFICAR" @if ($item->via == 'SIN ESPECIFICAR') selected @endif>Sin Especificar</option>
+
+                                    </x-adminlte-select>
+                                </div>
+                                <div class="col">
                                     <label for="hora">Hora</label>
                                     <input type="time" name="hora" class="form-control" id="hora" value="{{ $item->hora }}" required>
                                 </div>
