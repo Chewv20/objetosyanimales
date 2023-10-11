@@ -97,6 +97,11 @@ class EstadisticasController extends Controller
         ->whereDate('fecha','>=',$request->fecha,'and')
         ->whereDate('fecha','<=',$request->fecha2)
         ->get();
+        
+        $zapatas = DB::table('zapatas')
+        ->whereDate('fecha','>=',$request->fecha,'and')
+        ->whereDate('fecha','<=',$request->fecha2)
+        ->get();
 
         $cuentas = [];
 
@@ -106,6 +111,7 @@ class EstadisticasController extends Controller
         $cuentas[3] = count($personasajenas);
         $cuentas[4] = count($incidentesrelevantes);
         $cuentas[5] = count($puertas);
+        $cuentas[6] = count($zapatas);
 
         
 

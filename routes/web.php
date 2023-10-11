@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ObjetoController;
 use App\Http\Controllers\PersonasajenasController;
 use App\Http\Controllers\PuertasController;
+use App\Http\Controllers\ZapatasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('personasajenas',PersonasajenasController::class);
     Route::resource('incidentesrelevantes',IncidentesrelevantesController::class);
     Route::resource('puertas',PuertasController::class);
+    Route::resource('zapatas',ZapatasController::class);
 
     Route::post('/estaciones/get/',[EstacionesController::class,'get']);
     Route::post('/estaciones2/get/',[Estaciones2Controller::class,'get']);
@@ -72,6 +74,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/puertas/get/',[PuertasController::class,'get']);
     Route::post('/puertas/getReporte/',[PuertasController::class,'getReporte']);
     Route::get('/puertas/delete/{id}',[PuertasController::class, 'delete']);
+
+    Route::post('/zapatas/get/',[ZapatasController::class,'get']);
+    Route::post('/zapatas/getReporte/',[ZapatasController::class,'getReporte']);
+    Route::get('/zapatas/delete/{id}',[ZapatasController::class, 'delete']);
 
     Route::post('/estadisticas/getcuentas',[EstadisticasController::class, 'getCount']);
 

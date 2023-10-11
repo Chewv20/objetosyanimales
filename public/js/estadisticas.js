@@ -26,6 +26,7 @@ function actualizaEstadisticas(Pdata){
         document.getElementById('numPersonasAjenas').innerHTML= data[3]
         document.getElementById('numIncidentes').innerHTML= data[4]
         document.getElementById('numPuertas').innerHTML= data[5]
+        document.getElementById('numZapatas').innerHTML= data[6]
 
         
 

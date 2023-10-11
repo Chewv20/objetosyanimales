@@ -334,6 +334,11 @@ return [
                     'url'         => '/puertas',
                     'icon'        => 'fa fa-wrench',
                 ],
+                [
+                    'text'        => 'Zapatas',
+                    'url'         => '/zapatas',
+                    'icon'        => 'fa fa-cloud',
+                ],
             ]
         ],
     ],
