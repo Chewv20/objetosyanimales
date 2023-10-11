@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Estaciones2;
+use App\Models\Estacionesvias;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-
-class Estaciones2Controller extends Controller
+class EstacionesviasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -67,11 +65,10 @@ class Estaciones2Controller extends Controller
 
     public function get(Request $request)
     {
-        $estaciones2 = DB::table('estaciones2')
-        ->where('linea',$request->linea)
-        ->orderBy('id_estacion')
-        ->get();
+        $estaciones = Estacionesvias::where('linea',$request->linea)
+                                ->orderBy('id_estacion')
+                                ->get();
         
-        return $estaciones2;
+        return $estaciones;
     }
 }
