@@ -16,11 +16,19 @@
     @endphp
 
     <div>
-        <label for="date">Fecha</label>
-        <input id="fecha" type="date" value="<?php echo $hoy;?>" min="2020-11-04" max="<?php echo $hoy;?>">
-        <label for="date"> a </label>
-        <input id="fecha2" type="date" value="<?php echo $hoy;?>" min="2020-11-04" max="<?php echo $hoy;?>">
-        <button type="button" id="filtro" class="btn btn-outline-success" >Aplicar Filtro</button>
+        <div class="row">
+            <div class="col-2">
+                
+                <input id="fecha" type="date" class="form-control" value="<?php echo $hoy;?>" min="2020-11-04" max="<?php echo $hoy;?>">
+            </div>
+            <div class="col-2">
+                
+                <input id="fecha2" type="date" class="form-control" value="<?php echo $hoy;?>" min="2020-11-04" max="<?php echo $hoy;?>">
+            </div>
+            <div class="col-2">
+                <button type="button" id="filtro" class="btn btn-outline-success" >Aplicar Filtro</button>
+            </div>
+        </div>
     </div>
 
 

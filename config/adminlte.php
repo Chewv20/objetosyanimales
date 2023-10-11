@@ -318,6 +318,11 @@ return [
             'url'         => '/personasajenas',
             'icon'        => 'fa fa-male',
         ],
+        [
+            'text'        => 'Incidentes Relevantes Dictaminados',
+            'url'         => '/incidentesrelevantes',
+            'icon'        => 'fa fa-ban',
+        ],
         /*[
             'text'        => 'Anexo III',
             'url'         => '/anexoIII',

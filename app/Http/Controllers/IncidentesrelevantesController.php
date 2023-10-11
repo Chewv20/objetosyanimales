@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Lineas;
-use App\Models\Objeto;
 use App\Models\Estaciones;
+use App\Models\Incidentesrelevantes;
+use App\Models\Lineas;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class ObjetoController extends Controller
+class IncidentesrelevantesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class ObjetoController extends Controller
     {
         $lineas = Lineas::all();
 
-        return view('objetos',compact('lineas'));
+        return view('incidentes',compact('lineas'));
     }
 
     /**
@@ -34,7 +34,7 @@ class ObjetoController extends Controller
      */
     public function store(Request $request)
     {
-        Objeto::create($request->all());
+        Incidentesrelevantes::create($request->all());
 
         return true;
     }
@@ -44,10 +44,10 @@ class ObjetoController extends Controller
      */
     public function show(string $id)
     {
-        $objeto = Objeto::where('id',$id)->get();
+        $incidentes = Incidentesrelevantes::where('id',$id)->get();
         $lineas = Lineas::all();
 
-        return view('objetos-update',compact('objeto','lineas'));
+        return view('incidentes-update',compact('incidentes','lineas'));
     }
 
     /**
@@ -63,18 +63,16 @@ class ObjetoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Objeto::where('id',$id)
+        Incidentesrelevantes::where('id',$id)
         ->update([
             'linea'=>$request->linea,
             'fecha'=>$request->fecha,
-            'estacion'=>$request->estacion,
-            'retardo'=>$request->retardo,
-            'corte_corriente'=>$request->corte_corriente,
-            'tipo_objeto'=>$request->tipo_objeto,
+            'lugar'=>$request->lugar,
+            'evento'=>$request->evento,
             'usu_correccion'=>$request->usu_correccion,
         ]);
 
-        return redirect('objeto');
+        return redirect('incidentesrelevantes');
     }
 
     /**
@@ -87,48 +85,46 @@ class ObjetoController extends Controller
 
     public function delete(string $id)
     {
-        DB::table('objetos')->where('id', $id)->delete();
-        return redirect('objeto');
+        DB::table('incidentesrelevantes')->where('id', $id)->delete();
+        return redirect('incidentes');
     }
 
     public function getReporte(Request $request)
     {
-        $objetos = DB::table('objetos')
+        $incidentes = DB::table('incidentesrelevantes')
         ->where([
             ['linea',$request->linea],
-            ['estacion',$request->estacion],
-            ['retardo',$request->retardo],
+            ['lugar',$request->lugar],
+            ['evento',$request->evento],
             ['fecha',$request->fecha],
-            ['corte_corriente',$request->corte_corriente],
-            ['tipo_objeto',$request->tipo_objeto],
         ])
         ->orderBy('id')
         ->get();
 
-        return $objetos;
+        return $incidentes;
     }
 
     public function get()
     {
-        $objetos = Objeto::all();
+        $incidentes = Incidentesrelevantes::all();
         $lineas = Lineas::all();
         $estaciones = Estaciones::all();
 
 
-        foreach ($objetos as $objeto) {
+        foreach ($incidentes as $incidente) {
             foreach ($lineas as $linea) {
-                if ($objeto->linea==$linea->id_linea) {
-                    $objeto->linea=$linea->linea;
+                if ($incidente->linea==$linea->id_linea) {
+                    $incidente->linea=$linea->linea;
                 }
             }
 
             foreach ($estaciones as $estacion) {
-                if ($objeto->estacion==$estacion->id_estacion) {
-                    $objeto->estacion=$estacion->estacion;
+                if ($incidente->lugar==$estacion->id_estacion) {
+                    $incidente->lugar=$estacion->estacion;
                 }
             }
         }
 
-        return datatables($objetos)->toJson();
+        return datatables($incidentes)->toJson();
     }
 }

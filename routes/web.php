@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AnimalesController;
 use App\Http\Controllers\EstacionesController;
+use App\Http\Controllers\Estaciones2Controller;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\AccidentadosController;
+use App\Http\Controllers\IncidentesrelevantesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ObjetoController;
 use App\Http\Controllers\PersonasajenasController;
@@ -38,8 +40,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('animales',AnimalesController::class);
     Route::resource('accidentados',AccidentadosController::class);
     Route::resource('personasajenas',PersonasajenasController::class);
+    Route::resource('incidentesrelevantes',IncidentesrelevantesController::class);
 
     Route::post('/estaciones/get/',[EstacionesController::class,'get']);
+    Route::post('/estaciones2/get/',[Estaciones2Controller::class,'get']);
     Route::post('/objeto/get/',[ObjetoController::class,'get']);
     Route::post('/objeto/getReporte/',[ObjetoController::class,'getReporte']);
     Route::get('/objeto/delete/{id}',[ObjetoController::class, 'delete']);
@@ -55,6 +59,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/personasajenas/get/',[PersonasajenasController::class,'get']);
     Route::post('/personasajenas/getReporte/',[PersonasajenasController::class,'getReporte']);
     Route::get('/personasajenas/delete/{id}',[PersonasajenasController::class, 'delete']);
+
+    Route::post('/incidentesrelevantes/get/',[IncidentesrelevantesController::class,'get']);
+    Route::post('/incidentesrelevantes/getReporte/',[IncidentesrelevantesController::class,'getReporte']);
+    Route::get('/incidentesrelevantes/delete/{id}',[IncidentesrelevantesController::class, 'delete']);
 
     Route::post('/estadisticas/getcuentas',[EstadisticasController::class, 'getCount']);
 

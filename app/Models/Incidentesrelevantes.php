@@ -5,13 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Estaciones extends Model
+class Incidentesrelevantes extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'id_estacion',
+        'id',
+        'fecha',
         'linea',
-        'estacion',
+        'lugar',
+        'evento',
+        'usuario',
+        'usu_correccion',
     ];
 }
