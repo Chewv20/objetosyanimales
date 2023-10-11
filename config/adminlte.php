@@ -296,6 +296,11 @@ return [
             'topnav_right' => true,
         ],
         [
+            'text'        => 'Estadísticas',
+            'url'         => '/estadisticas',
+            'icon'        => 'fa fa-chart',
+        ],
+        [
             'header' => 'Registrar',
         ],
         [

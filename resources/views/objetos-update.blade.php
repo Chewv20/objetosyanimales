@@ -60,7 +60,7 @@
                                 </div>
                                 <div>
                                     <label for="fecha">Fecha</label>
-                                    <input type="date" id="fecha" class="form-control" name="fecha"  min="2020-11-04" max="<?php echo $hoy;?>"  value="{{ $item->fecha }}">
+                                    <input type="date" id="fecha" class="form-control" name="fecha"  min="1992-03-18" max="<?php echo $hoy;?>"  value="{{ $item->fecha }}">
                                     
                                 </div>
                             </div>

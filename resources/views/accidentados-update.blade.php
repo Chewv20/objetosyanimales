@@ -27,7 +27,7 @@
                             <div class="row">
                                 <div>
                                     <label for="fecha">Fecha</label>
-                                    <input type="date" id="fecha" class="form-control" name="fecha" value="{{ $item->fecha }}" min="2020-11-04" max="<?php echo $hoy;?>">
+                                    <input type="date" id="fecha" class="form-control" name="fecha" value="{{ $item->fecha }}" min="1992-03-18" max="<?php echo $hoy;?>">
                                     
                                 </div>
                                 <div class="col-md-3">

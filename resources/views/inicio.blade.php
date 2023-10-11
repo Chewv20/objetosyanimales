@@ -19,11 +19,11 @@
         <div class="row">
             <div class="col-2">
                 
-                <input id="fecha" type="date" class="form-control" value="<?php echo $hoy;?>" min="2020-11-04" max="<?php echo $hoy;?>">
+                <input id="fecha" type="date" class="form-control" value="<?php echo $hoy;?>" min="1992-03-18" max="<?php echo $hoy;?>">
             </div>
             <div class="col-2">
                 
-                <input id="fecha2" type="date" class="form-control" value="<?php echo $hoy;?>" min="2020-11-04" max="<?php echo $hoy;?>">
+                <input id="fecha2" type="date" class="form-control" value="<?php echo $hoy;?>" min="1992-03-18" max="<?php echo $hoy;?>">
             </div>
             <div class="col-2">
                 <button type="button" id="filtro" class="btn btn-outline-success" >Aplicar Filtro</button>
@@ -76,6 +76,16 @@
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numPersonasAjenas' ></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card bg-success"  style="text-align:center; width: 5cm;">
+                                <div class="card-header">
+                                    <i class='fa fa-trash'>Incidentes Relevantes</i>
+                                </div>
+                                <div class="card-body textCard" >
+                                    <p id='numIncidentes' ></p>
                                 </div>
                             </div>
                         </div>
