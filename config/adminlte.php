@@ -328,6 +328,11 @@ return [
             'url'         => '/incidentesrelevantes',
             'icon'        => 'fa fa-ban',
         ],
+        [
+            'text'        => 'Cierre de Puertas',
+            'url'         => '/puertas',
+            'icon'        => 'fa fa-wrench',
+        ],
         /*[
             'text'        => 'Anexo III',
             'url'         => '/anexoIII',

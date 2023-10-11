@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Accidentados;
+use App\Models\Puertas;
 use App\Models\Estaciones;
 use App\Models\Lineas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AccidentadosController extends Controller
+class PuertasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,8 @@ class AccidentadosController extends Controller
     public function index()
     {
         $lineas = Lineas::all();
-        
 
-        return view('accidentados',compact('lineas'));
+        return view('puertas',compact('lineas'));
     }
 
     /**
@@ -34,7 +33,7 @@ class AccidentadosController extends Controller
      */
     public function store(Request $request)
     {
-        Accidentados::create($request->all());
+        Puertas::create($request->all());
 
         return true;
     }
@@ -44,11 +43,10 @@ class AccidentadosController extends Controller
      */
     public function show(string $id)
     {
-        $accidentados = Accidentados::where('id',$id)->get();
+        $puertas = Puertas::where('id',$id)->get();
         $lineas = Lineas::all();
-        $estaciones = Estaciones::all();
 
-        return view('accidentados-update',compact('accidentados','lineas'));
+        return view('puertas-update',compact('puertas','lineas'));
     }
 
     /**
@@ -64,21 +62,20 @@ class AccidentadosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Accidentados::where('id',$id)
+        Puertas::where('id',$id)
         ->update([
             'fecha'=>$request->fecha,
             'hora'=>$request->hora,
             'linea'=>$request->linea,
             'estacion'=>$request->estacion,
             'descripcion'=>$request->descripcion,
-            'status'=>$request->status,
-            'genero'=>$request->genero,
-            'edad'=>$request->edad,
-            'retardo'=>$request->retardo,
+            'puerta_opuesta'=>$request->puerta_opuesta,
+            'desalojo'=>$request->desalojo,
+            'asistencia_policia'=>$request->asistencia_policia,
             'usu_correccion'=>$request->usu_correccion,
         ]);
 
-        return redirect('accidentados');
+        return redirect('puertas');
     }
 
     /**
@@ -91,52 +88,51 @@ class AccidentadosController extends Controller
 
     public function delete(string $id)
     {
-        $accidentados = Accidentados::find($id);
-        $accidentados->delete();
-        return redirect('accidentados');
+        $puertas = Puertas::find($id);
+        $puertas->delete();
+        return redirect('puertas');
     }
 
     public function getReporte(Request $request)
     {
-        $accidentados = DB::table('accidentados')
+        $puertas = DB::table('puertas')
         ->where([
             ['fecha',$request->fecha],
             ['hora',$request->hora],
             ['linea',$request->linea],
             ['estacion',$request->estacion],
             ['descripcion',$request->descripcion],
-            ['status',$request->status],
-            ['genero',$request->genero],
-            ['edad',$request->edad],
-            ['retardo',$request->retardo],
+            ['puerta_opuesta',$request->status],
+            ['desalojo',$request->genero],
+            ['asistencia_policia',$request->edad],
         ])
         ->orderBy('id')
         ->get();
 
-        return $accidentados;
+        return $puertas;
     }
 
     public function get()
     {
-        $accidentados = Accidentados::all();
+        $puertas = Puertas::all();
         $lineas = Lineas::all();
         $estaciones = Estaciones::all();
 
 
-        foreach ($accidentados as $accidentado) {
+        foreach ($puertas as $puerta) {
             foreach ($lineas as $linea) {
-                if ($accidentado->linea==$linea->id_linea) {
-                    $accidentado->linea=$linea->linea;
+                if ($puerta->linea==$linea->id_linea) {
+                    $puerta->linea=$linea->linea;
                 }
             }
 
             foreach ($estaciones as $estacion) {
-                if ($accidentado->estacion==$estacion->id_estacion) {
-                    $accidentado->estacion=$estacion->estacion;
+                if ($puerta->estacion==$estacion->id_estacion) {
+                    $puerta->estacion=$estacion->estacion;
                 }
             }
         }
 
-        return datatables($accidentados)->toJson();
+        return datatables($puertas)->toJson();
     }
 }
