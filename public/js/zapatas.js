@@ -66,7 +66,7 @@ function compruebaRep(){
             Swal.fire(
                 {icon: 'error',
                 title: 'Se intenta guardar un reporte existente',
-                text: data[0].id}
+                text: 'ID: '+data[0].id}
             )
         
         }else{
@@ -140,6 +140,7 @@ function generaTabla(){
         },
         columns: [
             { data: 'fecha' },
+            { data: 'hora' },
             { data: 'linea' },
             { data: 'descripcion' },
             { data: 'humo' },

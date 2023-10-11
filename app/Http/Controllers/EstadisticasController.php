@@ -112,6 +112,7 @@ class EstadisticasController extends Controller
         $cuentas[4] = count($incidentesrelevantes);
         $cuentas[5] = count($puertas);
         $cuentas[6] = count($zapatas);
+        $cuentas[7] = count($objetos)+count($animales)+count($accidentados)+count($personasajenas)+count($incidentesrelevantes)+count($puertas)+count($zapatas);
 
         
 
