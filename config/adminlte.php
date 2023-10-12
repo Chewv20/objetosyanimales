@@ -332,7 +332,7 @@ return [
                 [
                     'text'        => 'Cierre de Puertas',
                     'url'         => '/puertas',
-                    'icon'        => 'fa fa-wrench',
+                    'icon'        => 'fas fa-door-open',
                 ],
                 [
                     'text'        => 'Zapatas',

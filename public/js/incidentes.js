@@ -155,6 +155,7 @@ function generaTabla(){
             url : "/incidentesrelevantes/get",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         },
+        "aLengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, 'Todos']],
         columns: [
             { data: 'fecha' },
             { data: 'lugar' },
@@ -170,7 +171,59 @@ function generaTabla(){
             },
         ],
         processing: true,
-        serverSide: true    
+        serverSide: true,
+        dom: 'Bfrtilp',
+        buttons: [
+            [
+                {
+                    extend: 'copyHtml5',
+                    text: '<i class="fa fa-copy"></i>',
+                    tittleAttr: 'Copiar al portapapeles',
+                    className: 'btn btn-secondary',
+                    exportOptions: {
+                        columns: [':visible' ]
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fas fa-file-excel"></i>',
+                    tittleAttr: 'Exportar a excel',
+                    className: 'btn btn-success',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fas fa-file-code"></i>',
+                    tittleAttr: 'Exportar a excel',
+                    className: 'btn btn-dark',
+                    exportOptions: {
+                        columns: [ ':visible' ]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fas fa-file-pdf"></i>',
+                    tittleAttr: 'Exportar a excel',
+                    className: 'btn btn-danger',
+                    exportOptions: {
+                        columns: [ ':visible' ]
+                    }
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fas fa-print"></i>',
+                    tittleAttr: 'Exportar a excel',
+                    className: 'btn btn-info',
+                    exportOptions: {
+                        columns: [ ':visible' ]
+                    }
+                },
+                'colvis',
+            ] 
+            
+        ]    
     });
 
 }

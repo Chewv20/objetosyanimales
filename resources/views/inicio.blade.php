@@ -39,9 +39,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <div class="card bg-success"  style="text-align:center; width: 5cm;">
+                            <div class="card bg-gray"  style="text-align:center; width: 5cm;">
                                 <div class="card-header">
-                                    <i class='fa fa-trash'>Total</i>
+                                    <i class='fas fa-folder'>Total</i>
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='total' ></p>
@@ -59,9 +59,9 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="card bg-success"  style="text-align:center; width: 5cm;">
+                            <div class="card bg-purple"  style="text-align:center; width: 5cm;">
                                 <div class="card-header">
-                                    <i class='fa fa-trash'>Animales en Vías</i>
+                                    <i class='fas fa-paw'>Animales en Vías</i>
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numAnimales' ></p>
@@ -69,9 +69,9 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="card bg-success"  style="text-align:center; width: 5cm;">
+                            <div class="card bg-red"  style="text-align:center; width: 5cm;">
                                 <div class="card-header">
-                                    <i class='fa fa-trash'>Arrollados y Accidentados</i>
+                                    <i class='fa fa-male'>Arrollados y Accidentados</i>
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numAccidentados' ></p>
@@ -80,9 +80,9 @@
                         </div>
 
                         <div class="col">
-                            <div class="card bg-success"  style="text-align:center; width: 5cm;">
+                            <div class="card bg-cyan"  style="text-align:center; width: 5cm;">
                                 <div class="card-header">
-                                    <i class='fa fa-trash'>Personas Ajenas en Vías</i>
+                                    <i class='fas fa-user-alt-slash'>Personas Ajenas en Vías</i>
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numPersonasAjenas' ></p>
@@ -90,9 +90,9 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="card bg-success"  style="text-align:center; width: 5cm;">
+                            <div class="card bg-yellow"  style="text-align:center; width: 5cm;">
                                 <div class="card-header">
-                                    <i class='fa fa-trash'>Incidentes Relevantes</i>
+                                    <i class='fas fa-exclamation-triangle'>Incidentes Relevantes</i>
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numIncidentes' ></p>
@@ -101,9 +101,9 @@
                         </div>
 
                         <div class="col">
-                            <div class="card bg-success"  style="text-align:center; width: 5cm;">
+                            <div class="card bg-orange"  style="text-align:center; width: 5cm;">
                                 <div class="card-header">
-                                    <i class='fa fa-trash'>Cierre de Puertas</i>
+                                    <i class='fas fa-door-open'>Cierre de Puertas</i>
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numPuertas' ></p>
@@ -111,9 +111,9 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="card bg-success"  style="text-align:center; width: 5cm;">
+                            <div class="card bg-black"  style="text-align:center; width: 5cm;">
                                 <div class="card-header">
-                                    <i class='fa fa-trash'>Zapatas</i>
+                                    <i class='fas fa-wind'>Zapatas</i>
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numZapatas' ></p>
