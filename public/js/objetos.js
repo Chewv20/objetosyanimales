@@ -35,7 +35,8 @@ $(document).ready(function(){
             Swal.fire({
                 icon: 'error',
                 title: 'Revisa los campos',
-                text: 'Revisa que todos los campos sean correctos'
+                text: 'Revisa que todos los campos sean correctos',
+                timer: 500
             })
         }
     })
@@ -131,6 +132,7 @@ function guardar(){
             Swal.fire(
                 {icon: 'success',
                 title: 'Reporte guardado con éxito',
+                timer: 500
                 }
             )
             limpiar() 
