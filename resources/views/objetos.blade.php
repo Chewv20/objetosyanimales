@@ -96,17 +96,28 @@
 <br><br>
                     <div class=" col-12">
                         <table class="table table-sm table-bordered" id="objetosVia">
-                        <thead class="text-center">
-                            <tr class="color-line line-objetos">
-                                <th scope="col">Linea</th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Lugar</th>
-                                <th scope="col">Retardo</th>
-                                <th scope="col">Corte de Corriente</th>
-                                <th scope="col">Tipo de Objeto</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
+                            <thead class="text-center">
+                                <tr class="color-line line-objetos">
+                                    <th scope="col" style="text-align: center">Linea</th>
+                                    <th scope="col" style="text-align: center">Fecha</th>
+                                    <th scope="col" style="text-align: center">Lugar</th>
+                                    <th scope="col" style="text-align: center">Retardo</th>
+                                    <th scope="col" style="text-align: center">Corte de Corriente</th>
+                                    <th scope="col" style="text-align: center">Tipo de Objeto</th>
+                                    <th scope="col" style="text-align: center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot class="text-center">
+                                <tr class="color-line line-objetos">
+                                    <th scope="col" style="text-align: center">Linea</th>
+                                    <th scope="col" style="text-align: center">Fecha</th>
+                                    <th scope="col" style="text-align: center">Lugar</th>
+                                    <th scope="col" style="text-align: center">Retardo</th>
+                                    <th scope="col" style="text-align: center">Corte de Corriente</th>
+                                    <th scope="col" style="text-align: center">Tipo de Objeto</th>
+                                    <th scope="col" style="text-align: center">Acciones</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -121,7 +132,13 @@
 
 <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" rel="stylesheet">
- 
+<link href="https://cdn.datatables.net/searchbuilder/1.6.0/css/searchBuilder.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css" rel="stylesheet">
+
+<script src="https://cdn.datatables.net/searchbuilder/1.6.0/js/dataTables.searchBuilder.min.js"></script>
+<script src="https://cdn.datatables.net/searchbuilder/1.6.0/js/searchBuilder.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>

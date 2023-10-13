@@ -27,7 +27,7 @@
                             <div class="row">
                                 <div>
                                     <label for="fecha">Fecha</label>
-                                    <input type="date" id="fecha" class="form-control" name="fecha"  min="1992-03-18" max="<?php echo $hoy;?>">
+                                    <input type="date" id="fecha" class="form-control" name="fecha"  min="1991-01-01" max="<?php echo $hoy;?>">
                                     
                                 </div>
                                 <div class="col-md-3">
@@ -75,15 +75,24 @@
 <br><br>
                     <div class=" col-12">
                         <table class="table table-sm table-bordered" id="incidentes">
-                        <thead class="text-center">
-                            <tr class="color-line line-objetos">
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Lugar</th>
-                                <th scope="col">Línea</th>
-                                <th scope="col">Evento</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
+                            <thead class="text-center">
+                                <tr class="color-line line-objetos">
+                                    <th scope="col" style="text-align: center">Fecha</th>
+                                    <th scope="col" style="text-align: center">Lugar</th>
+                                    <th scope="col" style="text-align: center">Línea</th>
+                                    <th scope="col" style="text-align: center">Evento</th>
+                                    <th scope="col" style="text-align: center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot class="text-center">
+                                <tr class="color-line line-objetos">
+                                    <th scope="col" >Fecha</th>
+                                    <th scope="col" >Lugar</th>
+                                    <th scope="col" >Línea</th>
+                                    <th scope="col" >Evento</th>
+                                    <th scope="col" >Acciones</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

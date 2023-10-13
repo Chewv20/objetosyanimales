@@ -91,6 +91,7 @@ function compruebaRep(){
             Swal.fire(
                 {icon: 'error',
                 title: 'Se intenta guardar un reporte existente',
+                time : 500,
                 text: data[0].id}
             )
         
@@ -167,7 +168,7 @@ function generaTabla(){
             url : "/objeto/get",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         },
-        "aLengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, 'Todos']],
+        "aLengthMenu": [[10,25,50, -1], [ 10, 25, 50, 'Todos']],
         columns: [
             { data: 'linea' },
             { data: 'fecha' },
@@ -189,6 +190,7 @@ function generaTabla(){
         dom: 'Bfrtilp',
         buttons: [
             [
+                
                 {
                     extend: 'copyHtml5',
                     text: '<i class="fa fa-copy"></i>',
@@ -235,11 +237,33 @@ function generaTabla(){
                     }
                 },
                 'colvis',
+
             ] 
             
-        ]   
-    });
+        ],
+        initComplete: function () {
+            this.api()
+                .columns()
+                .every(function () {
+                    let column = this;
+                    let title = column.footer().textContent;
+     
+                    // Create input element
+                    let input = document.createElement('input');
+                    input.placeholder = title;
+                    column.footer().replaceChildren(input);
+     
+                    // Event listener for user input
+                    input.addEventListener('keyup', () => {
+                        if (column.search() !== this.value) {
+                            column.search(input.value).draw();
+                        }
+                    });
+                });
+        }
 
+    });
+    
 }
 
 function actualizarTabla(){

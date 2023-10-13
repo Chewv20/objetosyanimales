@@ -96,7 +96,8 @@ function compruebaRep(){
             Swal.fire(
                 {icon: 'error',
                 title: 'Se intenta guardar un reporte existente',
-                text: data[0].id}
+                time : 500,
+                text: 'Id reporte'+data[0].id}
             )
         
         }else{
@@ -143,6 +144,7 @@ function guardar(){
             Swal.fire(
                 {icon: 'success',
                 title: 'Reporte guardado con éxito',
+                time : 500,
                 }
             )
             limpiar() 
@@ -181,7 +183,7 @@ function generaTabla(){
             url : "/accidentados/get",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         },
-        "aLengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, 'Todos']],
+        "aLengthMenu": [[10,25,50, -1], [ 10, 25, 50, 'Todos']],
         columns: [
             { data: 'fecha' },
             { data: 'linea' },

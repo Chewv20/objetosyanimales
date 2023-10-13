@@ -136,20 +136,34 @@
 <br><br>
                     <div class=" col-12">
                         <table class="table table-sm table-bordered" id="puertas">
-                        <thead class="text-center">
-                            <tr class="color-line line-objetos">
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Hora</th>
-                                <th scope="col">Linea</th>
-                                <th scope="col">Estacion / Terminal</th>
-                                <th scope="col">Vía</th>
-                                <th scope="col">Descripción</th>
-                                <th scope="col">Puerta Opuesta</th>
-                                <th scope="col">Desalojo</th>
-                                <th scope="col">Asistencia Policia</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
+                            <thead class="text-center">
+                                <tr class="color-line line-objetos">
+                                    <th scope="col" style="text-align: center">Fecha</th>
+                                    <th scope="col" style="text-align: center">Hora</th>
+                                    <th scope="col" style="text-align: center">Linea</th>
+                                    <th scope="col" style="text-align: center">Estacion / Terminal</th>
+                                    <th scope="col" style="text-align: center">Vía</th>
+                                    <th scope="col" style="text-align: center">Descripción</th>
+                                    <th scope="col" style="text-align: center">Puerta Opuesta</th>
+                                    <th scope="col" style="text-align: center">Desalojo</th>
+                                    <th scope="col" style="text-align: center">Asistencia Policia</th>
+                                    <th scope="col" style="text-align: center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot class="text-center">
+                                <tr class="color-line line-objetos">
+                                    <th scope="col" style="text-align: center">Fecha</th>
+                                    <th scope="col" style="text-align: center">Hora</th>
+                                    <th scope="col" style="text-align: center">Linea</th>
+                                    <th scope="col" style="text-align: center">Estacion / Terminal</th>
+                                    <th scope="col" style="text-align: center">Vía</th>
+                                    <th scope="col" style="text-align: center">Descripción</th>
+                                    <th scope="col" style="text-align: center">Puerta Opuesta</th>
+                                    <th scope="col" style="text-align: center">Desalojo</th>
+                                    <th scope="col" style="text-align: center">Asistencia Policia</th>
+                                    <th scope="col" style="text-align: center">Acciones</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

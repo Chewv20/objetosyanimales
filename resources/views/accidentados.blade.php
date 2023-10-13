@@ -129,20 +129,34 @@
 <br><br>
                     <div class=" col-12">
                         <table class="table table-sm table-bordered" id="accidentadosVias">
-                        <thead class="text-center">
-                            <tr class="color-line line-objetos">
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Linea</th>
-                                <th scope="col">Hora</th>
-                                <th scope="col">Ubicación</th>
-                                <th scope="col">Descripción</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Genero</th>
-                                <th scope="col">Edad</th>
-                                <th scope="col">Retardo</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
+                            <thead class="text-center">
+                                <tr class="color-line line-objetos">
+                                    <th scope="col" style="text-align: center">Fecha</th>
+                                    <th scope="col" style="text-align: center">Linea</th>
+                                    <th scope="col" style="text-align: center">Hora</th>
+                                    <th scope="col" style="text-align: center">Ubicación</th>
+                                    <th scope="col" style="text-align: center">Descripción</th>
+                                    <th scope="col" style="text-align: center">Status</th>
+                                    <th scope="col" style="text-align: center">Genero</th>
+                                    <th scope="col" style="text-align: center">Edad</th>
+                                    <th scope="col" style="text-align: center">Retardo</th>
+                                    <th scope="col" style="text-align: center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot class="text-center">
+                                <tr class="color-line line-objetos">
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Linea</th>
+                                    <th scope="col">Hora</th>
+                                    <th scope="col">Ubicación</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Genero</th>
+                                    <th scope="col">Edad</th>
+                                    <th scope="col">Retardo</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

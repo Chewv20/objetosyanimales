@@ -66,6 +66,7 @@ function compruebaRep(){
             Swal.fire(
                 {icon: 'error',
                 title: 'Se intenta guardar un reporte existente',
+                time : 500,
                 text: 'ID: '+data[0].id}
             )
         
@@ -105,6 +106,7 @@ function guardar(){
             Swal.fire(
                 {icon: 'success',
                 title: 'Reporte guardado con éxito',
+                time : 500,
                 }
             )
             limpiar() 
@@ -138,7 +140,7 @@ function generaTabla(){
             url : "/zapatas/get",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         },
-        "aLengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, 'Todos']],
+        "aLengthMenu": [[10,25,50, -1], [ 10, 25, 50, 'Todos']],
         columns: [
             { data: 'fecha' },
             { data: 'hora' },

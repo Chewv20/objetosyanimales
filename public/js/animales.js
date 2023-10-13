@@ -35,12 +35,14 @@ $(document).ready(function(){
             Swal.fire({
                 icon: 'error',
                 title: 'Revisa los campos',
-                text: 'Revisa que todos los campos sean correctos'
+                text: 'Revisa que todos los campos sean correctos',
+                time : 500,
             })
         }
     })
 
     generaTabla()
+
 })
 
 function validar(){
@@ -135,6 +137,7 @@ function guardar(){
             Swal.fire(
                 {icon: 'success',
                 title: 'Reporte guardado con éxito',
+                time : 500,
                 }
             )
             limpiar() 
@@ -171,7 +174,7 @@ function generaTabla(){
             url : "/animales/get",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         },
-        "aLengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, 'Todos']],
+        "aLengthMenu": [[10,25,50, -1], [ 10, 25, 50, 'Todos']],
         columns: [
             { data: 'fecha' },
             { data: 'linea' },
@@ -242,9 +245,29 @@ function generaTabla(){
                 'colvis',
             ] 
             
-        ]
+        ],
+        /*initComplete: function () {
+            this.api()
+                .columns()
+                .every(function () {
+                    let column = this;
+                    let title = column.footer().textContent;
+     
+                    // Create input element
+                    let input = document.createElement('input');
+                    input.placeholder = title;
+                    column.footer().replaceChildren(input);
+     
+                    // Event listener for user input
+                    input.addEventListener('keyup', () => {
+                        if (column.search() !== this.value) {
+                            column.search(input.value).draw();
+                        }
+                    });
+                });
+        }*/
     });
-
+    
 }
 
 function actualizarTabla(){
