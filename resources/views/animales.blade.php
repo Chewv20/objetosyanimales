@@ -102,9 +102,40 @@
                         </form>
                     </x-adminlte-modal>
                     <x-adminlte-button label="Registrar incidente" data-toggle="modal" theme="success" icon="fas fa-plus" data-target="#formRegistro"/>
-<br><br>
+
+                    <br><br>
+                    <div class="row">
+                        <div class="col-lg-12 d-lg-flex">
+                            <div style="width: 20%" class="form-floating mx-1">
+                                <input 
+                                    type="text" 
+                                    id="lineaFiltro"
+                                    class="form-control"
+                                    placeholder="Linea" 
+                                    data-index="1"
+                                    >
+                            </div>
+                            <div style="width: 20%" class="form-floating mx-1">
+                                <input 
+                                    type="date" 
+                                    id="fechaDesde"
+                                    class="form-control" 
+                                    max="{{ $hoy }}">
+                            </div>
+                            <div style="width: 20%" class="form-floating mx-1">
+                                <input 
+                                    type="date" 
+                                    id="fechaHasta"
+                                    class="form-control"
+                                    max="{{ $hoy }}">
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    <br><br>
                     <div class=" col-12">
-                        <table class="table table-sm table-bordered" id="animalesVias">
+                        <table class="table table-sm table-bordered" id="animalesVias" style="width:100%">
                             <thead class="text-center">
                                 <tr class="color-line line-objetos">
                                     <th scope="col" style="text-align: center">Fecha</th>
