@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Accidentados;
+use App\Models\Animales;
+use App\Models\Incidentesrelevantes;
 use App\Models\Objeto;
+use App\Models\Personasajenas;
+use App\Models\Puertas;
+use App\Models\Zapatas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -118,5 +124,30 @@ class EstadisticasController extends Controller
 
         return $cuentas;
 
+    }
+
+    public function getAll(){
+        $objetos = Objeto::all();
+        $animales = Animales::all();
+        $accidentados = Accidentados::all();
+        $personasajenas = Personasajenas::all();
+        $incidentesrelevantes = Incidentesrelevantes::all();
+        $puertas = Puertas::all();
+        $zapatas = Zapatas::all();
+
+        $numobjetos = count($objetos);
+        $numanimales = count($animales);
+        $numaccidentados = count($accidentados);
+        $numpersonasajenas = count($personasajenas);
+        $numincidentesrelevantes = count($incidentesrelevantes);
+        $numpuertas =count($puertas);
+        $numzapatas = count($zapatas);
+        $numtotal = $numobjetos+$numanimales+$numaccidentados+$numpersonasajenas+$numincidentesrelevantes+$numpuertas+$numzapatas;
+
+        $total = [];
+
+        array_push($total,$numobjetos,$numanimales,$numaccidentados,$numpersonasajenas,$numincidentesrelevantes,$numpuertas,$numzapatas,$numtotal);
+
+        return $total;
     }
 }

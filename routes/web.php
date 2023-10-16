@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/objeto/delete/{id}',[ObjetoController::class, 'delete']);
 
     Route::post('/animales/get/',[AnimalesController::class,'get']);
+    Route::post('/animales/getfiltro/',[AnimalesController::class,'getFiltro']);
     Route::post('/animales/getReporte/',[AnimalesController::class,'getReporte']);
     Route::get('/animales/delete/{id}',[AnimalesController::class, 'delete']);
     
@@ -80,6 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/zapatas/delete/{id}',[ZapatasController::class, 'delete']);
 
     Route::post('/estadisticas/getcuentas',[EstadisticasController::class, 'getCount']);
+    Route::post('/estadisticas/getall',[EstadisticasController::class,'getAll']);
 
 
 });

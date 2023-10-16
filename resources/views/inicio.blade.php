@@ -19,11 +19,11 @@
         <div class="row">
             <div class="col-2">
                 
-                <input id="fecha" type="date" class="form-control" value="<?php echo $hoy;?>" min="1992-03-18" max="<?php echo $hoy;?>">
+                <input id="fecha" type="date" class="form-control" min="1991-01-01" max="<?php echo $hoy;?>">
             </div>
             <div class="col-2">
                 
-                <input id="fecha2" type="date" class="form-control" value="<?php echo $hoy;?>" min="1992-03-18" max="<?php echo $hoy;?>">
+                <input id="fecha2" type="date" class="form-control" min="1991-01-01" max="<?php echo $hoy;?>">
             </div>
             <div class="col-2">
                 <button type="button" id="filtro" class="btn btn-outline-success" >Aplicar Filtro</button>
@@ -55,6 +55,7 @@
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numObjetos' ></p>
+                                    <a href="/objeto"><button type="button" class="btn btn-success">Registrar</button></a>
                                 </div>
                             </div>
                         </div>
@@ -65,6 +66,8 @@
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numAnimales' ></p>
+                                    <a href="/animales" style="color: white"><button type="button" class="btn btn-purple">Registrar</button></a>
+
                                 </div>
                             </div>
                         </div>
@@ -75,6 +78,7 @@
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numAccidentados' ></p>
+                                    <a href="/accidentados"><button type="button" class="btn btn-danger">Registrar</button></a>
                                 </div>
                             </div>
                         </div>
@@ -86,6 +90,8 @@
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numPersonasAjenas' ></p>
+                                    <a href="/personasajenas" ><button type="button" class="btn btn-info">Registrar</button></a>
+
                                 </div>
                             </div>
                         </div>
@@ -96,6 +102,8 @@
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numIncidentes' ></p>
+                                    <a href="/incidentesrelevantes"><button type="button" class="btn btn-warning">Registrar</button></a>
+
                                 </div>
                             </div>
                         </div>
@@ -107,16 +115,18 @@
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numPuertas' ></p>
+                                    <a href="/puertas"><button type="button" class="btn btn-orange">Registrar</button></a>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
-                            <div class="card bg-black"  style="text-align:center; width: 5cm;">
+                            <div class="card bg-dark"  style="text-align:center; width: 5cm;">
                                 <div class="card-header">
                                     <i class='fas fa-wind'>Zapatas</i>
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numZapatas' ></p>
+                                    <a href="/zapatas"><button type="button" class="btn btn-dark">Registrar</button></a>
                                 </div>
                             </div>
                         </div>

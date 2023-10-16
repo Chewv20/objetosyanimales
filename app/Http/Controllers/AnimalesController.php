@@ -135,4 +135,31 @@ class AnimalesController extends Controller
 
         return datatables($animales)->toJson();
     }
+
+    public function getFiltro(Request $request)
+    {
+        $animales = DB::table('animales')
+        ->whereDate('fecha','>=',$request->fecha1,'and')
+        ->whereDate('fecha','<=',$request->fecha2)
+        ->get();
+        $lineas = Lineas::all();
+        $estaciones = Estaciones::all();
+
+
+        foreach ($animales as $animal) {
+            foreach ($lineas as $linea) {
+                if ($animal->linea==$linea->id_linea) {
+                    $animal->linea=$linea->linea;
+                }
+            }
+
+            foreach ($estaciones as $estacion) {
+                if ($animal->estacion==$estacion->id_estacion) {
+                    $animal->estacion=$estacion->estacion;
+                }
+            }
+        }
+
+        return datatables($animales)->toJson();
+    }
 }
