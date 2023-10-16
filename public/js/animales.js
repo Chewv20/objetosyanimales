@@ -77,7 +77,7 @@ $(document).ready(function(){
         ],
         processing: true,
         serverSide: true,
-        dom: 'Bfrtilp',
+        dom: 'Brtilp',
         deferRender: true,
         buttons: [
             [
@@ -97,15 +97,6 @@ $(document).ready(function(){
                     className: 'btn btn-success',
                     exportOptions: {
                         columns: ':visible'
-                    }
-                },
-                {
-                    extend: 'csvHtml5',
-                    text: '<i class="fas fa-file-code"></i>',
-                    tittleAttr: 'Exportar a excel',
-                    className: 'btn btn-dark',
-                    exportOptions: {
-                        columns: [ ':visible' ]
                     }
                 },
                 {
@@ -319,7 +310,7 @@ function generaTablaF(Pfecha1,Pfecha2){
         ],
         processing: true,
         serverSide: true,
-        dom: 'Bfrtilp',
+        dom: 'Brtilp',
         buttons: [
             [
                 {
@@ -338,15 +329,6 @@ function generaTablaF(Pfecha1,Pfecha2){
                     className: 'btn btn-success',
                     exportOptions: {
                         columns: ':visible'
-                    }
-                },
-                {
-                    extend: 'csvHtml5',
-                    text: '<i class="fas fa-file-code"></i>',
-                    tittleAttr: 'Exportar a excel',
-                    className: 'btn btn-dark',
-                    exportOptions: {
-                        columns: [ ':visible' ]
                     }
                 },
                 {
@@ -411,7 +393,7 @@ function generaTabla(){
         ],
         processing: true,
         serverSide: true,
-        dom: 'Bfrtilp',
+        dom: 'Brtilp',
         buttons: [
             [
                 {
@@ -430,15 +412,6 @@ function generaTabla(){
                     className: 'btn btn-success',
                     exportOptions: {
                         columns: ':visible'
-                    }
-                },
-                {
-                    extend: 'csvHtml5',
-                    text: '<i class="fas fa-file-code"></i>',
-                    tittleAttr: 'Exportar a excel',
-                    className: 'btn btn-dark',
-                    exportOptions: {
-                        columns: [ ':visible' ]
                     }
                 },
                 {
