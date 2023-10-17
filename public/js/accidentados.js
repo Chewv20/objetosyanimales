@@ -64,7 +64,7 @@ $(document).ready(function(){
             { data: 'retardo','width': '1%' },
             {
                 "data": null,
-                'width': '12%',
+                'width': '8%',
                 "bSortable": false,
                 "mRender": function(data, type, value) {
                     return '<a href="/accidentados/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/accidentados/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
@@ -120,7 +120,7 @@ $(document).ready(function(){
         keys : true,
         'columnDefs': [
             {
-                "targets": [0,1,2,3,5,6,7,8], 
+                "targets": [0,1,2,3,5,6,7,8,9], 
                 "className": "text-center",
             },
             {
@@ -324,7 +324,7 @@ function generaTablaF(Pfecha1,Pfecha2){
             { data: 'retardo','width': '1%' },
             {
                 "data": null,
-                'width': '12%',
+                'width': '8%',
                 "bSortable": false,
                 "mRender": function(data, type, value) {
                     return '<a href="/accidentados/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/accidentados/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
@@ -380,7 +380,7 @@ function generaTablaF(Pfecha1,Pfecha2){
         keys : true,
         'columnDefs': [
             {
-                "targets": [0,1,2,3,5,6,7,8], 
+                "targets": [0,1,2,3,5,6,7,8,9], 
                 "className": "text-center",
             },
             {
@@ -419,7 +419,7 @@ function generaTabla(){
             { data: 'retardo','width': '1%' },
             {
                 "data": null,
-                'width': '12%',
+                'width': '8%',
                 "bSortable": false,
                 "mRender": function(data, type, value) {
                     return '<a href="/accidentados/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/accidentados/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
@@ -475,7 +475,7 @@ function generaTabla(){
         keys : true,
         'columnDefs': [
             {
-                "targets": [0,1,2,3,5,6,7,8], 
+                "targets": [0,1,2,3,5,6,7,8,9], 
                 "className": "text-center",
             },
             {

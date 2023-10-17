@@ -109,7 +109,9 @@ class IncidentesrelevantesController extends Controller
     {
         $incidentes = Incidentesrelevantes::all();
         $lineas = Lineas::all();
-        $estaciones = Estaciones2::all();
+        $estaciones = DB::table('estaciones2')
+        ->orderBy('id_estacion')
+        ->get();
 
 
         foreach ($incidentes as $incidente) {
@@ -136,7 +138,9 @@ class IncidentesrelevantesController extends Controller
         ->whereDate('fecha','<=',$request->fecha2)
         ->get();
         $lineas = Lineas::all();
-        $estaciones = Estaciones2::all();
+        $estaciones = DB::table('estaciones2')
+        ->orderBy('id_estacion')
+        ->get();
 
 
         foreach ($incidentes as $incidente) {
