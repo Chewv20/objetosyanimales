@@ -137,4 +137,31 @@ class PersonasajenasController extends Controller
 
         return datatables($personasajenas)->toJson();
     }
+
+    public function getFiltro(Request $request)
+    {
+        $personasajenas = DB::table('personasajenas')
+        ->whereDate('fecha','>=',$request->fecha1,'and')
+        ->whereDate('fecha','<=',$request->fecha2)
+        ->get();
+        $lineas = Lineas::all();
+        $estaciones = Estaciones::all();
+
+
+        foreach ($personasajenas as $personaajena) {
+            foreach ($lineas as $linea) {
+                if ($personaajena->linea==$linea->id_linea) {
+                    $personaajena->linea=$linea->linea;
+                }
+            }
+
+            foreach ($estaciones as $estacion) {
+                if ($personaajena->estacion==$estacion->id_estacion) {
+                    $personaajena->estacion=$estacion->estacion;
+                }
+            }
+        }
+
+        return datatables($personasajenas)->toJson();
+    }
 }

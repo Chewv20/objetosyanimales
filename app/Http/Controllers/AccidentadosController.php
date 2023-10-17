@@ -139,4 +139,31 @@ class AccidentadosController extends Controller
 
         return datatables($accidentados)->toJson();
     }
+
+    public function getFiltro(Request $request)
+    {
+        $accidentados = DB::table('accidentados')
+        ->whereDate('fecha','>=',$request->fecha1,'and')
+        ->whereDate('fecha','<=',$request->fecha2)
+        ->get();
+        $lineas = Lineas::all();
+        $estaciones = Estaciones::all();
+
+
+        foreach ($accidentados as $accidentado) {
+            foreach ($lineas as $linea) {
+                if ($accidentado->linea==$linea->id_linea) {
+                    $accidentado->linea=$linea->linea;
+                }
+            }
+
+            foreach ($estaciones as $estacion) {
+                if ($accidentado->estacion==$estacion->id_estacion) {
+                    $accidentado->estacion=$estacion->estacion;
+                }
+            }
+        }
+
+        return datatables($accidentados)->toJson();
+    }
 }

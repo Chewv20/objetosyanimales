@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Puertas;
-use App\Models\Estaciones;
+use App\Models\Estacionesvias;
 use App\Models\Lineas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -116,7 +116,34 @@ class PuertasController extends Controller
     {
         $puertas = Puertas::all();
         $lineas = Lineas::all();
-        $estaciones = Estaciones::all();
+        $estaciones = Estacionesvias::all();
+
+
+        foreach ($puertas as $puerta) {
+            foreach ($lineas as $linea) {
+                if ($puerta->linea==$linea->id_linea) {
+                    $puerta->linea=$linea->linea;
+                }
+            }
+
+            foreach ($estaciones as $estacion) {
+                if ($puerta->estacion==$estacion->id_estacion) {
+                    $puerta->estacion=$estacion->estacion;
+                }
+            }
+        }
+
+        return datatables($puertas)->toJson();
+    }
+
+    public function getFiltro(Request $request)
+    {
+        $puertas = DB::table('puertas')
+        ->whereDate('fecha','>=',$request->fecha1,'and')
+        ->whereDate('fecha','<=',$request->fecha2)
+        ->get();
+        $lineas = Lineas::all();
+        $estaciones = Estacionesvias::all();
 
 
         foreach ($puertas as $puerta) {

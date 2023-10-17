@@ -106,35 +106,45 @@
                     <br><br>
                     <div class="row">
                         <div class="col-lg-12 d-lg-flex">
-                            <div style="width: 40%" class="form-floating mx-1">
+                            <div style="width: 20%" class="form-floating mx-1">
                                 <input 
                                     type="text" 
                                     id="lineaFiltro"
                                     class="form-control"
-                                    placeholder="Linea" 
+                                    placeholder="Busqueda en la Línea" 
                                     data-index="1"
                                     >
+                            
                             </div>
-                            <div style="width: 15%" class="form-floating mx-1">
+                            <div style="width: 20%" class="form-floating mx-1">
+                                <input 
+                                    type="text" 
+                                    id="descripcionFiltro"
+                                    class="form-control"
+                                    placeholder="Busqueda en la Descripcion" 
+                                    data-index="4"
+                                    >
+                            </div>
+                            <div style="width: 20%" class="form-floating mx-1">
                                 <input 
                                     type="date" 
                                     id="fechaDesde"
                                     class="form-control" 
                                     max="{{ $hoy }}">
                             </div>
-                            <div style="width: 15%" class="form-floating mx-1">
+                            <div style="width: 20%" class="form-floating mx-1">
                                 <input 
                                     type="date" 
                                     id="fechaHasta"
                                     class="form-control"
                                     max="{{ $hoy }}">
                             </div>
-                            <div style="width: 15%" class="form-floating mx-1">
+                            <div style="width: 20%" class="form-floating mx-1">
                                 <button class="btn btn-outline-success" id="filtroFecha">
                                     Aplicar Filtro Fecha
                                 </button>
                             </div>
-                            <div style="width: 15%" class="form-floating mx-1">
+                            <div style="width: 20%" class="form-floating mx-1">
                                 <button class="btn btn-outline-danger" id="borrarFecha">
                                     Borrar Filtro Fecha
                                 </button>
@@ -148,26 +158,26 @@
                         <table class="table table-sm table-bordered" id="animalesVias" style="width:100%">
                             <thead class="text-center">
                                 <tr class="color-line line-objetos">
-                                    <th scope="col" style="text-align: center">Fecha</th>
-                                    <th scope="col" style="text-align: center">Linea</th>
-                                    <th scope="col" style="text-align: center">Hora</th>
-                                    <th scope="col" style="text-align: center">Ubicación</th>
-                                    <th scope="col" style="text-align: center">Descripción</th>
-                                    <th scope="col" style="text-align: center">Status</th>
-                                    <th scope="col" style="text-align: center">Retardo</th>
-                                    <th scope="col" style="text-align: center">Acciones</th>
+                                    <th style="text-align: center">Fecha</th>
+                                    <th style="text-align: center">Linea</th>
+                                    <th style="text-align: center">Hora</th>
+                                    <th style="text-align: center">Ubicación</th>
+                                    <th style="text-align: center">Descripción</th>
+                                    <th style="text-align: center">Status</th>
+                                    <th style="text-align: center">Retardo</th>
+                                    <th style="text-align: center">Acciones</th>
                                 </tr>
                             </thead>
                             <tfoot class="text-center">
                                 <tr class="color-line line-objetos">
-                                    <th>Fecha</th>
-                                    <th>Linea</th>
-                                    <th>Hora</th>
-                                    <th>Ubicación</th>
-                                    <th>Descripción</th>
-                                    <th>Status</th>
-                                    <th>Retardo</th>
-                                    <th>Acciones</th>
+                                    <th style="text-align: center">Fecha</th>
+                                    <th style="text-align: center">Linea</th>
+                                    <th style="text-align: center">Hora</th>
+                                    <th style="text-align: center">Ubicación</th>
+                                    <th style="text-align: center">Descripción</th>
+                                    <th style="text-align: center">Status</th>
+                                    <th style="text-align: center">Retardo</th>
+                                    <th style="text-align: center">Acciones</th>
                                 </tr>
                             </tfoot>
                         </table>

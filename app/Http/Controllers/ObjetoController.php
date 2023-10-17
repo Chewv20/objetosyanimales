@@ -131,4 +131,31 @@ class ObjetoController extends Controller
 
         return datatables($objetos)->toJson();
     }
+    
+    public function getFiltro(Request $request)
+    {
+        $objetos = DB::table('objetos')
+        ->whereDate('fecha','>=',$request->fecha1,'and')
+        ->whereDate('fecha','<=',$request->fecha2)
+        ->get();
+        $lineas = Lineas::all();
+        $estaciones = Estaciones::all();
+
+
+        foreach ($objetos as $objeto) {
+            foreach ($lineas as $linea) {
+                if ($objeto->linea==$linea->id_linea) {
+                    $objeto->linea=$linea->linea;
+                }
+            }
+
+            foreach ($estaciones as $estacion) {
+                if ($objeto->estacion==$estacion->id_estacion) {
+                    $objeto->estacion=$estacion->estacion;
+                }
+            }
+        }
+
+        return datatables($objetos)->toJson();
+    }
 }

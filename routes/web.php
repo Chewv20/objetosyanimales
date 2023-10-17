@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/objeto/get/',[ObjetoController::class,'get']);
     Route::post('/objeto/getReporte/',[ObjetoController::class,'getReporte']);
     Route::get('/objeto/delete/{id}',[ObjetoController::class, 'delete']);
+    Route::post('/objeto/getfiltro/',[ObjetoController::class,'getFiltro']);
 
     Route::post('/animales/get/',[AnimalesController::class,'get']);
     Route::post('/animales/getfiltro/',[AnimalesController::class,'getFiltro']);
@@ -62,22 +63,27 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/accidentados/get/',[AccidentadosController::class,'get']);
     Route::post('/accidentados/getReporte/',[AccidentadosController::class,'getReporte']);
+    Route::post('/accidentados/getfiltro/',[AccidentadosController::class,'getFiltro']);
     Route::get('/accidentados/delete/{id}',[AccidentadosController::class, 'delete']);
-
+    
     Route::post('/personasajenas/get/',[PersonasajenasController::class,'get']);
     Route::post('/personasajenas/getReporte/',[PersonasajenasController::class,'getReporte']);
+    Route::post('/personasajenas/getfiltro/',[PersonasajenasController::class,'getFiltro']);
     Route::get('/personasajenas/delete/{id}',[PersonasajenasController::class, 'delete']);
-
+    
     Route::post('/incidentesrelevantes/get/',[IncidentesrelevantesController::class,'get']);
     Route::post('/incidentesrelevantes/getReporte/',[IncidentesrelevantesController::class,'getReporte']);
+    Route::post('/incidentesrelevantes/getfiltro/',[IncidentesrelevantesController::class,'getFiltro']);
     Route::get('/incidentesrelevantes/delete/{id}',[IncidentesrelevantesController::class, 'delete']);
-
+    
     Route::post('/puertas/get/',[PuertasController::class,'get']);
     Route::post('/puertas/getReporte/',[PuertasController::class,'getReporte']);
+    Route::post('/puertas/getfiltro/',[PuertasController::class,'getFiltro']);
     Route::get('/puertas/delete/{id}',[PuertasController::class, 'delete']);
-
+    
     Route::post('/zapatas/get/',[ZapatasController::class,'get']);
     Route::post('/zapatas/getReporte/',[ZapatasController::class,'getReporte']);
+    Route::post('/zapatas/getfiltro/',[ZapatasController::class,'getFiltro']);
     Route::get('/zapatas/delete/{id}',[ZapatasController::class, 'delete']);
 
     Route::post('/estadisticas/getcuentas',[EstadisticasController::class, 'getCount']);

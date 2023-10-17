@@ -1,7 +1,7 @@
 const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
+var table
 
 $(document).ready(function(){
-    var table
     const minDate = document.querySelector('#fechaDesde')
     const maxDate = document.querySelector('#fechaHasta')
     
@@ -48,7 +48,6 @@ $(document).ready(function(){
     table = $('#animalesVias').DataTable({
         responsive: true,
         autoWidth: false,
-        scrollX: false,
         language: {
             url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json',
         },
@@ -59,15 +58,16 @@ $(document).ready(function(){
         },
         "aLengthMenu": [[10,25,50, -1], [ 10, 25, 50, 'Todos']],
         columns: [
-            { data: 'fecha' },
-            { data: 'linea'},
-            { data: 'hora' },
-            { data: 'estacion' },
-            { data: 'descripcion' },
-            { data: 'status'  },
-            { data: 'retardo'  },
+            { data: 'fecha', "width": "7%" },
+            { data: 'linea', "width": "5%" },
+            { data: 'hora', "width": "5%" },
+            { data: 'estacion', "width": "15%" },
+            { data: 'descripcion', "width": "45%" },
+            { data: 'status', "width": "5%" },
+            { data: 'retardo', "width": "8%" },
             {
                 "data": null,
+                "width": "10%",
                 "bSortable": false,
                 "mRender": function(data, type, value) {
                     return '<a href="/animales/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/animales/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
@@ -78,7 +78,6 @@ $(document).ready(function(){
         processing: true,
         serverSide: true,
         dom: 'Brtilp',
-        deferRender: true,
         buttons: [
             [
                 {
@@ -121,12 +120,14 @@ $(document).ready(function(){
             ] 
             
         ],
-        colReorder: true,
         keys : true,
     });
 
-    
     $("#lineaFiltro").keyup(function(){
+        table.column($(this).data('index')).search(this.value).draw()
+    })
+
+    $("#descripcionFiltro").keyup(function(){
         table.column($(this).data('index')).search(this.value).draw()
     })
 
@@ -141,6 +142,8 @@ $(document).ready(function(){
                 time : 500,
             })
         }else{
+            document.getElementById('lineaFiltro').value = ''
+            document.getElementById('descripcionFiltro').value = ''
             generaTablaF(fecha1,fecha2)
         }
     })
@@ -149,6 +152,8 @@ $(document).ready(function(){
         generaTabla()
         document.getElementById('fechaDesde').value = ''
         document.getElementById('fechaHasta').value = ''
+        document.getElementById('lineaFiltro').value = ''
+        document.getElementById('descripcionFiltro').value = ''
     })
 
     
@@ -274,7 +279,7 @@ function limpiar(){
 function generaTablaF(Pfecha1,Pfecha2){
     $('#animalesVias').DataTable().destroy();
     
-    new DataTable(animalesVias, {
+    table = $('#animalesVias').DataTable({
         responsive: true,
         autoWidth: false,
         language: {
@@ -292,15 +297,16 @@ function generaTablaF(Pfecha1,Pfecha2){
         },
         "aLengthMenu": [[10,25,50, -1], [ 10, 25, 50, 'Todos']],
         columns: [
-            { data: 'fecha' },
-            { data: 'linea' },
-            { data: 'hora' },
-            { data: 'estacion' },
-            { data: 'descripcion' },
-            { data: 'status' },
-            { data: 'retardo' },
+            { data: 'fecha', "width": "7%" },
+            { data: 'linea', "width": "5%" },
+            { data: 'hora', "width": "5%" },
+            { data: 'estacion', "width": "15%" },
+            { data: 'descripcion', "width": "45%" },
+            { data: 'status', "width": "5%" },
+            { data: 'retardo', "width": "8%" },
             {
                 "data": null,
+                "width": "10%",
                 "bSortable": false,
                 "mRender": function(data, type, value) {
                     return '<a href="/animales/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/animales/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
@@ -353,7 +359,6 @@ function generaTablaF(Pfecha1,Pfecha2){
             ] 
             
         ],
-        colReorder: true,
         keys : true,
     });
 
@@ -362,7 +367,7 @@ function generaTablaF(Pfecha1,Pfecha2){
 function generaTabla(){
     $('#animalesVias').DataTable().destroy();
     
-    new DataTable(animalesVias, {
+    table = $('#animalesVias').DataTable({
         responsive: true,
         autoWidth: false,
         language: {
@@ -375,15 +380,16 @@ function generaTabla(){
         },
         "aLengthMenu": [[10,25,50, -1], [ 10, 25, 50, 'Todos']],
         columns: [
-            { data: 'fecha' },
-            { data: 'linea' },
-            { data: 'hora' },
-            { data: 'estacion' },
-            { data: 'descripcion' },
-            { data: 'status' },
-            { data: 'retardo' },
+            { data: 'fecha', "width": "7%" },
+            { data: 'linea', "width": "5%" },
+            { data: 'hora', "width": "5%" },
+            { data: 'estacion', "width": "15%" },
+            { data: 'descripcion', "width": "45%" },
+            { data: 'status', "width": "5%" },
+            { data: 'retardo', "width": "8%" },
             {
                 "data": null,
+                "width": "10%",
                 "bSortable": false,
                 "mRender": function(data, type, value) {
                     return '<a href="/animales/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/animales/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
@@ -436,7 +442,6 @@ function generaTabla(){
             ] 
             
         ],
-        colReorder: true,
         keys : true,
     });
 

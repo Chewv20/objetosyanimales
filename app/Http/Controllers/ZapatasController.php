@@ -122,4 +122,24 @@ class ZapatasController extends Controller
 
         return datatables($zapatas)->toJson();
     }
+
+    public function getFiltro(Request $request)
+    {
+        $zapatas = DB::table('zapatas')
+        ->whereDate('fecha','>=',$request->fecha1,'and')
+        ->whereDate('fecha','<=',$request->fecha2)
+        ->get();
+        $lineas = Lineas::all();
+
+
+        foreach ($zapatas as $zapata) {
+            foreach ($lineas as $linea) {
+                if ($zapata->linea==$linea->id_linea) {
+                    $zapata->linea=$linea->linea;
+                }
+            }
+        }
+
+        return datatables($zapatas)->toJson();
+    }
 }
