@@ -31,7 +31,7 @@
         </div>
     </div>
 
-
+    
 
     <div class="row">
         <div class="col-12">
@@ -67,7 +67,7 @@
                                 <div class="card-body textCard" >
                                     <p id='numAnimales' ></p>
                                     <a href="/animales" style="color: white"><button type="button" class="btn btn-purple">Registrar</button></a>
-
+                                    
                                 </div>
                             </div>
                         </div>
@@ -132,15 +132,21 @@
                         </div>
                     </div>
 
+                    <div id="map">   
+                    </div>    
                     
-
                 </div>
             </div>
+            
         </div>
     </div>
+    
 @stop
 
 @section('js')
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+
+<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
 <script src="{{ URL::asset('js/estadisticas.js') }}"></script>
 
 @stop
