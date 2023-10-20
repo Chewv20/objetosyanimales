@@ -108,8 +108,9 @@ function creaMapa(){
     var linea1_18 =  L.marker([19.416422, -99.090581],{icon:icon1},{draggable: true})
     var linea1_19 =  L.marker([19.412260, -99.082598],{icon:icon1},{draggable: true})
     var linea1_20 =  L.marker([19.416337, -99.074342],{icon:icon1},{draggable: true})
-    
-    
+    let prueba = '<b>Observatorio</b><br>'
+    prueba += 'Zapatas: 10'
+    linea1_1.bindPopup(prueba)
     
     /* Línea 2 */
     var linea2_1  =  L.marker([19.460584, -99.215713],{icon:icon2},{draggable: true}).bindPopup('Cuatro caminos')
