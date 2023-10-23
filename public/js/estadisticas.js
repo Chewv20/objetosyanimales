@@ -1,4 +1,11 @@
 const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
+let cuentasObjetos = []
+let cuentasAnimales = []
+let cuentasAccidentados = []
+let cuentasPersonas = []
+let cuentasIncidentes = []
+let cuentasPuertas = []
+
     $(document).ready(function(){
         iniciaEstadisticas()
         document.getElementById('filtro').addEventListener('click',(e)=>{
@@ -6,12 +13,18 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
         })
        
         creaMapa()
-
+        /* obtieneObjetos()
+        obtieneAnimales()
+        obtieneAccidentados()
+        obtienePersonas()
+        obtieneIncidentes()
+        obtienePuertas() */
+        
 
     })
     
 function iniciaEstadisticas(){
-        fetch('/estadisticas/getall/',{
+    fetch('/estadisticas/getall/',{
         method : 'POST',
         body: JSON.stringify({   
         }),
@@ -22,16 +35,15 @@ function iniciaEstadisticas(){
     }).then(response=>{
         return response.json()
     }).then( data=>{      
-        document.getElementById('numObjetos').innerHTML= data[0]
+        /* document.getElementById('numObjetos').innerHTML= data[0]
         document.getElementById('numAnimales').innerHTML= data[1]
         document.getElementById('numAccidentados').innerHTML= data[2]
         document.getElementById('numPersonasAjenas').innerHTML= data[3]
         document.getElementById('numIncidentes').innerHTML= data[4]
         document.getElementById('numPuertas').innerHTML= data[5]
         document.getElementById('numZapatas').innerHTML= data[6]
-        document.getElementById('total').innerHTML= data[7]
-        
-
+        document.getElementById('total').innerHTML= data[7] */
+        console.log(data);
     }).catch(error => console.error(error));
 }
 
@@ -57,12 +69,141 @@ function actualizaEstadisticas(Pdata){
         document.getElementById('numPuertas').innerHTML= data[5]
         document.getElementById('numZapatas').innerHTML= data[6]
         document.getElementById('total').innerHTML= data[7]
-
-        
-
     }).catch(error => console.error(error));
     
     setTimeout(actualizaEstadisticas,5000)
+}
+
+function obtieneObjetos(){
+    let lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB']
+    lineas.forEach(element => {
+        fetch('/objeto/getlinea/',{
+            method : 'POST',
+            body: JSON.stringify({
+                linea : element
+            }),
+            headers:{
+                'Content-Type': 'application/json',
+                "X-CSRF-Token": csrfToken
+            }
+        }).then(response=>{
+            return response.json()
+        }).then( data=>{
+            cuentasObjetos[element]=data 
+        }).catch(error => console.error(error));
+    });
+
+    console.log(cuentasObjetos);
+}
+
+function obtieneAnimales(){
+    let lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB']
+    lineas.forEach(element => {
+        fetch('/animales/getlinea/',{
+            method : 'POST',
+            body: JSON.stringify({
+                linea : element
+            }),
+            headers:{
+                'Content-Type': 'application/json',
+                "X-CSRF-Token": csrfToken
+            }
+        }).then(response=>{
+            return response.json()
+        }).then( data=>{
+            cuentasAnimales[element]=data 
+        }).catch(error => console.error(error));
+    });
+
+    console.log(cuentasAnimales);
+}
+
+function obtieneAccidentados(){
+    let lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB']
+    lineas.forEach(element => {
+        fetch('/accidentados/getlinea/',{
+            method : 'POST',
+            body: JSON.stringify({
+                linea : element
+            }),
+            headers:{
+                'Content-Type': 'application/json',
+                "X-CSRF-Token": csrfToken
+            }
+        }).then(response=>{
+            return response.json()
+        }).then( data=>{
+            cuentasAccidentados[element]=data 
+        }).catch(error => console.error(error));
+    });
+
+    console.log(cuentasAccidentados);
+}
+
+function obtienePersonas(){
+    let lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB']
+    lineas.forEach(element => {
+        fetch('/personasajenas/getlinea/',{
+            method : 'POST',
+            body: JSON.stringify({
+                linea : element
+            }),
+            headers:{
+                'Content-Type': 'application/json',
+                "X-CSRF-Token": csrfToken
+            }
+        }).then(response=>{
+            return response.json()
+        }).then( data=>{
+            cuentasPersonas[element]=data 
+        }).catch(error => console.error(error));
+    });
+
+    console.log(cuentasPersonas);
+}
+
+function obtieneIncidentes(){
+    let lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB']
+    lineas.forEach(element => {
+        fetch('/incidentesrelevantes/getlinea/',{
+            method : 'POST',
+            body: JSON.stringify({
+                linea : element
+            }),
+            headers:{
+                'Content-Type': 'application/json',
+                "X-CSRF-Token": csrfToken
+            }
+        }).then(response=>{
+            return response.json()
+        }).then( data=>{
+            cuentasIncidentes[element]=data 
+        }).catch(error => console.error(error));
+    });
+
+    console.log(cuentasIncidentes);
+}
+
+function obtienePuertas(){
+    let lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB']
+    lineas.forEach(element => {
+        fetch('/puertas/getlinea/',{
+            method : 'POST',
+            body: JSON.stringify({
+                linea : element
+            }),
+            headers:{
+                'Content-Type': 'application/json',
+                "X-CSRF-Token": csrfToken
+            }
+        }).then(response=>{
+            return response.json()
+        }).then( data=>{
+            cuentasPersonas[element]=data 
+        }).catch(error => console.error(error));
+    });
+
+    console.log(cuentasPersonas);
 }
 
 function creaMapa(){
@@ -83,7 +224,7 @@ function creaMapa(){
     var icon7 = new LeafIcon({iconUrl: '../img/7_circle.png'})
     var icon8 = new LeafIcon({iconUrl: '../img/8_circle.png'})
     var icon9 = new LeafIcon({iconUrl: '../img/9_circle.png'})
-  var icon12 = new LeafIcon({iconUrl: '../img/12_circle.png'})
+    var icon12 = new LeafIcon({iconUrl: '../img/12_circle.png'})
     var icona = new LeafIcon({iconUrl: '../img/a_circle.png'})
     var iconb = new LeafIcon({iconUrl: '../img/b_circle.png'})
     
@@ -108,9 +249,6 @@ function creaMapa(){
     var linea1_18 =  L.marker([19.416422, -99.090581],{icon:icon1},{draggable: true})
     var linea1_19 =  L.marker([19.412260, -99.082598],{icon:icon1},{draggable: true})
     var linea1_20 =  L.marker([19.416337, -99.074342],{icon:icon1},{draggable: true})
-    let prueba = '<b>Observatorio</b><br>'
-    prueba += 'Zapatas: 10'
-    linea1_1.bindPopup(prueba)
     
     /* Línea 2 */
     var linea2_1  =  L.marker([19.460584, -99.215713],{icon:icon2},{draggable: true}).bindPopup('Cuatro caminos')

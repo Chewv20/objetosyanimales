@@ -15,6 +15,8 @@ return new class extends Migration
             $table->string('id_estacion');
             $table->string('linea');
             $table->string('estacion');
+            $table->float('longitud')->nullable();
+            $table->float('latitud')->nullable();
             $table->timestamps();
         });
     }

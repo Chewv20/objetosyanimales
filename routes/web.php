@@ -6,6 +6,7 @@ use App\Http\Controllers\Estaciones2Controller;
 use App\Http\Controllers\EstacionesviasController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\AccidentadosController;
+use App\Http\Controllers\EstacionessiController;
 use App\Http\Controllers\IncidentesrelevantesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ObjetoController;
@@ -50,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/estaciones/get/',[EstacionesController::class,'get']);
     Route::post('/estaciones2/get/',[Estaciones2Controller::class,'get']);
     Route::post('/estacionesvias/get/',[EstacionesviasController::class,'get']);
+    Route::post('/estacionessi/get/',[EstacionessiController::class,'get']);
 
     Route::post('/objeto/get/',[ObjetoController::class,'get']);
     Route::post('/objeto/getReporte/',[ObjetoController::class,'getReporte']);

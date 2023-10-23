@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Accidentados;
 use App\Models\Animales;
+use App\Models\Estaciones;
+use App\Models\Estacionessi;
+use App\Models\Estacionesvias;
 use App\Models\Incidentesrelevantes;
 use App\Models\Objeto;
 use App\Models\Personasajenas;
@@ -21,8 +24,8 @@ class EstadisticasController extends Controller
     public function index()
     {
         $objetos = Objeto::all();
-        $numObjetos = count($objetos);
-        return view('inicio',compact('numObjetos'));
+        $Objetos = count($objetos);
+        return view('inicio',compact('Objetos'));
     }
 
     /**
@@ -127,27 +130,50 @@ class EstadisticasController extends Controller
     }
 
     public function getAll(){
-        $objetos = Objeto::all();
-        $animales = Animales::all();
-        $accidentados = Accidentados::all();
-        $personasajenas = Personasajenas::all();
-        $incidentesrelevantes = Incidentesrelevantes::all();
-        $puertas = Puertas::all();
-        $zapatas = Zapatas::all();
+        $lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB'];
 
-        $numobjetos = count($objetos);
-        $numanimales = count($animales);
-        $numaccidentados = count($accidentados);
-        $numpersonasajenas = count($personasajenas);
-        $numincidentesrelevantes = count($incidentesrelevantes);
-        $numpuertas =count($puertas);
-        $numzapatas = count($zapatas);
-        $numtotal = $numobjetos+$numanimales+$numaccidentados+$numpersonasajenas+$numincidentesrelevantes+$numpuertas+$numzapatas;
+        $objetos = Objeto::all()->count();
+        $animales = Animales::all()->count();
+        $accidentados = Accidentados::all()->count();
+        $personasajenas = Personasajenas::all()->count();
+        $incidentesrelevantes = Incidentesrelevantes::all()->count();
+        $puertas = Puertas::all()->count();
+        $zapatas = Zapatas::all()->count();
+        $estaciones = Estacionessi::all();
+
+        $numObjetos = [];
+        $numAnimales = [];
+        $numAccidentes = [];
+        $numPersonas = [];
+        $numIncidentes = [];
+        $numPuertas = [];
+        
+        foreach ($estaciones as $estacion) {
+            $numObjetos[$estacion->id_estacion]=Objeto::where('estacion','=',$estacion->id_estacion)->count();
+            $numAnimales[$estacion->id_estacion]=Animales::where('estacion','=',$estacion->id_estacion)->count();
+            $numAccidentes[$estacion->id_estacion]=Accidentados::where('estacion','=',$estacion->id_estacion)->count();
+            $numPersonas[$estacion->id_estacion]=Personasajenas::where('estacion','=',$estacion->id_estacion)->count();
+            $numIncidentes[$estacion->id_estacion]=Incidentesrelevantes::where('lugar','=',$estacion->id_estacion)->count();
+            $numPuertas[$estacion->id_estacion]=Puertas::where('estacion','=',$estacion->id_estacion)->count();
+        }
+        $numtotal = $objetos+$animales+$accidentados+$personasajenas+$incidentesrelevantes+$puertas+$zapatas;
 
         $total = [];
 
-        array_push($total,$numobjetos,$numanimales,$numaccidentados,$numpersonasajenas,$numincidentesrelevantes,$numpuertas,$numzapatas,$numtotal);
+        array_push($total,$objetos,$animales,$accidentados,$personasajenas,$incidentesrelevantes,$puertas,$zapatas,$numtotal);
 
-        return $total;
+
+        $respuesta = [
+            'total' => $total,
+            'objetos' => $numObjetos,
+            'animales' => $numAnimales,
+            'accidentados' => $numAccidentes,
+            'personas' => $numPersonas,
+            'incidentes' => $numIncidentes,
+            'puertas' => $numPuertas,
+        ]; 
+
+        return response()->json($respuesta,200);
+        /* return $total; */
     }
 }
