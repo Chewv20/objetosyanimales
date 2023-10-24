@@ -63,12 +63,10 @@ class EstacionessiController extends Controller
         //
     }
 
-    public function get(Request $request)
+    public function get()
     {
-        $estaciones = Estacionessi::where('linea',$request->linea)
-                                ->orderBy('id_estacion')
-                                ->get();
+        $estaciones = Estacionessi::all();
         
-        return $estaciones;
+        return response()->json($estaciones,200);
     }
 }

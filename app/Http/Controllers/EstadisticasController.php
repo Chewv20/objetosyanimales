@@ -77,55 +77,72 @@ class EstadisticasController extends Controller
     }
 
     public function getCount(Request $request){
-        $objetos = DB::table('objetos')
-        ->whereDate('fecha','>=',$request->fecha,'and')
-        ->whereDate('fecha','<=',$request->fecha2)
-        ->get();
+        $objetos = Objeto::whereBetween('fecha',[$request->fecha,$request->fecha2])->count();
+        $animales = Animales::whereBetween('fecha',[$request->fecha,$request->fecha2])->count();
+        $accidentados = Accidentados::whereBetween('fecha',[$request->fecha,$request->fecha2])->count();
+        $personasajenas = Personasajenas::whereBetween('fecha',[$request->fecha,$request->fecha2])->count();
+        $incidentesrelevantes = Incidentesrelevantes::whereBetween('fecha',[$request->fecha,$request->fecha2])->count();
+        $puertas = Puertas::whereBetween('fecha',[$request->fecha,$request->fecha2])->count();
+        $zapatas = Zapatas::whereBetween('fecha',[$request->fecha,$request->fecha2])->count();
+        $estaciones = Estacionessi::all();
 
-        $animales = DB::table('animales')
-        ->whereDate('fecha','>=',$request->fecha,'and')
-        ->whereDate('fecha','<=',$request->fecha2)
-        ->get();
-
-        $accidentados = DB::table('accidentados')
-        ->whereDate('fecha','>=',$request->fecha,'and')
-        ->whereDate('fecha','<=',$request->fecha2)
-        ->get();
-
-        $personasajenas = DB::table('personasajenas')
-        ->whereDate('fecha','>=',$request->fecha,'and')
-        ->whereDate('fecha','<=',$request->fecha2)
-        ->get();
-
-        $incidentesrelevantes = DB::table('incidentesrelevantes')
-        ->whereDate('fecha','>=',$request->fecha,'and')
-        ->whereDate('fecha','<=',$request->fecha2)
-        ->get();
-
-        $puertas = DB::table('puertas')
-        ->whereDate('fecha','>=',$request->fecha,'and')
-        ->whereDate('fecha','<=',$request->fecha2)
-        ->get();
+        $numObjetos = [];
+        $numAnimales = [];
+        $numAccidentes = [];
+        $numPersonas = [];
+        $numIncidentes = [];
+        $numPuertas = [];
         
-        $zapatas = DB::table('zapatas')
-        ->whereDate('fecha','>=',$request->fecha,'and')
-        ->whereDate('fecha','<=',$request->fecha2)
-        ->get();
+        foreach ($estaciones as $estacion) {
+            $numObjetos[$estacion->id_estacion]=Objeto::where([
+                ['estacion','=',$estacion->id_estacion],
+                ['fecha', '>=', $request->fecha],
+                ['fecha', '<=', $request->fecha2],
+            ])->count();
+            $numAnimales[$estacion->id_estacion]=Animales::where([
+                ['estacion','=',$estacion->id_estacion],
+                ['fecha', '>=', $request->fecha],
+                ['fecha', '<=', $request->fecha2],
+            ])->count();
+            $numAccidentes[$estacion->id_estacion]=Accidentados::where([
+                ['estacion','=',$estacion->id_estacion],
+                ['fecha', '>=', $request->fecha],
+                ['fecha', '<=', $request->fecha2],
+            ])->count();
+            $numPersonas[$estacion->id_estacion]=Personasajenas::where([
+                ['estacion','=',$estacion->id_estacion],
+                ['fecha', '>=', $request->fecha],
+                ['fecha', '<=', $request->fecha2],
+            ])->count();
+            $numIncidentes[$estacion->id_estacion]=Incidentesrelevantes::where([
+                ['lugar','=',$estacion->id_estacion],
+                ['fecha', '>=', $request->fecha],
+                ['fecha', '<=', $request->fecha2],
+            ])->count();
+            $numPuertas[$estacion->id_estacion]=Puertas::where([
+                ['estacion','=',$estacion->id_estacion],
+                ['fecha', '>=', $request->fecha],
+                ['fecha', '<=', $request->fecha2],
+            ])->count();
+        }
 
-        $cuentas = [];
-
-        $cuentas[0] = count($objetos);
-        $cuentas[1] = count($animales);
-        $cuentas[2] = count($accidentados);
-        $cuentas[3] = count($personasajenas);
-        $cuentas[4] = count($incidentesrelevantes);
-        $cuentas[5] = count($puertas);
-        $cuentas[6] = count($zapatas);
-        $cuentas[7] = count($objetos)+count($animales)+count($accidentados)+count($personasajenas)+count($incidentesrelevantes)+count($puertas)+count($zapatas);
-
+        $numtotal = $objetos+$animales+$accidentados+$personasajenas+$incidentesrelevantes+$puertas+$zapatas;
+        $total = [];
+        array_push($total,$objetos,$animales,$accidentados,$personasajenas,$incidentesrelevantes,$puertas,$zapatas,$numtotal);
         
+        $respuesta = [
+            'total' => $total,
+            'objetos' => $numObjetos,
+            'animales' => $numAnimales,
+            'accidentados' => $numAccidentes,
+            'personas' => $numPersonas,
+            'incidentes' => $numIncidentes,
+            'puertas' => $numPuertas,
+        ]; 
 
-        return $cuentas;
+        return response()->json($respuesta,200);
+
+        /* return $total; */
 
     }
 
