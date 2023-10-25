@@ -139,7 +139,14 @@ function creaMapa(){
     var icon12 = new LeafIcon({iconUrl: '../img/12_circle.png'})
     var icona = new LeafIcon({iconUrl: '../img/a_circle.png'})
     var iconb = new LeafIcon({iconUrl: '../img/b_circle.png'})
-
+    
+    var iconObjetos = new LeafIcon({iconUrl: '../img/objetos.png'})
+    var iconAnimales = new LeafIcon({iconUrl: '../img/animales.png'})
+    var iconAccidentes = new LeafIcon({iconUrl: '../img/accidentados.png'})
+    var iconIncidentes = new LeafIcon({iconUrl: '../img/incidentes.png'})
+    var iconPersonas = new LeafIcon({iconUrl: '../img/personas.png'})
+    var iconPuertas = new LeafIcon({iconUrl: '../img/puertas.png'})
+    
     var icon1b = new LeafIcon({iconUrl: '../img/1_1_circle.png'})
     var icon2b = new LeafIcon({iconUrl: '../img/2_1_circle.png'})
     var icon3b = new LeafIcon({iconUrl: '../img/3_1_circle.png'})
@@ -213,12 +220,13 @@ function creaMapa(){
     var linea12 = L.layerGroup().addTo(map)
     var lineaA = L.layerGroup().addTo(map)
     var lineaB = L.layerGroup().addTo(map)
+
     
     estaciones.forEach(element => {
         if (element.linea=='01') {
             let descripcion = creaDescripcion(element.estacion,element.id_estacion)
             let total = obtieneTotal(element.id_estacion)
-            if(total>=3){
+            if(total){
                 marker = L.marker([element.longitud,element.latitud],{icon:iconsB.get('01')},{draggable: true}).bindPopup(descripcion)
                 linea1.addLayer(marker)
             }else{
@@ -228,7 +236,7 @@ function creaMapa(){
         }else if (element.linea=='02') {
             let descripcion = creaDescripcion(element.estacion,element.id_estacion)
             let total = obtieneTotal(element.id_estacion)
-            if(total>=3){
+            if(total){
                 marker = L.marker([element.longitud,element.latitud],{icon:iconsB.get('02')},{draggable: true}).bindPopup(descripcion)
                 linea2.addLayer(marker)
             }else{
@@ -238,7 +246,7 @@ function creaMapa(){
         }else if (element.linea=='03') {
             let descripcion = creaDescripcion(element.estacion,element.id_estacion)
             let total = obtieneTotal(element.id_estacion)
-            if(total>=3){
+            if(total){
                 marker = L.marker([element.longitud,element.latitud],{icon:iconsB.get('03')},{draggable: true}).bindPopup(descripcion)
                 linea3.addLayer(marker)
             }else{
@@ -248,7 +256,7 @@ function creaMapa(){
         }else if (element.linea=='04') {
             let descripcion = creaDescripcion(element.estacion,element.id_estacion)
             let total = obtieneTotal(element.id_estacion)
-            if(total>=3){
+            if(total){
                 marker = L.marker([element.longitud,element.latitud],{icon:iconsB.get('04')},{draggable: true}).bindPopup(descripcion)
                 linea4.addLayer(marker)
             }else{
@@ -258,7 +266,7 @@ function creaMapa(){
         }else if (element.linea=='05') {
             let descripcion = creaDescripcion(element.estacion,element.id_estacion)
             let total = obtieneTotal(element.id_estacion)
-            if(total>=3){
+            if(total){
                 marker = L.marker([element.longitud,element.latitud],{icon:iconsB.get('05')},{draggable: true}).bindPopup(descripcion)
                 linea5.addLayer(marker)
             }else{
@@ -268,7 +276,7 @@ function creaMapa(){
         }else if (element.linea=='06') {
             let descripcion = creaDescripcion(element.estacion,element.id_estacion)
             let total = obtieneTotal(element.id_estacion)
-            if(total>=3){
+            if(total){
                 marker = L.marker([element.longitud,element.latitud],{icon:iconsB.get('06')},{draggable: true}).bindPopup(descripcion)
                 linea6.addLayer(marker)
             }else{
@@ -278,7 +286,7 @@ function creaMapa(){
         }else if (element.linea=='07') {
             let descripcion = creaDescripcion(element.estacion,element.id_estacion)
             let total = obtieneTotal(element.id_estacion)
-            if(total>=3){
+            if(total){
                 marker = L.marker([element.longitud,element.latitud],{icon:iconsB.get('07')},{draggable: true}).bindPopup(descripcion)
                 linea7.addLayer(marker)
             }else{
@@ -288,7 +296,7 @@ function creaMapa(){
         }else if (element.linea=='08') {
             let descripcion = creaDescripcion(element.estacion,element.id_estacion)
             let total = obtieneTotal(element.id_estacion)
-            if(total>=3){
+            if(total){
                 marker = L.marker([element.longitud,element.latitud],{icon:iconsB.get('08')},{draggable: true}).bindPopup(descripcion)
                 linea8.addLayer(marker)
             }else{
@@ -298,7 +306,7 @@ function creaMapa(){
         }else if (element.linea=='09') {
             let descripcion = creaDescripcion(element.estacion,element.id_estacion)
             let total = obtieneTotal(element.id_estacion)
-            if(total>=3){
+            if(total){
                 marker = L.marker([element.longitud,element.latitud],{icon:iconsB.get('09')},{draggable: true}).bindPopup(descripcion)
                 linea9.addLayer(marker)
             }else{
@@ -308,7 +316,7 @@ function creaMapa(){
         }else if (element.linea=='12') {
             let descripcion = creaDescripcion(element.estacion,element.id_estacion)
             let total = obtieneTotal(element.id_estacion)
-            if(total>=3){
+            if(total){
                 marker = L.marker([element.longitud,element.latitud],{icon:iconsB.get('12')},{draggable: true}).bindPopup(descripcion)
                 linea12.addLayer(marker)
             }else{
@@ -318,7 +326,7 @@ function creaMapa(){
         }else if (element.linea=='LA') {
             let descripcion = creaDescripcion(element.estacion,element.id_estacion)
             let total = obtieneTotal(element.id_estacion)
-            if(total>=3){
+            if(total){
                 marker = L.marker([element.longitud,element.latitud],{icon:iconsB.get('LA')},{draggable: true}).bindPopup(descripcion)
                 lineaA.addLayer(marker)
             }else{
@@ -328,7 +336,7 @@ function creaMapa(){
         }else if (element.linea=='LB') {
             let descripcion = creaDescripcion(element.estacion,element.id_estacion)
             let total = obtieneTotal(element.id_estacion)
-            if(total>=3){
+            if(total){
                 marker = L.marker([element.longitud,element.latitud],{icon:iconsB.get('LB')},{draggable: true}).bindPopup(descripcion)
                 lineaB.addLayer(marker)
             }else{
@@ -338,6 +346,8 @@ function creaMapa(){
         }
         
     })
+
+
 
     var overlayMaps = {
         "Línea 1": linea1,
@@ -352,6 +362,7 @@ function creaMapa(){
         "Línea 12": linea12,
         "Línea A": lineaA,
         "Línea B": lineaB,
+
     };
     
     var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map)
@@ -366,6 +377,49 @@ function creaMapa(){
     });
     
     layerControl.addBaseLayer(openTopoMap, "OpenTopoMap");
+
+    var layerObjetos = L.layerGroup()
+    var layerAnimales = L.layerGroup()
+    var layerAccidentados = L.layerGroup()
+    var layerIncidentes = L.layerGroup()
+    var layerPersonas = L.layerGroup()
+    var layerPuertas = L.layerGroup()
+
+    estaciones.forEach(element => {
+        if(cuentasObjetos[element.id_estacion]>0){
+            descripcion = creaDescripcionEventos('Objetos', element.estacion,element.id_estacion)
+            marker = L.marker([element.longitud,element.latitud],{icon:iconObjetos},{draggable: true}).bindPopup(descripcion)
+            layerObjetos.addLayer(marker)
+        }else if(cuentasAnimales[element.id_estacion]>0){
+            descripcion = creaDescripcionEventos('Animales', element.estacion,element.id_estacion)
+            marker = L.marker([element.longitud,element.latitud],{icon:iconAnimales},{draggable: true}).bindPopup(descripcion)
+            layerAnimales.addLayer(marker)
+        }else if(cuentasAccidentados[element.id_estacion]>0){
+            descripcion = creaDescripcionEventos('Accidentados', element.estacion,element.id_estacion)
+            marker = L.marker([element.longitud,element.latitud],{icon:iconAccidentes},{draggable: true}).bindPopup(descripcion)
+            layerAccidentados.addLayer(marker)
+        }else if(cuentasPersonas[element.id_estacion]>0){
+            descripcion = creaDescripcionEventos('Personas', element.estacion,element.id_estacion)
+            marker = L.marker([element.longitud,element.latitud],{icon:iconPersonas},{draggable: true}).bindPopup(descripcion)
+            layerPersonas.addLayer(marker)
+        }else if(cuentasIncidentes[element.id_estacion]>0){
+            descripcion = creaDescripcionEventos('Incidentes Relevantes', element.estacion,element.id_estacion)
+            marker = L.marker([element.longitud,element.latitud],{icon:iconIncidentes},{draggable: true}).bindPopup(descripcion)
+            layerIncidentes.addLayer(marker)
+        }else if(cuentasPuertas[element.id_estacion]>0){
+            descripcion = creaDescripcionEventos('Cierre de Puertas', element.estacion,element.id_estacion)
+            marker = L.marker([element.longitud,element.latitud],{icon:iconPuertas},{draggable: true}).bindPopup(descripcion)
+            layerPuertas.addLayer(marker)
+        }
+        
+    })
+    
+    layerControl.addOverlay(layerObjetos, "Objetos");
+    layerControl.addOverlay(layerAnimales, "Animales");
+    layerControl.addOverlay(layerAccidentados, "Accidentados");
+    layerControl.addOverlay(layerIncidentes, "Incidentes");
+    layerControl.addOverlay(layerPersonas, "Personas");
+    layerControl.addOverlay(layerPuertas, "Puertas");
     
 }
 
@@ -381,6 +435,43 @@ function creaDescripcion(Pnombre,Pestacion){
 }
 
 function obtieneTotal(Pestacion){
-    let total = cuentasObjetos[Pestacion]+cuentasAnimales[Pestacion]+cuentasAccidentados[Pestacion]+cuentasPersonas[Pestacion]+cuentasIncidentes[Pestacion]+cuentasPuertas[Pestacion]
-    return total
+    if(cuentasObjetos[Pestacion]>=3){
+        return true
+    }else if(cuentasAnimales[Pestacion]>=3){
+        return true
+    }else if(cuentasAccidentados[Pestacion]>=3){
+        return true
+    }else if(cuentasPersonas[Pestacion]>=3){
+        return true
+    }else if(cuentasIncidentes[Pestacion]){
+
+    }else if(cuentasPuertas[Pestacion]>=3){
+        return true
+    }else{
+        return false
+    }
+}
+
+function creaDescripcionEventos(Pevento,Pnombre,Pestacion){
+    let descripcion = '<b>'+Pnombre+'</b><br>'
+    /* if (Pevento != 'Incidentes Relevantes' || Pevento != 'Cierre de puertas') {
+        descripcion+= Pevento+ ' en vías: '        +cuentasObjetos[Pestacion]     +'<br>'
+    }else{
+        descripcion+= Pevento+': '+cuentasObjetos[Pestacion]     +'<br>'
+    } */
+    if(Pevento == 'Objetos'){
+        descripcion+= Pevento+ ' en vías: '        +cuentasObjetos[Pestacion]     +'<br>'
+    }else if(Pevento == 'Animales'){
+        descripcion+= Pevento+ ' en vías: '        +cuentasAnimales[Pestacion]     +'<br>'
+    }else if(Pevento == 'Accidentados'){
+        descripcion+= Pevento+ ' en vías: '        +cuentasAccidentados[Pestacion]     +'<br>'
+    }else if(Pevento == 'Incidentes Relevantes'){
+        descripcion+= Pevento+ ' : '        +cuentasIncidentes[Pestacion]     +'<br>'
+    }else if(Pevento == 'Personas'){
+        descripcion+= Pevento+ ' Ajenas en vías: '        +cuentasPersonas[Pestacion]     +'<br>'
+    }else if(Pevento == 'Cierre de Puertas'){
+        descripcion+= Pevento+ ' : '        +cuentasPuertas[Pestacion]     +'<br>'
+    }
+    
+    return descripcion
 }

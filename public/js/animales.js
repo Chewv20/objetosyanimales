@@ -121,6 +121,16 @@ $(document).ready(function(){
             
         ],
         keys : true,
+        'columnDefs': [
+            {
+                "targets": [0,1,2,3,5,6,7], 
+                "className": "text-center",
+            },
+            {
+                "targets": [4], 
+                "className": "text-justify",
+            },
+        ],
     });
 
     $("#lineaFiltro").keyup(function(){
@@ -362,6 +372,16 @@ function generaTablaF(Pfecha1,Pfecha2){
             
         ],
         keys : true,
+        'columnDefs': [
+            {
+                "targets": [0,1,2,3,5,6,7], 
+                "className": "text-center",
+            },
+            {
+                "targets": [4], 
+                "className": "text-justify",
+            },
+        ],
     });
 
 }
@@ -445,6 +465,16 @@ function generaTabla(){
             
         ],
         keys : true,
+        'columnDefs': [
+            {
+                "targets": [0,1,2,3,5,6,7], 
+                "className": "text-center",
+            },
+            {
+                "targets": [4], 
+                "className": "text-justify",
+            },
+        ],
     });
 
 }

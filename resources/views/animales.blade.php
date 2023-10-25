@@ -68,19 +68,9 @@
                                         </x-slot>
                                     </x-adminlte-textarea>
                                 </div>
-                            </div>    
-                            
+                            </div>
+
                             <div class="row">
-                                <div class="col-3">
-                                    <x-adminlte-input name="retardo" id="retardo" label="Retardo" placeholder="Ingresa el retardo" type="number" min=0 required>
-                                        <x-slot name="prependSlot">
-                                            <div class="input-group-text">
-                                                <i class="fas fa-clock"></i>
-                                            </div>
-                                        </x-slot>
-                                    </x-adminlte-input>
-                                </div>
-                                
                                 <div class="col">
                                     <x-adminlte-select name='status' id="status" label='Status' >
                                         <x-slot name="prependSlot">
@@ -92,6 +82,18 @@
                                         <option value="Vivo" selected>Vivo</option>
                                     </x-adminlte-select>
                                 </div>
+
+                                <div class="col">
+                                    <x-adminlte-input name="retardo" id="retardo" label="Retardo" placeholder="Ingresa el retardo" type="number" min=0 required>
+                                        <x-slot name="prependSlot">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-clock"></i>
+                                            </div>
+                                        </x-slot>
+                                    </x-adminlte-input>
+                                </div>
+                                
+                                
                             </div>
                             <input type="text" id='usuario' value="{{ auth()->user()->username }}" hidden>
                             
