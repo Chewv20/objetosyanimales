@@ -35,6 +35,7 @@ $(document).ready(function(){
             Swal.fire({
                 icon: 'error',
                 title: 'Revisa los campos',
+                timer: 500,
                 text: 'Revisa que todos los campos sean correctos'
             })
         }
@@ -145,7 +146,7 @@ $(document).ready(function(){
                 icon: 'error',
                 title: 'Fecha no válida',
                 text: 'Revisa que las dos fechas sean correctas',
-                time : 500,
+                timer : 500,
             })
         }else{
             document.getElementById('lineaFiltro').value = ''
@@ -214,7 +215,7 @@ function compruebaRep(){
             Swal.fire(
                 {icon: 'error',
                 title: 'Se intenta guardar un reporte existente',
-                time : 500,
+                timer : 500,
                 text: data[0].id}
             )
         
@@ -260,7 +261,7 @@ function guardar(){
             Swal.fire(
                 {icon: 'success',
                 title: 'Reporte guardado con éxito',
-                time : 500,
+                timer : 500,
                 }
             )
             limpiar() 

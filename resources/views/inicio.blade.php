@@ -28,6 +28,12 @@
             <div class="col-2">
                 <button type="button" id="filtro" class="btn btn-outline-success" >Aplicar Filtro</button>
             </div>
+            <div class="col-2">
+                <button class="btn btn-outline-danger" id="borrarFecha">
+                    Borrar Filtro
+                </button>
+            </div>
+
         </div>
     </div>
 
@@ -144,6 +150,9 @@
 @stop
 
 @section('js')
+<link href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
 
 <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
