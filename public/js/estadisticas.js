@@ -5,6 +5,7 @@ let cuentasAccidentados = []
 let cuentasPersonas = []
 let cuentasIncidentes = []
 let cuentasPuertas = []
+let cuentasCables = []
 let estaciones = []
 let lineas = ['01','02','03','04','05','06','07','08','09','12','LA','LB'];
 var map
@@ -56,12 +57,14 @@ function iniciaEstadisticas(){
         document.getElementById('numPuertas').innerHTML= data.total[5]
         document.getElementById('numZapatas').innerHTML= data.total[6]
         document.getElementById('total').innerHTML= data.total[7]
+        document.getElementById('numCables').innerHTML= data.total[8]
         cuentasObjetos = data.objetos
         cuentasAnimales = data.animales
         cuentasAccidentados = data.accidentados
         cuentasPersonas = data.personas
         cuentasIncidentes = data.incidentes
         cuentasPuertas = data.puertas
+        cuentasCables = data.cables
         obtieneEstaciones()
     }).catch(error => console.error(error));
     
@@ -90,12 +93,14 @@ function actualizaEstadisticas(Pdata){
         document.getElementById('numPuertas').innerHTML= data.total[5]
         document.getElementById('numZapatas').innerHTML= data.total[6]
         document.getElementById('total').innerHTML= data.total[7]
+        document.getElementById('numCables').innerHTML= data.total[8]
         cuentasObjetos = data.objetos
         cuentasAnimales = data.animales
         cuentasAccidentados = data.accidentados
         cuentasPersonas = data.personas
         cuentasIncidentes = data.incidentes
         cuentasPuertas = data.puertas
+        cuentasCables = data.cables
         obtieneEstaciones()
     }).catch(error => console.error(error));
     
@@ -146,6 +151,7 @@ function creaMapa(){
     var iconIncidentes = new LeafIcon({iconUrl: '../img/incidentes.png'})
     var iconPersonas = new LeafIcon({iconUrl: '../img/personas.png'})
     var iconPuertas = new LeafIcon({iconUrl: '../img/puertas.png'})
+    var iconCables = new LeafIcon({iconUrl: '../img/cables.png'})
     
     var icon1b = new LeafIcon({iconUrl: '../img/1_1_circle.png'})
     var icon2b = new LeafIcon({iconUrl: '../img/2_1_circle.png'})
@@ -347,8 +353,6 @@ function creaMapa(){
         
     })
 
-
-
     var overlayMaps = {
         "Línea 1": linea1,
         "Línea 2": linea2,
@@ -384,32 +388,37 @@ function creaMapa(){
     var layerIncidentes = L.layerGroup()
     var layerPersonas = L.layerGroup()
     var layerPuertas = L.layerGroup()
+    var layerCables = L.layerGroup()
 
     estaciones.forEach(element => {
         if(cuentasObjetos[element.id_estacion]>0){
             descripcion = creaDescripcionEventos('Objetos', element.estacion,element.id_estacion)
             marker = L.marker([element.longitud,element.latitud],{icon:iconObjetos},{draggable: true}).bindPopup(descripcion)
             layerObjetos.addLayer(marker)
-        }else if(cuentasAnimales[element.id_estacion]>0){
+        } if(cuentasAnimales[element.id_estacion]>0){
             descripcion = creaDescripcionEventos('Animales', element.estacion,element.id_estacion)
             marker = L.marker([element.longitud,element.latitud],{icon:iconAnimales},{draggable: true}).bindPopup(descripcion)
             layerAnimales.addLayer(marker)
-        }else if(cuentasAccidentados[element.id_estacion]>0){
+        } if(cuentasAccidentados[element.id_estacion]>0){
             descripcion = creaDescripcionEventos('Accidentados', element.estacion,element.id_estacion)
             marker = L.marker([element.longitud,element.latitud],{icon:iconAccidentes},{draggable: true}).bindPopup(descripcion)
             layerAccidentados.addLayer(marker)
-        }else if(cuentasPersonas[element.id_estacion]>0){
+        } if(cuentasPersonas[element.id_estacion]>0){
             descripcion = creaDescripcionEventos('Personas', element.estacion,element.id_estacion)
             marker = L.marker([element.longitud,element.latitud],{icon:iconPersonas},{draggable: true}).bindPopup(descripcion)
             layerPersonas.addLayer(marker)
-        }else if(cuentasIncidentes[element.id_estacion]>0){
+        } if(cuentasIncidentes[element.id_estacion]>0){
             descripcion = creaDescripcionEventos('Incidentes Relevantes', element.estacion,element.id_estacion)
             marker = L.marker([element.longitud,element.latitud],{icon:iconIncidentes},{draggable: true}).bindPopup(descripcion)
             layerIncidentes.addLayer(marker)
-        }else if(cuentasPuertas[element.id_estacion]>0){
+        } if(cuentasPuertas[element.id_estacion]>0){
             descripcion = creaDescripcionEventos('Cierre de Puertas', element.estacion,element.id_estacion)
             marker = L.marker([element.longitud,element.latitud],{icon:iconPuertas},{draggable: true}).bindPopup(descripcion)
             layerPuertas.addLayer(marker)
+        } if(cuentasCables[element.id_estacion]>0){
+            descripcion = creaDescripcionEventos('Cables Robados', element.estacion,element.id_estacion)
+            marker = L.marker([element.longitud,element.latitud],{icon:iconCables},{draggable: true}).bindPopup(descripcion)
+            layerCables.addLayer(marker)
         }
         
     })
@@ -420,6 +429,7 @@ function creaMapa(){
     layerControl.addOverlay(layerIncidentes, "Incidentes");
     layerControl.addOverlay(layerPersonas, "Personas");
     layerControl.addOverlay(layerPuertas, "Puertas");
+    layerControl.addOverlay(layerCables, "Cables");
     
 }
 
@@ -431,6 +441,7 @@ function creaDescripcion(Pnombre,Pestacion){
     descripcion+= 'Personas ajenas en vías: '+cuentasPersonas[Pestacion]    +'<br>'
     descripcion+= 'Incidentes Relevantes: '  +cuentasIncidentes[Pestacion]  +'<br>'
     descripcion+= 'Cierre de Puertas: '      +cuentasPuertas[Pestacion]     +'<br>'
+    descripcion+= 'Cables Robados: '      +cuentasCables[Pestacion]     +'<br>'
     return descripcion
 }
 
@@ -446,6 +457,8 @@ function obtieneTotal(Pestacion){
     }else if(cuentasIncidentes[Pestacion]){
 
     }else if(cuentasPuertas[Pestacion]>=3){
+        return true
+    }else if(cuentasCables[Pestacion]>=3){
         return true
     }else{
         return false
@@ -471,6 +484,8 @@ function creaDescripcionEventos(Pevento,Pnombre,Pestacion){
         descripcion+= Pevento+ ' Ajenas en vías: '        +cuentasPersonas[Pestacion]     +'<br>'
     }else if(Pevento == 'Cierre de Puertas'){
         descripcion+= Pevento+ ' : '        +cuentasPuertas[Pestacion]     +'<br>'
+    }else if(Pevento == 'Cables Robados'){
+        descripcion+= Pevento+ ' : '        +cuentasCables[Pestacion]     +'<br>'
     }
     
     return descripcion

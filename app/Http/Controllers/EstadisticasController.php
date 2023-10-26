@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Accidentados;
 use App\Models\Animales;
+use App\Models\Cables;
 use App\Models\Estaciones;
 use App\Models\Estacionessi;
 use App\Models\Estacionesvias;
@@ -23,9 +24,8 @@ class EstadisticasController extends Controller
      */
     public function index()
     {
-        $objetos = Objeto::all();
-        $Objetos = count($objetos);
-        return view('inicio',compact('Objetos'));
+        
+        return view('inicio');
     }
 
     /**
@@ -84,6 +84,7 @@ class EstadisticasController extends Controller
         $incidentesrelevantes = Incidentesrelevantes::whereBetween('fecha',[$request->fecha,$request->fecha2])->count();
         $puertas = Puertas::whereBetween('fecha',[$request->fecha,$request->fecha2])->count();
         $zapatas = Zapatas::whereBetween('fecha',[$request->fecha,$request->fecha2])->count();
+        $cables = Cables::whereBetween('fecha',[$request->fecha,$request->fecha2])->count();
         $estaciones = Estacionessi::all();
 
         $numObjetos = [];
@@ -92,6 +93,7 @@ class EstadisticasController extends Controller
         $numPersonas = [];
         $numIncidentes = [];
         $numPuertas = [];
+        $numCables = [];
         
         foreach ($estaciones as $estacion) {
             $numObjetos[$estacion->id_estacion]=Objeto::where([
@@ -124,11 +126,16 @@ class EstadisticasController extends Controller
                 ['fecha', '>=', $request->fecha],
                 ['fecha', '<=', $request->fecha2],
             ])->count();
+            $numCables[$estacion->id_estacion]=Cables::where([
+                ['estacion','=',$estacion->id_estacion],
+                ['fecha', '>=', $request->fecha],
+                ['fecha', '<=', $request->fecha2],
+            ])->count();
         }
 
-        $numtotal = $objetos+$animales+$accidentados+$personasajenas+$incidentesrelevantes+$puertas+$zapatas;
+        $numtotal = $objetos+$animales+$accidentados+$personasajenas+$incidentesrelevantes+$puertas+$zapatas+$cables;
         $total = [];
-        array_push($total,$objetos,$animales,$accidentados,$personasajenas,$incidentesrelevantes,$puertas,$zapatas,$numtotal);
+        array_push($total,$objetos,$animales,$accidentados,$personasajenas,$incidentesrelevantes,$puertas,$zapatas,$numtotal,$cables);
         
         $respuesta = [
             'total' => $total,
@@ -138,6 +145,7 @@ class EstadisticasController extends Controller
             'personas' => $numPersonas,
             'incidentes' => $numIncidentes,
             'puertas' => $numPuertas,
+            'cables' => $numCables,
         ]; 
 
         return response()->json($respuesta,200);
@@ -156,6 +164,7 @@ class EstadisticasController extends Controller
         $incidentesrelevantes = Incidentesrelevantes::all()->count();
         $puertas = Puertas::all()->count();
         $zapatas = Zapatas::all()->count();
+        $cables = Cables::all()->count();
         $estaciones = Estacionessi::all();
 
         $numObjetos = [];
@@ -164,6 +173,7 @@ class EstadisticasController extends Controller
         $numPersonas = [];
         $numIncidentes = [];
         $numPuertas = [];
+        $numCables = [];
         
         foreach ($estaciones as $estacion) {
             $numObjetos[$estacion->id_estacion]=Objeto::where('estacion','=',$estacion->id_estacion)->count();
@@ -172,12 +182,13 @@ class EstadisticasController extends Controller
             $numPersonas[$estacion->id_estacion]=Personasajenas::where('estacion','=',$estacion->id_estacion)->count();
             $numIncidentes[$estacion->id_estacion]=Incidentesrelevantes::where('lugar','=',$estacion->id_estacion)->count();
             $numPuertas[$estacion->id_estacion]=Puertas::where('estacion','=',$estacion->id_estacion)->count();
+            $numCables[$estacion->id_estacion]=Cables::where('estacion','=',$estacion->id_estacion)->count();
         }
-        $numtotal = $objetos+$animales+$accidentados+$personasajenas+$incidentesrelevantes+$puertas+$zapatas;
+        $numtotal = $objetos+$animales+$accidentados+$personasajenas+$incidentesrelevantes+$puertas+$zapatas+$cables;
 
         $total = [];
 
-        array_push($total,$objetos,$animales,$accidentados,$personasajenas,$incidentesrelevantes,$puertas,$zapatas,$numtotal);
+        array_push($total,$objetos,$animales,$accidentados,$personasajenas,$incidentesrelevantes,$puertas,$zapatas,$numtotal,$cables);
 
 
         $respuesta = [
@@ -188,6 +199,7 @@ class EstadisticasController extends Controller
             'personas' => $numPersonas,
             'incidentes' => $numIncidentes,
             'puertas' => $numPuertas,
+            'cables' => $numCables,
         ]; 
 
         return response()->json($respuesta,200);

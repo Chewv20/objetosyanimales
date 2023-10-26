@@ -5,8 +5,8 @@
 
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Personas Ajenas en Vías</aside></h1>
-    <link rel="stylesheet" href="{{ URL::asset('css/personasajenas.css') }}" />
+    <h1 class="m-0 text-dark">Cables Robados</h1>
+    <link rel="stylesheet" href="{{ URL::asset('css/cables.css') }}" />
 
 @stop
 
@@ -21,13 +21,17 @@
                 <div class="card-body">
                     <x-adminlte-modal id="formRegistro" title="Registrar incidente" size="xl" theme="success"
                         icon="fas fa-edit" v-centered scrollable>
-                        <form action="/personasajenas/" id='form-personasajenas' method="POST">
+                        <form action="/cables/" id='form-cables' method="POST">
                             @csrf
                             <div class="row">
                                 <div>
                                     <label for="fecha">Fecha</label>
                                     <input type="date" id="fecha" class="form-control" name="fecha"  min="1992-03-18" max="<?php echo $hoy;?>">
                                     
+                                </div>
+                                <div class="col">
+                                    <label for="hora">Hora</label>
+                                    <input type="time" name="hora" class="form-control" id="hora" required>
                                 </div>
                                 <div class="col-md-3">
                                     <x-adminlte-select name='linea' id='selLinea' label='Línea' required>
@@ -52,11 +56,29 @@
                                         <option value='0'>-- Seleccione una estación --</option>
                                     </x-adminlte-select>
                                 </div>
-                                <div class="col">
-                                    <label for="hora">Hora</label>
-                                    <input type="time" name="hora" class="form-control" id="hora" required>
-                                </div>
                                 
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <x-adminlte-input name='ubicacion' id="ubicacion" label='Ubicación' placeholder='Ingresa la ubicación' type='text' required>
+                                        <x-slot name="prependSlot">
+                                            <div class="input-group-text ">
+                                                <i class="fas fa-map-pin"></i>
+                                            </div>
+                                        </x-slot>
+                                    </x-adminlte-input>
+                                </div>
+
+                                <div class="col">
+                                    <x-adminlte-input name="metrosrobados" id="metrosrobados" label="Metros Robados" placeholder="Ingresa los metros Robados" type="number" min=0 required>
+                                        <x-slot name="prependSlot">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-plug"></i>
+                                            </div>
+                                        </x-slot>
+                                    </x-adminlte-input>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col">
@@ -68,44 +90,8 @@
                                         </x-slot>
                                     </x-adminlte-textarea>
                                 </div>
-                            </div>    
-                            
-                            <div class="row">
-                                <div class="col-3">
-                                    <x-adminlte-input name="retardo" id="retardo" label="Retardo" placeholder="Ingresa el retardo" type="number" min=0 required>
-                                        <x-slot name="prependSlot">
-                                            <div class="input-group-text">
-                                                <i class="fas fa-clock"></i>
-                                            </div>
-                                        </x-slot>
-                                    </x-adminlte-input>
-                                </div>
-
-                                <div class="col">
-                                    <x-adminlte-select name='genero' id="genero" label='Genero' >
-                                        <x-slot name="prependSlot">
-                                            <div class="input-group-text ">
-                                                <i class="fa fa-male"></i>
-                                            </div>
-                                        </x-slot>
-                                        <option value="" selected>-- Seleccione un genero --</option>
-                                        <option value="Sin Especificar">Sin especificar</option>
-                                        <option value="Masculino">Masculino</option>
-                                        <option value="Femenino">Femenino</option>
-                                    </x-adminlte-select>
-                                </div>
-
-                                <div class="col-3">
-                                    <x-adminlte-input name="edad" id="edad" label="Edad" placeholder="Ingresa la edad" type="number" min=0>
-                                        <x-slot name="prependSlot">
-                                            <div class="input-group-text">
-                                                <i class="fas fa-clock"></i>
-                                            </div>
-                                        </x-slot>
-                                    </x-adminlte-input>
-                                </div>
                             </div>
-                            <input type="text" id='usuario' value="{{ auth()->user()->username }}" hidden>
+                            <input type="text" id='usuario' value="{{ auth()->user()->username }}" disabled hidden>
                             
                             
                             <div class="center">
@@ -124,7 +110,7 @@
                                     id="lineaFiltro"
                                     class="form-control"
                                     placeholder="Busqueda en la Línea" 
-                                    data-index="1"
+                                    data-index="2"
                                     >
                             
                             </div>
@@ -134,7 +120,7 @@
                                     id="descripcionFiltro"
                                     class="form-control"
                                     placeholder="Busqueda en la Descripcion" 
-                                    data-index="4"
+                                    data-index="6"
                                     >
                             </div>
                             <div style="width: 20%" class="form-floating mx-1">
@@ -165,20 +151,18 @@
                         </div>
                         
                     </div>
-
                     <br><br>
                     <div class=" col-12">
-                        <table class="table table-sm table-bordered" id="personasAjenasVias">
+                        <table class="table table-sm table-bordered" id="cables" style="width:100%">
                             <thead class="text-center">
                                 <tr class="color-line line-objetos">
                                     <th style="text-align: center">Fecha</th>
                                     <th style="text-align: center">Linea</th>
                                     <th style="text-align: center">Hora</th>
+                                    <th style="text-align: center">Estación</th>
                                     <th style="text-align: center">Ubicación</th>
+                                    <th style="text-align: center">Metros Robados</th>
                                     <th style="text-align: center">Descripción</th>
-                                    <th style="text-align: center">Genero</th>
-                                    <th style="text-align: center">Edad</th>
-                                    <th style="text-align: center">Retardo</th>
                                     <th style="text-align: center">Acciones</th>
                                 </tr>
                             </thead>
@@ -187,14 +171,13 @@
                                     <th style="text-align: center">Fecha</th>
                                     <th style="text-align: center">Linea</th>
                                     <th style="text-align: center">Hora</th>
+                                    <th style="text-align: center">Estación</th>
                                     <th style="text-align: center">Ubicación</th>
+                                    <th style="text-align: center">Metros Robados</th>
                                     <th style="text-align: center">Descripción</th>
-                                    <th style="text-align: center">Genero</th>
-                                    <th style="text-align: center">Edad</th>
-                                    <th style="text-align: center">Retardo</th>
                                     <th style="text-align: center">Acciones</th>
                                 </tr>
-                            </tfoot>                            
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -236,6 +219,6 @@
 <script src="https://cdn.datatables.net/searchbuilder/1.6.0/js/dataTables.searchBuilder.js"></script>
 <script src="https://cdn.datatables.net/searchbuilder/1.6.0/js/searchBuilder.bootstrap5.js"></script>
 <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.js"></script>
-<script src="{{ URL::asset('js/personasajenas.js') }}"></script>
+<script src="{{ URL::asset('js/cables.js') }}"></script>
 
 @stop

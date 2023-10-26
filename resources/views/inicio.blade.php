@@ -136,6 +136,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col">
+                            <div class="card bg-primary"  style="text-align:center; width: 5cm;">
+                                <div class="card-header">
+                                    <i class='fas fa-plug'>Cables Robados</i>
+                                </div>
+                                <div class="card-body textCard" >
+                                    <p id='numCables' ></p>
+                                    <a href="/cables"><button type="button" class="btn btn-primary">Registrar</button></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div id="map">   

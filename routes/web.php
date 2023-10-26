@@ -6,6 +6,7 @@ use App\Http\Controllers\Estaciones2Controller;
 use App\Http\Controllers\EstacionesviasController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\AccidentadosController;
+use App\Http\Controllers\CablesController;
 use App\Http\Controllers\EstacionessiController;
 use App\Http\Controllers\IncidentesrelevantesController;
 use App\Http\Controllers\ProfileController;
@@ -47,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('incidentesrelevantes',IncidentesrelevantesController::class);
     Route::resource('puertas',PuertasController::class);
     Route::resource('zapatas',ZapatasController::class);
+    Route::resource('cables',CablesController::class);
 
     Route::post('/estaciones/get/',[EstacionesController::class,'get']);
     Route::post('/estaciones2/get/',[Estaciones2Controller::class,'get']);
@@ -87,6 +89,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/zapatas/getReporte/',[ZapatasController::class,'getReporte']);
     Route::post('/zapatas/getfiltro/',[ZapatasController::class,'getFiltro']);
     Route::get('/zapatas/delete/{id}',[ZapatasController::class, 'delete']);
+
+    Route::post('/cables/get/',[CablesController::class,'get']);
+    Route::post('/cables/getReporte/',[CablesController::class,'getReporte']);
+    Route::post('/cables/getfiltro/',[CablesController::class,'getFiltro']);
+    Route::get('/cables/delete/{id}',[CablesController::class, 'delete']);
 
     Route::post('/estadisticas/getcuentas',[EstadisticasController::class, 'getCount']);
     Route::post('/estadisticas/getall',[EstadisticasController::class,'getAll']);

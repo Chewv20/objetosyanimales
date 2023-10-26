@@ -339,6 +339,11 @@ return [
                     'url'         => '/zapatas',
                     'icon'        => 'fa fa-cloud',
                 ],
+                [
+                    'text'        => 'Cables',
+                    'url'         => '/cables',
+                    'icon'        => 'fas fa-plug',
+                ],
             ]
         ],
     ],
