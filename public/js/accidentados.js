@@ -220,7 +220,7 @@ function compruebaRep(){
                 {icon: 'error',
                 title: 'Se intenta guardar un reporte existente',
                 timer : 500,
-                text: 'Id reporte'+data[0].id}
+                text: 'Id reporte: '+data[0].id}
             )
         
         }else{

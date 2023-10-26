@@ -87,7 +87,7 @@ class IncidentesrelevantesController extends Controller
     public function delete(string $id)
     {
         DB::table('incidentesrelevantes')->where('id', $id)->delete();
-        return redirect('incidentes');
+        return redirect('incidentesrelevantes');
     }
 
     public function getReporte(Request $request)

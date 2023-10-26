@@ -86,7 +86,7 @@
                             
                             <div class="row">
                                 <div class="col-3">
-                                    <x-adminlte-select name='puerta_opuesta' id="puerta_opuesta" label='Puerta Opuesta' >
+                                    <x-adminlte-select name='puerta_opuesta' id="puerta_opuesta" label='Puerta Opuesta' required>
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text ">
                                                 <i class="fa fa-wrench"></i>
@@ -99,7 +99,7 @@
                                 </div>
                                 
                                 <div class="col-3">
-                                    <x-adminlte-select name='desalojado' id="desalojado" label='Desalojado' >
+                                    <x-adminlte-select name='desalojado' id="desalojado" label='Desalojado' required>
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text ">
                                                 <i class="fa fa-asterisk"></i>
@@ -112,7 +112,7 @@
                                 </div>
 
                                 <div class="col-3">
-                                    <x-adminlte-select name='asistencia_policia' id="asistencia_policia" label='Asistencia Policia' >
+                                    <x-adminlte-select name='asistencia_policia' id="asistencia_policia" label='Asistencia Policia' required >
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text ">
                                                 <i class="fa fa-asterisk"></i>

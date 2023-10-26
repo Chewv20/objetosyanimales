@@ -101,6 +101,7 @@ class PuertasController extends Controller
             ['hora',$request->hora],
             ['linea',$request->linea],
             ['estacion',$request->estacion],
+            ['via',$request->via],
             ['descripcion',$request->descripcion],
             ['puerta_opuesta',$request->status],
             ['desalojo',$request->genero],

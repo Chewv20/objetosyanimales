@@ -183,6 +183,8 @@ function validar(){
 }
 
 function compruebaRep(){
+
+    console.log('entra');
     Pfecha = document.getElementById('fecha').value
     Plinea = document.getElementById('selLinea').value
     Phora = document.getElementById('hora').value
@@ -213,6 +215,8 @@ function compruebaRep(){
     }).then(response=>{
         return response.json()
     }).then( data=>{      
+        
+        console.log(data);
         if(data[0]){            
             Swal.fire(
                 {icon: 'error',
