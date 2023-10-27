@@ -103,9 +103,9 @@ class PuertasController extends Controller
             ['estacion',$request->estacion],
             ['via',$request->via],
             ['descripcion',$request->descripcion],
-            ['puerta_opuesta',$request->status],
-            ['desalojo',$request->genero],
-            ['asistencia_policia',$request->edad],
+            ['puerta_opuesta',$request->puerta_opuesta],
+            ['desalojo',$request->desalojo],
+            ['asistencia_policia',$request->asistencia_policia],
         ])
         ->orderBy('id')
         ->get();

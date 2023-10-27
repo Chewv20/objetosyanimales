@@ -181,7 +181,7 @@ function compruebaRep(){
         method : 'POST',
         body: JSON.stringify({
             linea :  Plinea,
-            estacion :  Pestacion,     
+            evento :  Pevento,     
             lugar :  Pestacion,     
             fecha :  Pfecha,         
 

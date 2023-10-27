@@ -94,11 +94,11 @@ class ZapatasController extends Controller
     {
         $zapatas = DB::table('zapatas')
         ->where([
+            ['fecha',$request->fecha],
             ['linea',$request->linea],
             ['hora',$request->hora],
-            ['descripcion',$request->descripcion],
-            ['fecha',$request->fecha],
             ['humo',$request->humo],
+            ['descripcion',$request->descripcion],
         ])
         ->orderBy('id')
         ->get();
