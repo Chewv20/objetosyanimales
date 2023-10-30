@@ -51,8 +51,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('cables',CablesController::class);
 
     Route::post('/estaciones/get/',[EstacionesController::class,'get']);
-    Route::post('/estaciones2/get/',[Estaciones2Controller::class,'get']);
-    Route::post('/estacionesvias/get/',[EstacionesviasController::class,'get']);
     Route::post('/estacionessi/get/',[EstacionessiController::class,'get']);
 
     Route::post('/objeto/get/',[ObjetoController::class,'get']);

@@ -3,7 +3,7 @@ const csrfToken = document.head.querySelector("[name~=csrf-token][content]").con
 $(document).ready(function(){
     document.getElementById('selLinea').addEventListener('change',(e)=>{
         
-        fetch('/estaciones2/get/',{
+        fetch('/estaciones/get/',{
             method : 'POST',
             body: JSON.stringify({
                 linea :  e.target.value,     
@@ -30,7 +30,7 @@ $(document).ready(function(){
 })
 
 function obtieneEstaciones(Plinea,Pestacion){
-    fetch('/estaciones2/get/',{
+    fetch('/estaciones/get/',{
         method : 'POST',
         body: JSON.stringify({
             linea :  Plinea,     

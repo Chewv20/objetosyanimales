@@ -3,7 +3,7 @@ var table
 $(document).ready(function(){
     document.getElementById('selLinea').addEventListener('change',(e)=>{
         
-        fetch('/estaciones2/get/',{
+        fetch('/estaciones/get/',{
             method : 'POST',
             body: JSON.stringify({
                 linea :  e.target.value,     

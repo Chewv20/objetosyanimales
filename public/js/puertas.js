@@ -4,7 +4,7 @@ var table
 $(document).ready(function(){
     document.getElementById('selLinea').addEventListener('change',(e)=>{
         console.log(e.target.value);
-        fetch('/estacionesvias/get/',{
+        fetch('/estaciones/get/',{
             method : 'POST',
             body: JSON.stringify({
                 linea :  e.target.value,     
