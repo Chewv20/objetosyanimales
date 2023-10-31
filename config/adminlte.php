@@ -315,7 +315,12 @@ return [
                     'icon'        => 'fa fa-paw',
                 ],
                 [
-                    'text'        => 'Arrollados y Accidentados',
+                    'text'        => 'Arrollados',
+                    'url'         => '/arrollados',
+                    'icon'        => 'fa fa-male',
+                ],
+                [
+                    'text'        => 'Accidentados',
                     'url'         => '/accidentados',
                     'icon'        => 'fa fa-male',
                 ],

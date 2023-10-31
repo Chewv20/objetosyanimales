@@ -6,6 +6,7 @@ use App\Http\Controllers\Estaciones2Controller;
 use App\Http\Controllers\EstacionesviasController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\AccidentadosController;
+use App\Http\Controllers\ArrolladosController;
 use App\Http\Controllers\CablesController;
 use App\Http\Controllers\EstacionessiController;
 use App\Http\Controllers\IncidentesrelevantesController;
@@ -43,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('estadisticas',EstadisticasController::class);
     Route::resource('objeto',ObjetoController::class);
     Route::resource('animales',AnimalesController::class);
+    Route::resource('arrollados',ArrolladosController::class);
     Route::resource('accidentados',AccidentadosController::class);
     Route::resource('personasajenas',PersonasajenasController::class);
     Route::resource('incidentesrelevantes',IncidentesrelevantesController::class);
@@ -51,8 +53,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('cables',CablesController::class);
 
     Route::post('/estaciones/get/',[EstacionesController::class,'get']);
-    Route::post('/estaciones2/get/',[Estaciones2Controller::class,'get']);
-    Route::post('/estacionesvias/get/',[EstacionesviasController::class,'get']);
     Route::post('/estacionessi/get/',[EstacionessiController::class,'get']);
 
     Route::post('/objeto/get/',[ObjetoController::class,'get']);
@@ -69,6 +69,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/accidentados/getReporte/',[AccidentadosController::class,'getReporte']);
     Route::post('/accidentados/getfiltro/',[AccidentadosController::class,'getFiltro']);
     Route::get('/accidentados/delete/{id}',[AccidentadosController::class, 'delete']);
+
+        
+    Route::post('/arrollados/get/',[ArrolladosController::class,'get']);
+    Route::post('/arrollados/getReporte/',[ArrolladosController::class,'getReporte']);
+    Route::post('/arrollados/getfiltro/',[ArrolladosController::class,'getFiltro']);
+    Route::get('/arrollados/delete/{id}',[ArrolladosController::class, 'delete']);
     
     Route::post('/personasajenas/get/',[PersonasajenasController::class,'get']);
     Route::post('/personasajenas/getReporte/',[PersonasajenasController::class,'getReporte']);

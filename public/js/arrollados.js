@@ -1,9 +1,8 @@
 const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
 var table
-
 $(document).ready(function(){
     document.getElementById('selLinea').addEventListener('change',(e)=>{
-        console.log(e.target.value);
+        
         fetch('/estaciones/get/',{
             method : 'POST',
             body: JSON.stringify({
@@ -16,7 +15,7 @@ $(document).ready(function(){
         }).then(response=>{
             return response.json()
         }).then( data=>{      
-            var opciones="<option value='' selected>-- Seleccione una estación --</option>"
+            var opciones="<option value='0' selected>-- Seleccione una estación --</option>"
             for(let i in data){
                 opciones+= '<option value="'+data[i].id_estacion+'">'+data[i].estacion+'</option>';
             }
@@ -37,12 +36,12 @@ $(document).ready(function(){
                 icon: 'error',
                 title: 'Revisa los campos',
                 text: 'Revisa que todos los campos sean correctos',
-                timer: 500
+                timer : 500,
             })
         }
     })
 
-    table = $('#puertas').DataTable({
+    table = $('#arrolladosVias').DataTable({
         responsive: true,
         autoWidth: false,
         language: {
@@ -50,32 +49,33 @@ $(document).ready(function(){
         },
         ajax : {
             method : "POST",
-            url : "/puertas/get",
+            url : "/arrollados/get",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         },
         "aLengthMenu": [[10,25,50, -1], [ 10, 25, 50, 'Todos']],
         columns: [
-            { data: 'fecha', "width": "7%" },
-            { data: 'linea' },
-            { data: 'hora' },
-            { data: 'estacion', "width": "8%" },
-            { data: 'via' },
+            { data: 'fecha','width': '7%' },
+            { data: 'linea','width': '4%' },
+            { data: 'hora','width': '4%' },
+            { data: 'estacion','width': '10%' },
             { data: 'descripcion' },
-            { data: 'puerta_opuesta' },
-            { data: 'desalojo' },
-            { data: 'asistencia_policia' },
+            { data: 'status' },
+            { data: 'genero' },
+            { data: 'edad','width': '1%' },
+            { data: 'retardo','width': '1%' },
             {
                 "data": null,
+                'width': '8%',
                 "bSortable": false,
                 "mRender": function(data, type, value) {
-                    return '<a href="/puertas/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/puertas/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
+                    return '<a href="/arrollados/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/arrollados/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
                     
                 }
             },
         ],
         processing: true,
         serverSide: true,
-        dom: 'Brtilp',
+        dom: 'Bfrtilp',
         buttons: [
             [
                 {
@@ -121,14 +121,14 @@ $(document).ready(function(){
         keys : true,
         'columnDefs': [
             {
-                "targets": [0,1,2,3,4,6,7,8,9], 
+                "targets": [0,1,2,3,5,6,7,8,9], 
                 "className": "text-center",
             },
             {
-                "targets": [5], 
+                "targets": [4], 
                 "className": "text-justify",
             },
-        ]   
+        ]
     })
 
     $("#lineaFiltro").keyup(function(){
@@ -163,12 +163,13 @@ $(document).ready(function(){
         document.getElementById('lineaFiltro').value = ''
         document.getElementById('descripcionFiltro').value = ''
     })
+    
 })
 
 function validar(){
     let error = false;
 
-        let inputsrequeridos = document.querySelectorAll('#form-puertas [required]')  
+        let inputsrequeridos = document.querySelectorAll('#form-arrollados [required]')  
         for(let i=0;i<inputsrequeridos.length;i++){
             if(inputsrequeridos[i].value =='' ){
                 inputsrequeridos[i].style.borderColor = '#FF0400'
@@ -183,30 +184,29 @@ function validar(){
 }
 
 function compruebaRep(){
-
-    console.log('entra');
     Pfecha = document.getElementById('fecha').value
     Plinea = document.getElementById('selLinea').value
     Phora = document.getElementById('hora').value
     Pestacion = document.getElementById('selEstacion').value
-    Pvia = document.getElementById('via').value
     Pdescripcion = document.getElementById('descripcion').value
-    Ppuerta_opuesta = document.getElementById('puerta_opuesta').value
-    Pdesalojo = document.getElementById('desalojado').value
-    Pasistencia_policia = document.getElementById('asistencia_policia').value
+    Pstatus = document.getElementById('status').value
+    Pgenero = document.getElementById('genero').value
+    Pedad = document.getElementById('edad').value
+    Pretardo = document.getElementById('retardo').value
 
-    fetch('/puertas/getReporte/',{
+
+    fetch('/arrollados/getReporte/',{
         method : 'POST',
         body: JSON.stringify({
             fecha :  Pfecha,     
             linea :  Plinea,
             hora : Phora,
-            estacion :  Pestacion,
-            via : Pvia,  
+            estacion :  Pestacion,     
             descripcion : Pdescripcion,
-            puerta_opuesta : Ppuerta_opuesta,
-            desalojo : Pdesalojo,
-            asistencia_policia : Pasistencia_policia,    
+            status : Pstatus,
+            genero : Pgenero,
+            edad : Pedad,
+            retardo :  Pretardo,     
         }),
         headers:{
             'Content-Type': 'application/json',
@@ -215,14 +215,12 @@ function compruebaRep(){
     }).then(response=>{
         return response.json()
     }).then( data=>{      
-        
-        console.log(data);
         if(data[0]){            
             Swal.fire(
                 {icon: 'error',
                 title: 'Se intenta guardar un reporte existente',
-                timer: 500,
-                text: data[0].id}
+                timer : 500,
+                text: 'Id reporte: '+data[0].id}
             )
         
         }else{
@@ -236,27 +234,27 @@ function guardar(){
     Plinea = document.getElementById('selLinea').value
     Phora = document.getElementById('hora').value
     Pestacion = document.getElementById('selEstacion').value
-    Pvia = document.getElementById('via').value
     Pdescripcion = document.getElementById('descripcion').value
-    Ppuerta_opuesta = document.getElementById('puerta_opuesta').value
-    Pdesalojo = document.getElementById('desalojado').value
-    Pasistencia_policia = document.getElementById('asistencia_policia').value
+    Pstatus = document.getElementById('status').value
+    Pgenero = document.getElementById('genero').value
+    Pedad = document.getElementById('edad').value
+    Pretardo = document.getElementById('retardo').value
     Pusuario = document.getElementById('usuario').value
 
     
-    fetch('/puertas/',{
+    fetch('/arrollados/',{
         method : 'POST',
         body: JSON.stringify({
             fecha :  Pfecha,     
             linea :  Plinea,
             hora : Phora,
-            estacion :  Pestacion,
-            via : Pvia,  
+            estacion :  Pestacion,     
             descripcion : Pdescripcion,
-            puerta_opuesta : Ppuerta_opuesta,
-            desalojo : Pdesalojo,
-            asistencia_policia : Pasistencia_policia,
-            usuario : Pusuario, 
+            status : Pstatus,
+            genero : Pgenero,
+            edad : Pedad,
+            retardo :  Pretardo,
+            usuario : Pusuario,
         }),
         headers:{
             'Content-Type': 'application/json',
@@ -269,7 +267,7 @@ function guardar(){
             Swal.fire(
                 {icon: 'success',
                 title: 'Reporte guardado con éxito',
-                timer: 500,
+                timer : 500,
                 }
             )
             limpiar() 
@@ -285,19 +283,21 @@ function limpiar(){
     document.getElementById('fecha').value = ""
     document.getElementById('selLinea').value = '0'
     document.getElementById('hora').value = ""
-    document.getElementById('selEstacion').value = ''
-    document.getElementById('via').value=''
+    document.getElementById('selEstacion').value = '0'
     document.getElementById('descripcion').value = ''
-    document.getElementById('puerta_opuesta').value = ""
-    document.getElementById('desalojado').value = ""
-    document.getElementById('asistencia_policia').value = ''
+    document.getElementById('status').value = ""
+    document.getElementById('retardo').value = ""
+    document.getElementById('genero').value = ''
+    document.getElementById('edad').value = ''
+
 
     actualizarTabla()
 }
 
-function generaTabla(){
-    $('#puertas').DataTable().destroy()
-    table = $('#puertas').DataTable({
+function generaTablaF(Pfecha1,Pfecha2){
+    $('#arrolladosVias').DataTable().destroy();
+
+    table = $('#arrolladosVias').DataTable({
         responsive: true,
         autoWidth: false,
         language: {
@@ -305,32 +305,37 @@ function generaTabla(){
         },
         ajax : {
             method : "POST",
-            url : "/puertas/get",
+            url : "/arrollados/getfiltro",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: {
+                fecha1 : Pfecha1,
+                fecha2 : Pfecha2,
+            }
         },
         "aLengthMenu": [[10,25,50, -1], [ 10, 25, 50, 'Todos']],
         columns: [
-            { data: 'fecha', "width": "7%" },
-            { data: 'linea' },
-            { data: 'hora' },
-            { data: 'estacion', "width": "8%" },
-            { data: 'via' },
+            { data: 'fecha','width': '7%' },
+            { data: 'linea','width': '4%' },
+            { data: 'hora','width': '4%' },
+            { data: 'estacion','width': '10%' },
             { data: 'descripcion' },
-            { data: 'puerta_opuesta' },
-            { data: 'desalojo' },
-            { data: 'asistencia_policia' },
+            { data: 'status' },
+            { data: 'genero' },
+            { data: 'edad','width': '1%' },
+            { data: 'retardo','width': '1%' },
             {
                 "data": null,
+                'width': '8%',
                 "bSortable": false,
                 "mRender": function(data, type, value) {
-                    return '<a href="/puertas/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/puertas/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
+                    return '<a href="/arrollados/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/arrollados/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
                     
                 }
             },
         ],
         processing: true,
         serverSide: true,
-        dom: 'Brtilp',
+        dom: 'Bfrtilp',
         buttons: [
             [
                 {
@@ -376,22 +381,22 @@ function generaTabla(){
         keys : true,
         'columnDefs': [
             {
-                "targets": [0,1,2,3,4,6,7,8,9], 
+                "targets": [0,1,2,3,5,6,7,8,9], 
                 "className": "text-center",
             },
             {
-                "targets": [5], 
+                "targets": [4], 
                 "className": "text-justify",
             },
-        ]   
+        ]  
     });
 
 }
 
-function generaTablaF(Pfecha1,Pfecha2){
-    $('#puertas').DataTable().destroy()
+function generaTabla(){
+    $('#arrolladosVias').DataTable().destroy();
 
-    table = $('#puertas').DataTable({
+    table = $('#arrolladosVias').DataTable({
         responsive: true,
         autoWidth: false,
         language: {
@@ -399,36 +404,33 @@ function generaTablaF(Pfecha1,Pfecha2){
         },
         ajax : {
             method : "POST",
-            url : "/puertas/getfiltro",
+            url : "/arrollados/get",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data:{
-                fecha1 : Pfecha1,
-                fecha2 : Pfecha2,
-            },
         },
         "aLengthMenu": [[10,25,50, -1], [ 10, 25, 50, 'Todos']],
         columns: [
-            { data: 'fecha', "width": "7%" },
-            { data: 'linea' },
-            { data: 'hora' },
-            { data: 'estacion', "width": "8%" },
-            { data: 'via' },
+            { data: 'fecha','width': '7%' },
+            { data: 'linea','width': '4%' },
+            { data: 'hora','width': '4%' },
+            { data: 'estacion','width': '10%' },
             { data: 'descripcion' },
-            { data: 'puerta_opuesta' },
-            { data: 'desalojo' },
-            { data: 'asistencia_policia' },
+            { data: 'status' },
+            { data: 'genero' },
+            { data: 'edad','width': '1%' },
+            { data: 'retardo','width': '1%' },
             {
                 "data": null,
+                'width': '8%',
                 "bSortable": false,
                 "mRender": function(data, type, value) {
-                    return '<a href="/puertas/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/puertas/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
+                    return '<a href="/arrollados/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/arrollados/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
                     
                 }
             },
         ],
         processing: true,
         serverSide: true,
-        dom: 'Brtilp',
+        dom: 'Bfrtilp',
         buttons: [
             [
                 {
@@ -474,18 +476,18 @@ function generaTablaF(Pfecha1,Pfecha2){
         keys : true,
         'columnDefs': [
             {
-                "targets": [0,1,2,3,4,6,7,8,9], 
+                "targets": [0,1,2,3,5,6,7,8,9], 
                 "className": "text-center",
             },
             {
-                "targets": [5], 
+                "targets": [4], 
                 "className": "text-justify",
             },
-        ]   
+        ]  
     });
 
 }
 
 function actualizarTabla(){
-    $('#puertas').DataTable().ajax.reload();
+    $('#arrolladosVias').DataTable().ajax.reload();
 }

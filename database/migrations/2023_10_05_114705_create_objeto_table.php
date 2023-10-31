@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('estacion');
             $table->integer('retardo');
             $table->string('corte_corriente');
-            $table->string('tipo_objeto');
+            $table->text('tipo_objeto');
             $table->string('usuario');
             $table->string('usu_correccion')->nullable();
             $table->timestamps();

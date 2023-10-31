@@ -91,6 +91,7 @@
                                             </div>
                                         </x-slot>
                                         <option value="" selected>-- Seleccione un genero --</option>
+                                        <option value="Sin Especificar" @if ($item->genero == 'Sin Especificar') selected @endif>Sin especificar</option>
                                         <option value="Masculino" @if ($item->genero == 'Masculino') selected @endif>Masculino</option>
                                         <option value="Femenino" @if ($item->genero == 'Femenino') selected @endif >Femenino</option>
                                     </x-adminlte-select>

@@ -58,11 +58,12 @@ $(document).ready(function(){
             { data: 'linea','width': '4%' },
             { data: 'hora','width': '4%' },
             { data: 'estacion','width': '10%' },
+            { data: 'tren','width': '10%' },
+            { data: 'via','width': '10%' },
+            { data: 'retardo','width': '1%' },
             { data: 'descripcion' },
-            { data: 'status' },
             { data: 'genero' },
             { data: 'edad','width': '1%' },
-            { data: 'retardo','width': '1%' },
             {
                 "data": null,
                 'width': '8%',
@@ -121,11 +122,11 @@ $(document).ready(function(){
         keys : true,
         'columnDefs': [
             {
-                "targets": [0,1,2,3,5,6,7,8,9], 
+                "targets": [0,1,2,3,4,5,6,8,9,10], 
                 "className": "text-center",
             },
             {
-                "targets": [4], 
+                "targets": [7], 
                 "className": "text-justify",
             },
         ]
@@ -188,8 +189,9 @@ function compruebaRep(){
     Plinea = document.getElementById('selLinea').value
     Phora = document.getElementById('hora').value
     Pestacion = document.getElementById('selEstacion').value
+    Pvia = document.getElementById('via').value
+    Ptren = document.getElementById('tren').value
     Pdescripcion = document.getElementById('descripcion').value
-    Pstatus = document.getElementById('status').value
     Pgenero = document.getElementById('genero').value
     Pedad = document.getElementById('edad').value
     Pretardo = document.getElementById('retardo').value
@@ -202,8 +204,9 @@ function compruebaRep(){
             linea :  Plinea,
             hora : Phora,
             estacion :  Pestacion,     
+            via :  Pvia,     
+            tren :  Ptren,     
             descripcion : Pdescripcion,
-            status : Pstatus,
             genero : Pgenero,
             edad : Pedad,
             retardo :  Pretardo,     
@@ -234,8 +237,9 @@ function guardar(){
     Plinea = document.getElementById('selLinea').value
     Phora = document.getElementById('hora').value
     Pestacion = document.getElementById('selEstacion').value
+    Ptren = document.getElementById('tren').value
+    Pvia = document.getElementById('via').value
     Pdescripcion = document.getElementById('descripcion').value
-    Pstatus = document.getElementById('status').value
     Pgenero = document.getElementById('genero').value
     Pedad = document.getElementById('edad').value
     Pretardo = document.getElementById('retardo').value
@@ -249,8 +253,9 @@ function guardar(){
             linea :  Plinea,
             hora : Phora,
             estacion :  Pestacion,     
+            via :  Pvia,     
+            tren :  Ptren,     
             descripcion : Pdescripcion,
-            status : Pstatus,
             genero : Pgenero,
             edad : Pedad,
             retardo :  Pretardo,
@@ -284,8 +289,9 @@ function limpiar(){
     document.getElementById('selLinea').value = '0'
     document.getElementById('hora').value = ""
     document.getElementById('selEstacion').value = '0'
+    document.getElementById('tren').value = ''
+    document.getElementById('via').value = ''
     document.getElementById('descripcion').value = ''
-    document.getElementById('status').value = ""
     document.getElementById('retardo').value = ""
     document.getElementById('genero').value = ''
     document.getElementById('edad').value = ''
@@ -318,11 +324,12 @@ function generaTablaF(Pfecha1,Pfecha2){
             { data: 'linea','width': '4%' },
             { data: 'hora','width': '4%' },
             { data: 'estacion','width': '10%' },
+            { data: 'tren','width': '5%' },
+            { data: 'via','width': '5%' },
+            { data: 'retardo','width': '1%' },
             { data: 'descripcion' },
-            { data: 'status' },
             { data: 'genero' },
             { data: 'edad','width': '1%' },
-            { data: 'retardo','width': '1%' },
             {
                 "data": null,
                 'width': '8%',
@@ -413,11 +420,12 @@ function generaTabla(){
             { data: 'linea','width': '4%' },
             { data: 'hora','width': '4%' },
             { data: 'estacion','width': '10%' },
+            { data: 'tren','width': '1%' },
+            { data: 'via','width': '1%' },
+            { data: 'retardo','width': '1%' },
             { data: 'descripcion' },
-            { data: 'status' },
             { data: 'genero' },
             { data: 'edad','width': '1%' },
-            { data: 'retardo','width': '1%' },
             {
                 "data": null,
                 'width': '8%',

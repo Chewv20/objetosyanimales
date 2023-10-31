@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Puertas;
-use App\Models\Estacionesvias;
+use App\Models\Estaciones;
 use App\Models\Lineas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -117,7 +117,7 @@ class PuertasController extends Controller
     {
         $puertas = Puertas::all();
         $lineas = Lineas::all();
-        $estaciones = Estacionesvias::all();
+        $estaciones = Estaciones::all();
 
 
         foreach ($puertas as $puerta) {
@@ -144,7 +144,7 @@ class PuertasController extends Controller
         ->whereDate('fecha','<=',$request->fecha2)
         ->get();
         $lineas = Lineas::all();
-        $estaciones = Estacionesvias::all();
+        $estaciones = Estaciones::all();
 
 
         foreach ($puertas as $puerta) {

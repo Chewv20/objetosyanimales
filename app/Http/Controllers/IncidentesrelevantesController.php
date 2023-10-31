@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estaciones;
-use App\Models\Estaciones2;
 use App\Models\Incidentesrelevantes;
 use App\Models\Lineas;
 use Illuminate\Http\Request;
@@ -109,9 +108,7 @@ class IncidentesrelevantesController extends Controller
     {
         $incidentes = Incidentesrelevantes::all();
         $lineas = Lineas::all();
-        $estaciones = DB::table('estaciones2')
-        ->orderBy('id_estacion')
-        ->get();
+        $estaciones = Estaciones::all();
 
 
         foreach ($incidentes as $incidente) {
@@ -138,10 +135,7 @@ class IncidentesrelevantesController extends Controller
         ->whereDate('fecha','<=',$request->fecha2)
         ->get();
         $lineas = Lineas::all();
-        $estaciones = DB::table('estaciones2')
-        ->orderBy('id_estacion')
-        ->get();
-
+        $estaciones = Estaciones::all();
 
         foreach ($incidentes as $incidente) {
             foreach ($lineas as $linea) {

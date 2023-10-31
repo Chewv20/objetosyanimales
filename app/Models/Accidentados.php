@@ -15,6 +15,8 @@ class Accidentados extends Model
         'linea',
         'hora',
         'estacion',
+        'tren',
+        'via',
         'descripcion',
         'status',
         'genero',

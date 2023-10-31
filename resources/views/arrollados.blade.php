@@ -5,8 +5,8 @@
 
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Arrollados y Accidentados</h1>
-    <link rel="stylesheet" href="{{ URL::asset('css/accidentados.css') }}" />
+    <h1 class="m-0 text-dark">Arrollados</h1>
+    <link rel="stylesheet" href="{{ URL::asset('css/arrollados.css') }}" />
 
 @stop
 
@@ -21,7 +21,7 @@
                 <div class="card-body">
                     <x-adminlte-modal id="formRegistro" title="Registrar incidente" size="xl" theme="success"
                         icon="fas fa-edit" v-centered scrollable>
-                        <form action="/accidentados/" id='form-accidentados' method="POST">
+                        <form action="/arrollados/" id='form-arrollados' method="POST">
                             @csrf
                             <div class="row">
                                 <div>
@@ -29,7 +29,7 @@
                                     <input type="date" id="fecha" class="form-control" name="fecha"  min="1992-03-18" max="<?php echo $hoy;?>">
                                     
                                 </div>
-                                <div class="col">
+                                <div class="col-md-3">
                                     <x-adminlte-select name='linea' id='selLinea' label='Línea' required>
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text ">
@@ -42,7 +42,7 @@
                                         @endforeach
                                     </x-adminlte-select>  
                                 </div>
-                                <div class="col">
+                                <div class="col-md-4">
                                     <x-adminlte-select name='estacion' id='selEstacion' label='Estación' required>
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text ">
@@ -55,16 +55,6 @@
                                 <div class="col">
                                     <label for="hora">Hora</label>
                                     <input type="time" name="hora" class="form-control" id="hora" required>
-                                </div>
-                                
-                                <div class="col">
-                                    <x-adminlte-input name="tren" id="tren" label="Tren / Motriz" placeholder="Ingresa el número de tren y la motriz" type="text" required>
-                                        <x-slot name="prependSlot">
-                                            <div class="input-group-text">
-                                                <i class="fa fa-subway"></i>
-                                            </div>
-                                        </x-slot>
-                                    </x-adminlte-input>
                                 </div>
                                 
                             </div>
@@ -80,21 +70,20 @@
                                 </div>
                             </div>    
                             
-                            <div class="row">  
+                            <div class="row">                                
                                 <div class="col">
-                                    <x-adminlte-select name='via' id="via" label='Vía' >
+                                    <x-adminlte-select name='status' id="status" label='Status' >
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text ">
-                                                <i class="fa fa-map-pin"></i>
+                                                <i class="fa fa-heart"></i>
                                             </div>
                                         </x-slot>
-                                        <option value="">-- Seleccione una opción --</option>
-                                        <option value="VIA 1">Vía 1</option>
-                                        <option value="VIA 2">Vía 2</option>
-                                        <option value="SIN ESPECIFICAR">Sin Especificar</option>
-
+                                        <option value="" selected>-- Seleccione un status --</option>
+                                        <option value="Sin Vida">Sin vida</option>
+                                        <option value="Con Vida">Con vida</option>
                                     </x-adminlte-select>
-                                </div>                                              
+                                </div>
+
                                 <div class="col">
                                     <x-adminlte-select name='genero' id="genero" label='Genero' >
                                         <x-slot name="prependSlot">
@@ -109,7 +98,7 @@
                                 </div>
 
                                 <div class="col-3">
-                                    <x-adminlte-input name="edad" id="edad" label="Edad" placeholder="Ingresa la edad" type="number" min=0 >
+                                    <x-adminlte-input name="edad" id="edad" label="Edad" placeholder="Ingresa la edad" type="number" min=0 required>
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text">
                                                 <i class="fas fa-clock"></i>
@@ -191,19 +180,18 @@
                     
                     <br><br>
                     <div class=" col-12">
-                        <table class="table table-sm table-bordered" id="accidentadosVias">
+                        <table class="table table-sm table-bordered" id="arrolladosVias">
                             <thead class="text-center">
                                 <tr class="color-line line-objetos">
                                     <th scope="col" style="text-align: center">Fecha</th>
                                     <th scope="col" style="text-align: center">Linea</th>
                                     <th scope="col" style="text-align: center">Hora</th>
                                     <th scope="col" style="text-align: center">Ubicación</th>
-                                    <th scope="col" style="text-align: center">Tren / Motriz</th>
-                                    <th scope="col" style="text-align: center">Vía</th>
-                                    <th scope="col" style="text-align: center">Retardo</th>
                                     <th scope="col" style="text-align: center">Descripción</th>
+                                    <th scope="col" style="text-align: center">Status</th>
                                     <th scope="col" style="text-align: center">Genero</th>
                                     <th scope="col" style="text-align: center">Edad</th>
+                                    <th scope="col" style="text-align: center">Retardo</th>
                                     <th scope="col" style="text-align: center">Acciones</th>
                                 </tr>
                             </thead>
@@ -213,12 +201,11 @@
                                     <th scope="col" style="text-align: center">Linea</th>
                                     <th scope="col" style="text-align: center">Hora</th>
                                     <th scope="col" style="text-align: center">Ubicación</th>
-                                    <th scope="col" style="text-align: center">Tren / Motriz</th>
-                                    <th scope="col" style="text-align: center">Vía</th>
-                                    <th scope="col" style="text-align: center">Retardo</th>
-                                    <th scope="col" style="text-align: center">Descripción</th>                                   
+                                    <th scope="col" style="text-align: center">Descripción</th>
+                                    <th scope="col" style="text-align: center">Status</th>
                                     <th scope="col" style="text-align: center">Genero</th>
                                     <th scope="col" style="text-align: center">Edad</th>
+                                    <th scope="col" style="text-align: center">Retardo</th>
                                     <th scope="col" style="text-align: center">Acciones</th>
                                 </tr>
                             </tfoot>
@@ -263,6 +250,6 @@
 <script src="https://cdn.datatables.net/searchbuilder/1.6.0/js/dataTables.searchBuilder.js"></script>
 <script src="https://cdn.datatables.net/searchbuilder/1.6.0/js/searchBuilder.bootstrap5.js"></script>
 <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.js"></script>
-<script src="{{ URL::asset('js/accidentados.js') }}"></script>
+<script src="{{ URL::asset('js/arrollados.js') }}"></script>
 
 @stop
