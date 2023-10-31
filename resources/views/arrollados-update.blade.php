@@ -5,8 +5,8 @@
 
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Arrollados y Accidentados</h1>
-    <link rel="stylesheet" href="{{ URL::asset('css/accidentados.css') }}" />
+    <h1 class="m-0 text-dark">Arrollados</h1>
+    <link rel="stylesheet" href="{{ URL::asset('css/arrollados.css') }}" />
 
 @stop
 
@@ -19,8 +19,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    @foreach ($accidentados as $item)
-                        <form action="{{ route('accidentados.update', $item->id) }}" method="post" id='form-accidentados'>
+                    @foreach ($arrollados as $item)
+                        <form action="{{ route('arrollados.update', $item->id) }}" method="post" id='form-arrollados'>
                             @csrf
                             @method('PUT')
 
@@ -57,16 +57,6 @@
                                     <label for="hora">Hora</label>
                                     <input type="time" name="hora" class="form-control" id="hora" value="{{ $item->hora }}" required>
                                 </div>
-
-                                <div class="col">
-                                    <x-adminlte-input name="tren" id="tren" label="Tren / Motriz" placeholder="Ingresa el número de tren y la motriz" type="text" value='{{ $item->tren }}' required>
-                                        <x-slot name="prependSlot">
-                                            <div class="input-group-text">
-                                                <i class="fa fa-subway"></i>
-                                            </div>
-                                        </x-slot>
-                                    </x-adminlte-input>
-                                </div>
                                 
                             </div>
                             <div class="row">
@@ -92,19 +82,18 @@
                                         </x-slot>
                                     </x-adminlte-input>
                                 </div>
+                                
                                 <div class="col">
-                                    <x-adminlte-select name='via' id="via" label='Vía' >
+                                    <x-adminlte-select name='status' id="status" label='Status' >
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text ">
-                                                <i class="fa fa-map-pin"></i>
+                                                <i class="fa fa-heart"></i>
                                             </div>
                                         </x-slot>
-                                        <option value="">-- Seleccione una opción --</option>
-                                        <option value="VIA 1" @if ($item->via == 'VIA 1') selected @endif>Vía 1</option>
-                                        <option value="VIA 2" @if ($item->via == 'VIA 2') selected @endif>Vía 2</option>
-                                        <option value="SIN ESPECIFICAR" @if ($item->via == 'SIN ESPECIFICAR') selected @endif>Sin Especificar</option>
+                                        <option value="Sin Vida" @if ($item->status == 'Sin Vida') selected @endif >Sin Vida</option>
+                                        <option value="Con Vida" @if ($item->status == 'Con Vida') selected @endif>Con Vida</option>
                                     </x-adminlte-select>
-                                </div> 
+                                </div>
 
                                 <div class="col">
                                     <x-adminlte-select name='genero' id="genero" label='Genero' >
@@ -114,13 +103,14 @@
                                             </div>
                                         </x-slot>
                                         <option value="" selected>-- Seleccione un genero --</option>
+                                        <option value="Sin Especificar" @if ($item->genero == 'Sin Especificar') selected @endif>Sin especificar</option>
                                         <option value="Masculino" @if ($item->genero == 'Masculino') selected @endif>Masculino</option>
                                         <option value="Femenino" @if ($item->genero == 'Femenino') selected @endif >Femenino</option>
                                     </x-adminlte-select>
                                 </div>
 
                                 <div class="col-3">
-                                    <x-adminlte-input name="edad" id="edad" label="Edad" placeholder="Ingresa la edad" type="number" min=0 value='{{ $item->edad }}'>
+                                    <x-adminlte-input name="edad" id="edad" label="Edad" placeholder="Ingresa la edad" type="number" min=0 value='{{ $item->edad }}' required>
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text">
                                                 <i class="fas fa-clock"></i>
@@ -148,6 +138,6 @@
 @section('js')
 <link href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<script src="{{ URL::asset('js/personasajenas-update.js') }}"></script>
+<script src="{{ URL::asset('js/arrollados-update.js') }}"></script>
 
 @stop

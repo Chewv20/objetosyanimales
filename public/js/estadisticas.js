@@ -1,6 +1,7 @@
 const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
 let cuentasObjetos = []
 let cuentasAnimales = []
+let cuentasArrollados = []
 let cuentasAccidentados = []
 let cuentasPersonas = []
 let cuentasIncidentes = []
@@ -57,7 +58,9 @@ function iniciaEstadisticas(){
         document.getElementById('numPuertas').innerHTML= data.total[5]
         document.getElementById('numZapatas').innerHTML= data.total[6]
         document.getElementById('total').innerHTML= data.total[7]
+        document.getElementById('total').innerHTML= data.total[7]
         document.getElementById('numCables').innerHTML= data.total[8]
+        document.getElementById('numArrollados').innerHTML= data.total[9]
         cuentasObjetos = data.objetos
         cuentasAnimales = data.animales
         cuentasAccidentados = data.accidentados
@@ -65,6 +68,7 @@ function iniciaEstadisticas(){
         cuentasIncidentes = data.incidentes
         cuentasPuertas = data.puertas
         cuentasCables = data.cables
+        cuentasArrollados = data.arrollados
         obtieneEstaciones()
     }).catch(error => console.error(error));
     
@@ -94,6 +98,7 @@ function actualizaEstadisticas(Pdata){
         document.getElementById('numZapatas').innerHTML= data.total[6]
         document.getElementById('total').innerHTML= data.total[7]
         document.getElementById('numCables').innerHTML= data.total[8]
+        document.getElementById('numArrollados').innerHTML= data.total[9]
         cuentasObjetos = data.objetos
         cuentasAnimales = data.animales
         cuentasAccidentados = data.accidentados
@@ -101,6 +106,7 @@ function actualizaEstadisticas(Pdata){
         cuentasIncidentes = data.incidentes
         cuentasPuertas = data.puertas
         cuentasCables = data.cables
+        cuentasArrollados = data.arrollados
         obtieneEstaciones()
     }).catch(error => console.error(error));
     
@@ -148,6 +154,7 @@ function creaMapa(){
     var iconObjetos = new LeafIcon({iconUrl: '../img/objetos.png'})
     var iconAnimales = new LeafIcon({iconUrl: '../img/animales.png'})
     var iconAccidentes = new LeafIcon({iconUrl: '../img/accidentados.png'})
+    var iconArrollados = new LeafIcon({iconUrl: '../img/accidentados.png'})
     var iconIncidentes = new LeafIcon({iconUrl: '../img/incidentes.png'})
     var iconPersonas = new LeafIcon({iconUrl: '../img/personas.png'})
     var iconPuertas = new LeafIcon({iconUrl: '../img/puertas.png'})
@@ -385,6 +392,7 @@ function creaMapa(){
     var layerObjetos = L.layerGroup()
     var layerAnimales = L.layerGroup()
     var layerAccidentados = L.layerGroup()
+    var layerArrollados = L.layerGroup()
     var layerIncidentes = L.layerGroup()
     var layerPersonas = L.layerGroup()
     var layerPuertas = L.layerGroup()
@@ -419,12 +427,17 @@ function creaMapa(){
             descripcion = creaDescripcionEventos('Cables Robados', element.estacion,element.id_estacion)
             marker = L.marker([element.longitud,element.latitud],{icon:iconCables},{draggable: true}).bindPopup(descripcion)
             layerCables.addLayer(marker)
+        } if(cuentasArrollados[element.id_estacion]>0){
+            descripcion = creaDescripcionEventos('Arrollados', element.estacion,element.id_estacion)
+            marker = L.marker([element.longitud,element.latitud],{icon:iconAccidentes},{draggable: true}).bindPopup(descripcion)
+            layerArrollados.addLayer(marker)
         }
         
     })
     
     layerControl.addOverlay(layerObjetos, "Objetos");
     layerControl.addOverlay(layerAnimales, "Animales");
+    layerControl.addOverlay(layerArrollados, "Arrollados");
     layerControl.addOverlay(layerAccidentados, "Accidentados");
     layerControl.addOverlay(layerIncidentes, "Incidentes");
     layerControl.addOverlay(layerPersonas, "Personas");
@@ -437,6 +450,7 @@ function creaDescripcion(Pnombre,Pestacion){
     let descripcion = '<b>'+Pnombre+'</b><br>'
     descripcion+= 'Objetos en vías: '        +cuentasObjetos[Pestacion]     +'<br>'
     descripcion+= 'Animales en vías: '       +cuentasAnimales[Pestacion]    +'<br>'
+    descripcion+= 'Arrollados en vías: '   +cuentasArrollados[Pestacion]+'<br>'
     descripcion+= 'Accidentados en vías: '   +cuentasAccidentados[Pestacion]+'<br>'
     descripcion+= 'Personas ajenas en vías: '+cuentasPersonas[Pestacion]    +'<br>'
     descripcion+= 'Incidentes Relevantes: '  +cuentasIncidentes[Pestacion]  +'<br>'
@@ -446,19 +460,21 @@ function creaDescripcion(Pnombre,Pestacion){
 }
 
 function obtieneTotal(Pestacion){
-    if(cuentasObjetos[Pestacion]>=3){
+    if(cuentasObjetos[Pestacion]>=5){
         return true
-    }else if(cuentasAnimales[Pestacion]>=3){
+    }else if(cuentasAnimales[Pestacion]>=5){
         return true
-    }else if(cuentasAccidentados[Pestacion]>=3){
+    }else if(cuentasAccidentados[Pestacion]>=5){
         return true
-    }else if(cuentasPersonas[Pestacion]>=3){
+    }else if(cuentasArrollados[Pestacion]>=5){
         return true
-    }else if(cuentasIncidentes[Pestacion]){
-
-    }else if(cuentasPuertas[Pestacion]>=3){
+    }else if(cuentasPersonas[Pestacion]>=5){
         return true
-    }else if(cuentasCables[Pestacion]>=3){
+    }else if(cuentasIncidentes[Pestacion]>=5){
+        return true
+    }else if(cuentasPuertas[Pestacion]>=5){
+        return true
+    }else if(cuentasCables[Pestacion]>=5){
         return true
     }else{
         return false
@@ -486,6 +502,8 @@ function creaDescripcionEventos(Pevento,Pnombre,Pestacion){
         descripcion+= Pevento+ ' : '        +cuentasPuertas[Pestacion]     +'<br>'
     }else if(Pevento == 'Cables Robados'){
         descripcion+= Pevento+ ' : '        +cuentasCables[Pestacion]     +'<br>'
+    }else if(Pevento == 'Arrollados'){
+        descripcion+= Pevento+ ' : '        +cuentasArrollados[Pestacion]     +'<br>'
     }
     
     return descripcion

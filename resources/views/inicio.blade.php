@@ -80,7 +80,19 @@
                         <div class="col">
                             <div class="card bg-red"  style="text-align:center; width: 5cm;">
                                 <div class="card-header">
-                                    <i class='fa fa-male'>Arrollados y Accidentados</i>
+                                    <i class='fa fa-male'>Arrollados</i>
+                                </div>
+                                <div class="card-body textCard" >
+                                    <p id='numArrollados' ></p>
+                                    <a href="/arrollados"><button type="button" class="btn btn-danger">Registrar</button></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card bg-red"  style="text-align:center; width: 5cm;">
+                                <div class="card-header">
+                                    <i class='fa fa-male'>Accidentados</i>
                                 </div>
                                 <div class="card-body textCard" >
                                     <p id='numAccidentados' ></p>

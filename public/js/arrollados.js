@@ -41,7 +41,7 @@ $(document).ready(function(){
         }
     })
 
-    table = $('#accidentadosVias').DataTable({
+    table = $('#arrolladosVias').DataTable({
         responsive: true,
         autoWidth: false,
         language: {
@@ -49,7 +49,7 @@ $(document).ready(function(){
         },
         ajax : {
             method : "POST",
-            url : "/accidentados/get",
+            url : "/arrollados/get",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         },
         "aLengthMenu": [[10,25,50, -1], [ 10, 25, 50, 'Todos']],
@@ -58,18 +58,17 @@ $(document).ready(function(){
             { data: 'linea','width': '4%' },
             { data: 'hora','width': '4%' },
             { data: 'estacion','width': '10%' },
-            { data: 'tren','width': '10%' },
-            { data: 'via','width': '10%' },
-            { data: 'retardo','width': '1%' },
             { data: 'descripcion' },
+            { data: 'status' },
             { data: 'genero' },
             { data: 'edad','width': '1%' },
+            { data: 'retardo','width': '1%' },
             {
                 "data": null,
                 'width': '8%',
                 "bSortable": false,
                 "mRender": function(data, type, value) {
-                    return '<a href="/accidentados/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/accidentados/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
+                    return '<a href="/arrollados/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/arrollados/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
                     
                 }
             },
@@ -122,11 +121,11 @@ $(document).ready(function(){
         keys : true,
         'columnDefs': [
             {
-                "targets": [0,1,2,3,4,5,6,8,9,10], 
+                "targets": [0,1,2,3,5,6,7,8,9], 
                 "className": "text-center",
             },
             {
-                "targets": [7], 
+                "targets": [4], 
                 "className": "text-justify",
             },
         ]
@@ -170,7 +169,7 @@ $(document).ready(function(){
 function validar(){
     let error = false;
 
-        let inputsrequeridos = document.querySelectorAll('#form-accidentados [required]')  
+        let inputsrequeridos = document.querySelectorAll('#form-arrollados [required]')  
         for(let i=0;i<inputsrequeridos.length;i++){
             if(inputsrequeridos[i].value =='' ){
                 inputsrequeridos[i].style.borderColor = '#FF0400'
@@ -189,24 +188,22 @@ function compruebaRep(){
     Plinea = document.getElementById('selLinea').value
     Phora = document.getElementById('hora').value
     Pestacion = document.getElementById('selEstacion').value
-    Pvia = document.getElementById('via').value
-    Ptren = document.getElementById('tren').value
     Pdescripcion = document.getElementById('descripcion').value
+    Pstatus = document.getElementById('status').value
     Pgenero = document.getElementById('genero').value
     Pedad = document.getElementById('edad').value
     Pretardo = document.getElementById('retardo').value
 
 
-    fetch('/accidentados/getReporte/',{
+    fetch('/arrollados/getReporte/',{
         method : 'POST',
         body: JSON.stringify({
             fecha :  Pfecha,     
             linea :  Plinea,
             hora : Phora,
             estacion :  Pestacion,     
-            via :  Pvia,     
-            tren :  Ptren,     
             descripcion : Pdescripcion,
+            status : Pstatus,
             genero : Pgenero,
             edad : Pedad,
             retardo :  Pretardo,     
@@ -237,25 +234,23 @@ function guardar(){
     Plinea = document.getElementById('selLinea').value
     Phora = document.getElementById('hora').value
     Pestacion = document.getElementById('selEstacion').value
-    Ptren = document.getElementById('tren').value
-    Pvia = document.getElementById('via').value
     Pdescripcion = document.getElementById('descripcion').value
+    Pstatus = document.getElementById('status').value
     Pgenero = document.getElementById('genero').value
     Pedad = document.getElementById('edad').value
     Pretardo = document.getElementById('retardo').value
     Pusuario = document.getElementById('usuario').value
 
     
-    fetch('/accidentados/',{
+    fetch('/arrollados/',{
         method : 'POST',
         body: JSON.stringify({
             fecha :  Pfecha,     
             linea :  Plinea,
             hora : Phora,
             estacion :  Pestacion,     
-            via :  Pvia,     
-            tren :  Ptren,     
             descripcion : Pdescripcion,
+            status : Pstatus,
             genero : Pgenero,
             edad : Pedad,
             retardo :  Pretardo,
@@ -289,9 +284,8 @@ function limpiar(){
     document.getElementById('selLinea').value = '0'
     document.getElementById('hora').value = ""
     document.getElementById('selEstacion').value = '0'
-    document.getElementById('tren').value = ''
-    document.getElementById('via').value = ''
     document.getElementById('descripcion').value = ''
+    document.getElementById('status').value = ""
     document.getElementById('retardo').value = ""
     document.getElementById('genero').value = ''
     document.getElementById('edad').value = ''
@@ -301,9 +295,9 @@ function limpiar(){
 }
 
 function generaTablaF(Pfecha1,Pfecha2){
-    $('#accidentadosVias').DataTable().destroy();
+    $('#arrolladosVias').DataTable().destroy();
 
-    table = $('#accidentadosVias').DataTable({
+    table = $('#arrolladosVias').DataTable({
         responsive: true,
         autoWidth: false,
         language: {
@@ -311,7 +305,7 @@ function generaTablaF(Pfecha1,Pfecha2){
         },
         ajax : {
             method : "POST",
-            url : "/accidentados/getfiltro",
+            url : "/arrollados/getfiltro",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: {
                 fecha1 : Pfecha1,
@@ -324,18 +318,17 @@ function generaTablaF(Pfecha1,Pfecha2){
             { data: 'linea','width': '4%' },
             { data: 'hora','width': '4%' },
             { data: 'estacion','width': '10%' },
-            { data: 'tren','width': '5%' },
-            { data: 'via','width': '5%' },
-            { data: 'retardo','width': '1%' },
             { data: 'descripcion' },
+            { data: 'status' },
             { data: 'genero' },
             { data: 'edad','width': '1%' },
+            { data: 'retardo','width': '1%' },
             {
                 "data": null,
                 'width': '8%',
                 "bSortable": false,
                 "mRender": function(data, type, value) {
-                    return '<a href="/accidentados/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/accidentados/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
+                    return '<a href="/arrollados/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/arrollados/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
                     
                 }
             },
@@ -401,9 +394,9 @@ function generaTablaF(Pfecha1,Pfecha2){
 }
 
 function generaTabla(){
-    $('#accidentadosVias').DataTable().destroy();
+    $('#arrolladosVias').DataTable().destroy();
 
-    table = $('#accidentadosVias').DataTable({
+    table = $('#arrolladosVias').DataTable({
         responsive: true,
         autoWidth: false,
         language: {
@@ -411,7 +404,7 @@ function generaTabla(){
         },
         ajax : {
             method : "POST",
-            url : "/accidentados/get",
+            url : "/arrollados/get",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         },
         "aLengthMenu": [[10,25,50, -1], [ 10, 25, 50, 'Todos']],
@@ -420,18 +413,17 @@ function generaTabla(){
             { data: 'linea','width': '4%' },
             { data: 'hora','width': '4%' },
             { data: 'estacion','width': '10%' },
-            { data: 'tren','width': '1%' },
-            { data: 'via','width': '1%' },
-            { data: 'retardo','width': '1%' },
             { data: 'descripcion' },
+            { data: 'status' },
             { data: 'genero' },
             { data: 'edad','width': '1%' },
+            { data: 'retardo','width': '1%' },
             {
                 "data": null,
                 'width': '8%',
                 "bSortable": false,
                 "mRender": function(data, type, value) {
-                    return '<a href="/accidentados/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/accidentados/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
+                    return '<a href="/arrollados/'+value["id"]+'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>Editar</a> <a href="/arrollados/delete/'+value["id"]+'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Eliminar</a>'
                     
                 }
             },
@@ -497,5 +489,5 @@ function generaTabla(){
 }
 
 function actualizarTabla(){
-    $('#accidentadosVias').DataTable().ajax.reload();
+    $('#arrolladosVias').DataTable().ajax.reload();
 }

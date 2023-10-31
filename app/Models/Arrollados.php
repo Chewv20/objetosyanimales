@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Accidentados extends Model
+class Arrollados extends Model
 {
     use HasFactory;
 
@@ -15,8 +15,6 @@ class Accidentados extends Model
         'linea',
         'hora',
         'estacion',
-        'tren',
-        'via',
         'descripcion',
         'status',
         'genero',

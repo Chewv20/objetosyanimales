@@ -2,23 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Accidentados;
+use App\Models\Arrollados;
 use App\Models\Estaciones;
 use App\Models\Lineas;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
-class AccidentadosController extends Controller
+class ArrolladosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $lineas = Lineas::all();
         
 
-        return view('accidentados',compact('lineas'));
+        return view('arrollados',compact('lineas'));
     }
 
     /**
@@ -34,7 +31,7 @@ class AccidentadosController extends Controller
      */
     public function store(Request $request)
     {
-        Accidentados::create($request->all());
+        arrollados::create($request->all());
 
         return true;
     }
@@ -44,11 +41,11 @@ class AccidentadosController extends Controller
      */
     public function show(string $id)
     {
-        $accidentados = Accidentados::where('id',$id)->get();
+        $arrollados = Arrollados::where('id',$id)->get();
         $lineas = Lineas::all();
         $estaciones = Estaciones::all();
 
-        return view('accidentados-update',compact('accidentados','lineas'));
+        return view('arrollados-update',compact('arrollados','lineas'));
     }
 
     /**
@@ -64,22 +61,21 @@ class AccidentadosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Accidentados::where('id',$id)
+        Arrollados::where('id',$id)
         ->update([
             'fecha'=>$request->fecha,
             'hora'=>$request->hora,
             'linea'=>$request->linea,
             'estacion'=>$request->estacion,
-            'tren'=>$request->tren,
-            'via'=>$request->via,
             'descripcion'=>$request->descripcion,
+            'status'=>$request->status,
             'genero'=>$request->genero,
             'edad'=>$request->edad,
             'retardo'=>$request->retardo,
             'usu_correccion'=>$request->usu_correccion,
         ]);
 
-        return redirect('accidentados');
+        return redirect('arrollados');
     }
 
     /**
@@ -92,22 +88,21 @@ class AccidentadosController extends Controller
 
     public function delete(string $id)
     {
-        $accidentados = Accidentados::find($id);
-        $accidentados->delete();
-        return redirect('accidentados');
+        $arrollados = Arrollados::find($id);
+        $arrollados->delete();
+        return redirect('arrollados');
     }
 
     public function getReporte(Request $request)
     {
-        $accidentados = DB::table('accidentados')
+        $arrollados = DB::table('arrollados')
         ->where([
             ['fecha',$request->fecha],
             ['hora',$request->hora],
             ['linea',$request->linea],
             ['estacion',$request->estacion],
-            ['tren',$request->tren],
-            ['via',$request->via],
             ['descripcion',$request->descripcion],
+            ['status',$request->status],
             ['genero',$request->genero],
             ['edad',$request->edad],
             ['retardo',$request->retardo],
@@ -115,17 +110,17 @@ class AccidentadosController extends Controller
         ->orderBy('id')
         ->get();
 
-        return $accidentados;
+        return $arrollados;
     }
 
     public function get()
     {
-        $accidentados = Accidentados::all();
+        $arrollados = Arrollados::all();
         $lineas = Lineas::all();
         $estaciones = Estaciones::all();
 
 
-        foreach ($accidentados as $accidentado) {
+        foreach ($arrollados as $accidentado) {
             foreach ($lineas as $linea) {
                 if ($accidentado->linea==$linea->id_linea) {
                     $accidentado->linea=$linea->linea;
@@ -139,12 +134,12 @@ class AccidentadosController extends Controller
             }
         }
 
-        return datatables($accidentados)->toJson();
+        return datatables($arrollados)->toJson();
     }
 
     public function getFiltro(Request $request)
     {
-        $accidentados = DB::table('accidentados')
+        $arrollados = DB::table('arrollados')
         ->whereDate('fecha','>=',$request->fecha1,'and')
         ->whereDate('fecha','<=',$request->fecha2)
         ->get();
@@ -152,7 +147,7 @@ class AccidentadosController extends Controller
         $estaciones = Estaciones::all();
 
 
-        foreach ($accidentados as $accidentado) {
+        foreach ($arrollados as $accidentado) {
             foreach ($lineas as $linea) {
                 if ($accidentado->linea==$linea->id_linea) {
                     $accidentado->linea=$linea->linea;
@@ -166,6 +161,6 @@ class AccidentadosController extends Controller
             }
         }
 
-        return datatables($accidentados)->toJson();
+        return datatables($arrollados)->toJson();
     }
 }
