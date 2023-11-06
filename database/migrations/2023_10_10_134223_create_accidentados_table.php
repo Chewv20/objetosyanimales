@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('linea');
             $table->string('hora');
             $table->string('estacion');
-            $table->string('tren');
+            $table->string('tren')->nullable();
             $table->string('via');
             $table->text('descripcion');
             $table->string('genero');

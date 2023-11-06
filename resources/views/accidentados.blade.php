@@ -5,7 +5,7 @@
 
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Arrollados y Accidentados</h1>
+    <h1 class="m-0 text-dark">Accidentados</h1>
     <link rel="stylesheet" href="{{ URL::asset('css/accidentados.css') }}" />
 
 @stop
@@ -58,7 +58,7 @@
                                 </div>
                                 
                                 <div class="col">
-                                    <x-adminlte-input name="tren" id="tren" label="Tren / Motriz" placeholder="Ingresa el número de tren y la motriz" type="text" required>
+                                    <x-adminlte-input name="tren" id="tren" label="Tren / Motriz" placeholder="Ingresa el número de tren y la motriz" type="text">
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text">
                                                 <i class="fa fa-subway"></i>
@@ -82,18 +82,13 @@
                             
                             <div class="row">  
                                 <div class="col">
-                                    <x-adminlte-select name='via' id="via" label='Vía' >
+                                    <x-adminlte-input name='via' id="via" label='Vía' type='text' placeholder='Ingresa la via' >
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text ">
                                                 <i class="fa fa-map-pin"></i>
                                             </div>
                                         </x-slot>
-                                        <option value="">-- Seleccione una opción --</option>
-                                        <option value="VIA 1">Vía 1</option>
-                                        <option value="VIA 2">Vía 2</option>
-                                        <option value="SIN ESPECIFICAR">Sin Especificar</option>
-
-                                    </x-adminlte-select>
+                                    </x-adminlte-input>
                                 </div>                                              
                                 <div class="col">
                                     <x-adminlte-select name='genero' id="genero" label='Genero' >
@@ -105,6 +100,7 @@
                                         <option value="" selected>-- Seleccione un genero --</option>
                                         <option value="Masculino">Masculino</option>
                                         <option value="Femenino">Femenino</option>
+                                        <option value="Sin Especificar">Sin Especificar</option>
                                     </x-adminlte-select>
                                 </div>
 
