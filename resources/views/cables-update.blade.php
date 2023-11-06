@@ -84,7 +84,7 @@
                                 </div>
 
                                 <div class="col">
-                                    <x-adminlte-input name="metrosrobados" id="metrosrobados" label="Metros Robados" placeholder="Ingresa los metros Robados" type="number" min=0 value='{{ $item->ubicacion }}' required>
+                                    <x-adminlte-input name="metrosrobados" id="metrosrobados" label="Metros Robados" placeholder="Ingresa los metros Robados" type="number" min=0 value='{{ $item->metrosrobados }}' required>
                                         <x-slot name="prependSlot">
                                             <div class="input-group-text">
                                                 <i class="fas fa-plug"></i>
